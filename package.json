@@ -10,13 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "knex": "^0.13.0",
-    "morgan": "~1.9.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
-    "mariasql": "^0.2.6"
+    "express": "^4.16.2",
+    "knex": "^0.13.0",
+    "mariasql": "^0.2.6",
+    "morgan": "~1.9.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

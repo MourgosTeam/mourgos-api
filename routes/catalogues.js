@@ -9,6 +9,11 @@ router.get('/', function(req, res, next) {
 		(data) => res.send(data)
 	);
 });
+router.get('/:id', function(req, res, next) {
+	knex.table('catalogues').select('*').where({id: req.params.id}).then(
+		(data) => res.send(data[0])
+	);
+});
 
 router.post('/', function(req, res, next) {
 	knex.table('catalogues').insert(req.body).then(

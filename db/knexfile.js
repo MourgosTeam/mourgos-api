@@ -6,7 +6,8 @@ module.exports = {
 	    	port : 3306,
 	    	user : 'root',
 	    	password : 'm0urg0$',
-	    	db : 'mourgos'
+	    	db : 'mourgos',
+	    	charset  : 'utf8'
 	  }
 	}
 }

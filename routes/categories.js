@@ -10,9 +10,15 @@ router.get('/', function(req, res, next) {
 	);
 });
 
-router.get('/:catid', function(req, res, next) {
+router.get('/catalogue/:catid', function(req, res, next) {
 	knex.table('categories').select('*').where({catalogue_id : req.params.catid}).then(
 		(data) => res.send(data)
+	);
+});
+
+router.get('/:id', function(req, res, next) {
+	knex.table('categories').select('*').where({id : req.params.id}).then(
+		(data) => res.send(data[0])
 	);
 });
 

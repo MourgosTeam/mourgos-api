@@ -9,9 +9,15 @@ router.get('/', function(req, res, next) {
 		(data) => res.send(data)
 	);
 });
-router.get('/:productid', function(req, res, next) {
+router.get('/product/:productid', function(req, res, next) {
 	knex.table('attributes').select('*').where({product_id : req.params.productid}).then(
 		(data) => res.send(data)
+	);
+});
+
+router.get('/:id', function(req, res, next) {
+	knex.table('attributes').select('*').where({id : req.params.id}).then(
+		(data) => res.send(data[0])
 	);
 });
 
