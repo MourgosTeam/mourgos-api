@@ -6,6 +6,8 @@ cache:
   - node_modules
 install:
 - npm install
+script:
+- npm run lint
 after_success:
 - if [ $TRAVIS_BRANCH != 'master' ]; then exit 0; fi
 - rm -rf node_modules
