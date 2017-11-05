@@ -4,8 +4,8 @@
   "description": "The backend Restfull api for mourgos ",
   "main": "app.js",
   "scripts": {
-    "start": "supervisor ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "supervisor server.js",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "author": "",
   "license": "ISC",

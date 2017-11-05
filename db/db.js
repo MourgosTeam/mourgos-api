@@ -1,5 +1,5 @@
-var config      = require('./knexfile.js');  
-var env         = 'development';  
-var knex        = require('knex')(config[env]);
+var env = process.env.NODE_ENV || 'development';  
+var config = require('./config/' + env + '.json');
+var knex = require('knex')(config);
 
 module.exports = knex;

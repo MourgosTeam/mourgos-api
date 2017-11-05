@@ -1,0 +1,11 @@
+{
+  "client": "mariasql",
+  "connection": {
+    "host": "0.0.0.0",
+    "port": 32770,
+    "user": "root",
+    "password": "development",
+    "db": "mourgos",
+    "charset": "utf8"
+  }
+}
