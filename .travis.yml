@@ -1,18 +1,23 @@
 language: node_js
 node_js:
-  - 8
+- 8
 cache:
   directories:
-    - node_modules
+  - node_modules
 install:
-  - npm install
+- npm install
 after_success:
-  - if [ $TRAVIS_BRANCH != 'master' ]; then exit 0; fi
-  - rm -rf node_modules
-  - openssl aes-256-cbc -K $encrypted_8dbf7e943a18_key -iv $encrypted_8dbf7e943a18_iv -in .travis/mourgos_deploy.enc -out .travis/mourgos_deploy -d
-  - openssl aes-256-cbc -K $encrypted_b3711dfa409f_key -iv $encrypted_b3711dfa409f_iv -in db/config/production.json.enc -out db/config/production.json -d
-  - chmod 600 .travis/mourgos_deploy
-  - eval "$(ssh-agent -s)"
-  - ssh-add .travis/mourgos_deploy
-  - scp -o stricthostkeychecking=no -r ./ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-  - ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST "source .nvm/nvm.sh; ./deploy_api.sh"
+- if [ $TRAVIS_BRANCH != 'master' ]; then exit 0; fi
+- rm -rf node_modules
+- openssl aes-256-cbc -K $encrypted_8dbf7e943a18_key -iv $encrypted_8dbf7e943a18_iv
+  -in .travis/mourgos_deploy.enc -out .travis/mourgos_deploy -d
+- openssl aes-256-cbc -K $encrypted_b3711dfa409f_key -iv $encrypted_b3711dfa409f_iv
+  -in db/config/production.json.enc -out db/config/production.json -d
+- chmod 600 .travis/mourgos_deploy
+- eval "$(ssh-agent -s)"
+- ssh-add .travis/mourgos_deploy
+- scp -o stricthostkeychecking=no -r ./ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+- ssh -o stricthostkeychecking=no $DEPLOY_USER@$DEPLOY_HOST "source .nvm/nvm.sh; ./deploy_api.sh"
+notifications:
+  slack:
+    secure: cFiYXyEpVDar/I4SPxqGAymHvk9qoZUag77qyOzJKp++VOe77f8mH4FRcX4GFPZfwzeqUSrXXWUvvu4Ez+651hfdiPQGVKgUHC+USXMJdRXkYHR+rnnt8t8l89HeMSF6A1wjbIreCBrWOsvVf8/eZM4dF0j+aOT9m9Av+IykeMvCzsVi29sOzpIpm5GrxP0kUOcPWqqC27DoZlIT1tT4T+AU4uFQS0K0+LQuA0GDGCAkLwIeU1tm473nyiVO5Z6nnszKIQanNB0hO271PXaQyLqd2Bjxblva3hRo/cO/sL6GaFXGWzBu6qZMhy+s6iP9soyg7BcItwJu1m/k1TRp7E1ui0AQfgbGu1Ghnwx/lPicFEbTkirYk25C83+26OCKJYOIDxhiyfA9ME6yhkAKujgD2kgLrF2KGF3GasA9vDAtHPysJhJYG9tkMGuiNxz4MKz84KG5LsQh7hgnnWAWX/rImPfqKO255ARvY1Sf4to7YiAYPgeKWAAB9v8BeTZpscQDs08/oL9HHaxRqU4DzQQur7qZhKQ22lI+iq2dftA4z0l1q/6k7tuF7Z/aS6Tuq/MlcjW+0ARXMuDoWKP0nfvVjRamEJzZCVhjbPHv/uz2mUxyDCuwFlHL2OTzUe613Ol9yjvbybCe4XOz3F84V6Yy53LRAWjQkPmL0rozlF0=
