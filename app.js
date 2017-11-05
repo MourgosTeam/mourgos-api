@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var index = require('./routes/index');
 var catalogues = require('./routes/catalogues');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
@@ -23,7 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'files')));
 
 
-// app.use('/', index);
 app.use('/catalogues', catalogues);
 app.use('/categories', categories);
 app.use('/products', products);
