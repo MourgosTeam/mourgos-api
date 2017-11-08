@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 -- Dumping data for table mourgos.catalogues: ~3 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
 INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`) VALUES
-	(1, 'Erin\'s Donuts', '/images/donuts.png', 'Παιδάκια, burgers και donuts'),
+	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης'),
 	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί'),
 	(3, 'Greek Natural', '/images/donuts.png', 'Donuts, καφέ, χυμούς');
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~6 rows (approximately)
+-- Dumping data for table mourgos.categories: ~10 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(1, 'Category 1', 1),
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.products: ~8 rows (approximately)
+-- Dumping data for table mourgos.products: ~39 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `category_id`) VALUES
 	(1, 'Product 1', 'The best donut. Σαλάτα με iceberg, κοτόπουλο, μπέικον, κρουτόν & σως Καίσαρα', '/images/big-donut.jpg', 10.55, 1),
