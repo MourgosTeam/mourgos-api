@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 -- Dumping data for table mourgos.catalogues: ~3 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
 INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`) VALUES
-	(1, 'Erin\'s Donuts', '/images/donuts.png', 'Παιδάκια, burgers και donuts'),
+	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης'),
 	(2, 'Falafel House', '/images/donuts.png', 'Σουβλάκια, Τυρόπιτες'),
 	(3, 'Greek Natural', '/images/donuts.png', 'Donuts, καφέ, χυμούς');
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
