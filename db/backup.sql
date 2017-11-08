@@ -11,11 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Dumping database structure for mourgos
-CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `mourgos`;
-
 -- Dumping structure for table mourgos.attributes
 DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
@@ -55,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
 INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`) VALUES
 	(1, 'Erin\'s Donuts', '/images/donuts.png', 'Παιδάκια, burgers και donuts'),
-	(2, 'Falafel House', '/images/donuts.png', 'Σουβλάκια, Τυρόπιτες'),
+	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί'),
 	(3, 'Greek Natural', '/images/donuts.png', 'Donuts, καφέ, χυμούς');
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
@@ -68,17 +63,21 @@ CREATE TABLE IF NOT EXISTS `categories` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_catalogue_id` (`catalogue_id`),
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.categories: ~6 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(1, 'Category 1', 1),
-	(2, 'Category 2', 2),
+	(2, 'Wraps', 2),
 	(3, 'Category 3', 1),
 	(4, 'Category 4', 3),
-	(5, 'Category 5', 2),
-	(6, 'Category 6', 1);
+	(5, 'Μερίδες', 2),
+	(6, 'Category 6', 1),
+	(8, 'Burgers', 2),
+	(9, 'Γλυκά', 2),
+	(10, 'Φρέσκοι Χυμοί', 2),
+	(11, 'Ψυγείο', 2);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
@@ -93,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_category_id` (`category_id`),
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.products: ~8 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
@@ -101,11 +100,42 @@ INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `c
 	(1, 'Product 1', 'The best donut. Σαλάτα με iceberg, κοτόπουλο, μπέικον, κρουτόν & σως Καίσαρα', '/images/big-donut.jpg', 10.55, 1),
 	(2, 'Product 2', 'The normal donut', '/images/donuts.png', 9.55, 1),
 	(3, 'Product 2', 'The cheap donut', '/images/donuts.png', 0.55, 1),
-	(4, 'Product 1', 'The cheap coffee', '/images/coffee.jpg', 0.55, 2),
 	(5, 'Product 2', 'The big coffee', '/images/big-coffee.jpg', 0.55, 4),
-	(6, 'Product 3', 'The expensive coffee', '/images/expensive-coffee.jpg', 12.55, 2),
+	(6, 'Product 3', 'The expensive coffee', '/images/expensive-coffee.jpg', 12.55, 1),
 	(7, 'Product Coffee', 'The  coffee', '/images/coffee.jpg', 1.55, 3),
-	(8, 'Product 1', 'The best donut. Σαλάτα με iceberg, κοτόπουλο, μπέικον, κρουτόν & σως Καίσαρα', '/images/big-donut.jpg', 10.55, 1);
+	(8, 'Product 1', 'The best donut. Σαλάτα με iceberg, κοτόπουλο, μπέικον, κρουτόν & σως Καίσαρα', '/images/big-donut.jpg', 10.55, 1),
+	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, 2),
+	(10, 'Baba-Ganouj - Tabouleh Size L', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.00, 2),
+	(11, 'Baba-Ganouj - Tabouleh Size XL', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.20, 2),
+	(12, 'Baba-Ganouj - Fattoush Size M', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 2.80, 2),
+	(13, 'Baba-Ganouj - Fattoush Size L', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 3.00, 2),
+	(14, 'Baba-Ganouj - Fattoush Size XL', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 3.20, 2),
+	(15, 'Hummus - Tabbouleh Size M', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, 2),
+	(16, 'Hummus - Tabbouleh Size L', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.00, 2),
+	(17, 'Hummus - Tabbouleh Size XL', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.20, 2),
+	(18, 'Hummus - Fattoush Size M', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 2.80, 2),
+	(19, 'Hummus - Fattoush Size L', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 3.00, 2),
+	(20, 'Hummus - Fattoush Size XL', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 3.20, 2),
+	(21, 'Αλοιφή Small', '', '', 2.00, 5),
+	(22, 'Αλοιφή Big', '', '', 4.00, 5),
+	(23, 'Σαλάτα Small', '', '', 2.00, 5),
+	(24, 'Σαλάτα Big', '', '', 4.00, 5),
+	(25, 'Φαλάφελ Small', '6 τεμάχια', '', 2.00, 5),
+	(26, 'Φαλάφελ Big', '12 τεμάχια', '', 4.00, 5),
+	(27, 'Φαλάφελ Full', '6 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '', 5.50, 5),
+	(28, 'Φαλάφελ Full+', '12 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '', 7.50, 5),
+	(29, 'Φρέσκες Τηγανητές Πατάτες', '', '', 2.50, 5),
+	(30, 'Vegan Mayo Falafel Burger', 'Μπιφτέκι φαλάφελ, 100% vegan μαγιονέζα, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '', 4.20, 8),
+	(31, 'Guacamole Falafel Burger', 'Μπιφτέκι φαλάφελ, guacamole, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '', 4.20, 8),
+	(32, 'Τηγανητή Μπανάνα', '', '', 2.50, 9),
+	(33, 'Green Machine', 'Φύλλα σπανάκι, αγγούρι, καρότο, πράσινο μήλο', '', 3.70, 10),
+	(34, 'The Usual', 'Κόκκινο μήλο, πορτοκάλι, καρότο', '', 3.70, 10),
+	(35, 'Sweetheart', 'Κόκκινο μήλο, πατζάρι, καρότο', '', 3.70, 10),
+	(36, 'Mediterranean', 'Ντομάτα, καρότο, αγγούρι, μαϊντανός, κόκκινη πιπεριά, αλάτι, πιπέρι', '', 3.70, 10),
+	(37, 'Αναψυκτικά', 'Green Cola, Ble, Coca Cola', '', 1.20, 11),
+	(38, 'Μπύρες', 'Kaiser, Stella, Βεργίνα, Buckler', '', 1.70, 11),
+	(39, 'Χυμοί', 'Ρόδι', '', 2.50, 11),
+	(40, 'Νερό', '500ml', '', 0.50, 11);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
