@@ -34,7 +34,8 @@ CREATE TABLE IF NOT EXISTS `attributes` (
 INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
 	(8, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 82),
 	(9, 'Επικάλυψη', '["Σοκολάτα","Λευκή Σοκολάτα"]', 0.40, 82),
-	(10, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 83);
+	(10, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 83),
+	(11, 'TestAttribute', '["Με τεστ"]', 0.00, 82);
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.catalogues: ~3 rows (approximately)
+-- Dumping data for table mourgos.catalogues: ~4 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
 INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
 	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
@@ -69,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~14 rows (approximately)
+-- Dumping data for table mourgos.categories: ~17 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(2, 'Wraps', 2),
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.products: ~87 rows (approximately)
+-- Dumping data for table mourgos.products: ~141 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `category_id`) VALUES
 	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, 2),
@@ -167,20 +168,20 @@ INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `c
 	(65, 'Φρουτοσαλάτα', 'Φρουτοσαλάτα & σορμπέ λεμονιού', '/images/products/fruitsalad_smoothie.jpg', 3.00, 15),
 	(66, 'Μανγκομανία', 'Μάνγκο, μπανάνα, φράουλες, ανανάς & σορμπέ μάνγκο', '/images/products/mango_smoothie.jpg', 3.00, 15),
 	(67, 'Άρωμα Φρεσκάδας', 'Μπανάνα, ροδάκινο, φράουλες, ανανάς & σορμπέ φράουλα', '/images/products/peach_smoothie.jpg', 3.00, 15),
-	(68, 'Μπαχάμες', 'Μπανάνα, ανανάς, πορτοκάλι & μέλι', '', 2.50, 16),
-	(69, 'Τροπικό Τανγκό', 'Ανανάς, ροδάκινο, πορτοκάλι & πεπόνι', '', 2.50, 16),
-	(70, 'Επανενεργοποίηση', 'Μπανάνα, ανανάς, φράουλες & πορτοκάλι', '', 2.50, 16),
-	(71, 'Δυνατό Ξεκίνημα', 'Ανανάς, πορτοκάλι, γκρέιπφρουτ & λεμόνι', '', 2.50, 16),
-	(72, 'Καλοκαιρινή Πανδαισία', 'Φράουλες, μήλο, πεπόνι & καρπούζι', '', 2.50, 16),
-	(73, 'Φρεσκάδα Δυόσμου', 'Ανανάς, μήλο & δυόσμος', '', 2.50, 16),
-	(74, 'Βιταμινούχο Αδυνάτισμα', 'Ανανάς, πορτοκάλι, μήλο & ακτινίδιο', '', 2.50, 16),
-	(75, 'Φυσικός Χυμός Πορτοκάλι', '', '', 1.50, 16),
-	(76, 'Φυσικός Χυμός Πορτοκάλι - Ρόδι', '', '', 2.50, 16),
-	(77, 'Φρουτοσαλάτα', 'Διάφορα φρούτα εποχής', '', 2.00, 17),
-	(78, 'Φρουτοσαλάτα με Γιαούρτι, Μέλι και Δημητριακά', '', '', 2.50, 17),
-	(79, 'Φρουτοσαλάτα με Πραλίνα Σοκολάτα ή Μέλι', '', '', 2.50, 17),
-	(80, 'Φρουτοσαλάτα με Μούρα', '', '', 2.50, 17),
-	(81, 'Φρουτοσαλάτα με Παγωμένο Γιαούρτι', '', '', 3.30, 17),
+	(68, 'Μπαχάμες', 'Μπανάνα, ανανάς, πορτοκάλι & μέλι', '/images/products/banana_juice.jpg', 2.50, 16),
+	(69, 'Τροπικό Τανγκό', 'Ανανάς, ροδάκινο, πορτοκάλι & πεπόνι', '/images/products/pineapple_juice.jpg', 2.50, 16),
+	(70, 'Επανενεργοποίηση', 'Μπανάνα, ανανάς, φράουλες & πορτοκάλι', '/images/products/pineapple_banana_juice.jpg', 2.50, 16),
+	(71, 'Δυνατό Ξεκίνημα', 'Ανανάς, πορτοκάλι, γκρέιπφρουτ & λεμόνι', '/images/products/pineapple_orange_juice.gif', 2.50, 16),
+	(72, 'Καλοκαιρινή Πανδαισία', 'Φράουλες, μήλο, πεπόνι & καρπούζι', '/images/products/watermelon_juice.jpg', 2.50, 16),
+	(73, 'Φρεσκάδα Δυόσμου', 'Ανανάς, μήλο & δυόσμος', '/images/products/spearmint_juice.jpg', 2.50, 16),
+	(74, 'Βιταμινούχο Αδυνάτισμα', 'Ανανάς, πορτοκάλι, μήλο & ακτινίδιο', '/images/products/pineapple_kiwi_juice.jpg', 2.50, 16),
+	(75, 'Φυσικός Χυμός Πορτοκάλι', '', '/images/products/orange_juice.jpg', 1.50, 16),
+	(76, 'Φυσικός Χυμός Πορτοκάλι - Ρόδι', '', '/images/products/orange_rodi_juice.jpg', 2.50, 16),
+	(77, 'Φρουτοσαλάτα', 'Διάφορα φρούτα εποχής', '/images/products/fruitsalad.jpg', 2.00, 17),
+	(78, 'Φρουτοσαλάτα με Γιαούρτι, Μέλι και Δημητριακά', '', '/images/products/fruitsalad_cereal.jpg', 2.50, 17),
+	(79, 'Φρουτοσαλάτα με Πραλίνα Σοκολάτα ή Μέλι', '', '/images/products/fruitsalad_choco.jpg', 2.50, 17),
+	(80, 'Φρουτοσαλάτα με Μούρα', '', '/images/products/fruitsalad_berries.jpg', 2.50, 17),
+	(81, 'Φρουτοσαλάτα με Παγωμένο Γιαούρτι', '', '/images/products/fruitsalad_froyo.jpg', 3.30, 17),
 	(82, 'Μεσαίο donut με γέμιση', 'Γέμιση της επιλογής σας.', '/images/products/gemisi.jpg', 1.20, 18),
 	(83, 'Μεσαίο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi.jpg', 1.40, 18),
 	(84, 'Μεσαίο donut με γέμιση & επικάλυψη σπέσιαλ', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.70, 18),
