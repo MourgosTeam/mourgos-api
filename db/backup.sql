@@ -11,6 +11,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
+
+-- Dumping database structure for mourgos
+CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `mourgos`;
+
 -- Dumping structure for table mourgos.attributes
 DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
@@ -22,10 +27,14 @@ CREATE TABLE IF NOT EXISTS `attributes` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_product_id` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.attributes: ~7 rows (approximately)
+-- Dumping data for table mourgos.attributes: ~3 rows (approximately)
 /*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
+INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
+	(8, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 82),
+	(9, 'Επικάλυψη', '["Σοκολάτα","Λευκή Σοκολάτα"]', 0.40, 82),
+	(10, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 83);
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
@@ -36,15 +45,16 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   `Image` text DEFAULT NULL,
   `Description` text DEFAULT NULL,
   `FriendlyURL` text DEFAULT NULL,
+  `WorkingDates` text DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.catalogues: ~3 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `FriendlyURL`) VALUES
-	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts'),
-	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse'),
-	(3, 'Greek Natural', '/images/donuts.png', 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural');
+INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
+	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
+	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL),
+	(3, 'Greek Natural', '/images/donuts.png', 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -58,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~15 rows (approximately)
+-- Dumping data for table mourgos.categories: ~14 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(2, 'Wraps', 2),
@@ -91,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.products: ~80 rows (approximately)
+-- Dumping data for table mourgos.products: ~87 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `category_id`) VALUES
 	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, 2),
