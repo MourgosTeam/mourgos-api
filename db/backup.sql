@@ -43,15 +43,16 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   `Name` text DEFAULT NULL,
   `Image` text DEFAULT NULL,
   `Description` text DEFAULT NULL,
+  `FriendlyURL` text DEFAULT NULL,
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.catalogues: ~3 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`) VALUES
-	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης'),
-	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί'),
-	(3, 'Greek Natural', '/images/donuts.png', 'Donuts, καφέ, χυμούς');
+INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `FriendlyURL`) VALUES
+	(1, 'Eri\'s Donuts', '/images/erisdonuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts'),
+	(2, 'Falafel House', '/images/donuts.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse'),
+	(3, 'Greek Natural', '/images/donuts.png', 'Donuts, καφέ, χυμούς', 'GreekNatural');
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
