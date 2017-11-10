@@ -6,16 +6,18 @@ var knex = require('../db/db.js');
 function filterDate(data) {
   var day = new Date().getDay();
   var newArr = [];
-  for ( var i = 0 ; i < data.length ; i = i+1 ){
-    if ( data[i].Days === null ){
-      newArr.push( data[i] );
-    }
-    else {
-      var days = JSON.parse( data[i].Days );
-      if ( days[day] ) newArr.push(data[i]);
+  for (var ic = 0; ic < data.length; ic += 1) {
+    if (data[ic].Days === null) {
+      newArr.push(data[ic]);
+    } else {
+      var days = JSON.parse(data[ic].Days);
+      if (days[day]) {
+        newArr.push(data[ic]);
+      }
     }
   }
-  return newArr;
+
+return newArr;
 }
 
 /* GET users listing. */
