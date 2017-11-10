@@ -6,13 +6,13 @@ var knex = require('../db/db.js');
 function filterDate(data) {
   var day = new Date().getDay();
   var newArr = [];
-  for(var i=0;i<data.length;i++){
-    if(data[i].Days === null){
-      newArr.push(data[i]);
+  for ( var i = 0 ; i < data.length ; i++ ){
+    if ( data[i].Days === null ){
+      newArr.push( data[i] );
     }
-    else{
-      var days = JSON.parse(data[i].Days);
-      if(days[day])newArr.push(data[i]);
+    else {
+      var days = JSON.parse( data[i].Days );
+      if ( days[day] ) newArr.push(data[i]);
     }
   }
   return newArr;
