@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `Description` text NOT NULL DEFAULT '',
   `Image` text NOT NULL DEFAULT '',
   `Price` decimal(10,2) NOT NULL,
-  `Days` text DEFAULT NULL,
+  `Days` text NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `fk_category_id` (`category_id`),
