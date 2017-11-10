@@ -13,6 +13,7 @@
 
 
 -- Dumping database structure for mourgos
+DROP DATABASE IF EXISTS `mourgos`;
 CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mourgos`;
 
@@ -100,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `Description` text NOT NULL DEFAULT '',
   `Image` text NOT NULL DEFAULT '',
   `Price` decimal(10,2) NOT NULL,
-  `Days` text DEFAULT '"[1,1,1,1,1,1,1]"',
+  `Days` text NOT NULL DEFAULT '"[1,1,1,1,1,1,1]"',
   `category_id` int(10) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `fk_category_id` (`category_id`),
