@@ -6,7 +6,7 @@ var knex = require('../db/db.js');
 function filterDate(data) {
   var day = new Date().getDay();
   var newArr = [];
-  for ( var i = 0 ; i < data.length ; i++ ){
+  for ( var i = 0 ; i < data.length ; i = i+1 ){
     if ( data[i].Days === null ){
       newArr.push( data[i] );
     }
