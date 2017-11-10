@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for mourgos
-DROP DATABASE IF EXISTS `mourgos`;
 CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mourgos`;
 
 -- Dumping structure for table mourgos.attributes
-DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -40,7 +38,6 @@ INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`)
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
-DROP TABLE IF EXISTS `catalogues`;
 CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -61,7 +58,6 @@ INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `Friendly
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -94,14 +90,13 @@ INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
   `Description` text NOT NULL DEFAULT '',
   `Image` text NOT NULL DEFAULT '',
   `Price` decimal(10,2) NOT NULL,
-  `Days` text NOT NULL DEFAULT '"[1,1,1,1,1,1,1]"',
+  `Days` text DEFAULT NULL,
   `category_id` int(10) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `fk_category_id` (`category_id`),

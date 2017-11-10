@@ -7,8 +7,13 @@ function filterDate(data) {
   var day = new Date().getDay();
   var newArr = [];
   for(var i=0;i<data.length;i++){
-    var days = JSON.parse(data[i].Days);
-    if(days[day])newArr.push(data[i]);
+    if(data[i].Days == null){
+      newArr.push(data[i]);
+    }
+    else{
+      var days = JSON.parse(data[i].Days);
+      if(days[day])newArr.push(data[i]);
+    }
   }
   return newArr;
 }
