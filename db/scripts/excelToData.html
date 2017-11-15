@@ -341,6 +341,11 @@ function normalizeAttr(){
       	products = JSON.parse(obj[j]);
       	continue;
       }
+      if(j=='Options'){
+      	obj[j] = (""+obj[j]).split(" ").join('');
+      	obj[j] = (""+obj[j]).split(",").join('\\\",\\\"');
+      	obj[j] = "[\\\""+obj[j]+"\\\"]";
+      }
       if(keys.includes(j)){
         subss.push(j + "='" + obj[j] + "'");
         continue;
@@ -353,8 +358,8 @@ function normalizeAttr(){
     var v = values.join("','");
     subs = subs.join(", ");
     subss = subss.join(" AND ");
-    for(var i=0; i < products.length ;i ++){
-    	s+= `INSERT INTO ${table} (${f}, product_id) VALUES('${v}', '${products[i]}');\n`;
+    for(var j=0; j < products.length ;j ++){
+    	s+= `INSERT INTO ${table} (${f}, product_id) VALUES('${v}', '${products[j]}');\n`;
     }
   }
 

@@ -27,15 +27,25 @@ CREATE TABLE IF NOT EXISTS `attributes` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_product_id` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.attributes: ~4 rows (approximately)
 /*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
 INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
-	(8, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 82),
-	(9, 'Επικάλυψη', '["Σοκολάτα","Λευκή Σοκολάτα"]', 0.40, 82),
-	(10, 'Γέμιση', '["Σοκολάτα","Φράουλα"]', 0.20, 83),
-	(11, 'TestAttribute', '["Με τεστ"]', 0.00, 82);
+	(54, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 82),
+	(55, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 83),
+	(56, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 84),
+	(57, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 85),
+	(58, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 86),
+	(59, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 87),
+	(60, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 88),
+	(61, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 83),
+	(62, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 84),
+	(63, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 86),
+	(64, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 87),
+	(65, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 88),
+	(66, 'Topping', '["τρούφες","μπισκοτο","ινδοκαρυδο","καραμελωμενοφυστίκι","ορεο","άχνηζάχαρη"]', 0.00, 84),
+	(67, 'Topping', '["τρούφες","μπισκοτο","ινδοκαρυδο","καραμελωμενοφυστίκι","ορεο","άχνηζάχαρη"]', 0.00, 87);
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
@@ -44,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
   `Image` text DEFAULT NULL,
+  `HeroImage` text DEFAULT NULL,
   `Description` text DEFAULT NULL,
   `FriendlyURL` text DEFAULT NULL,
   `WorkingDates` text DEFAULT NULL,
@@ -52,11 +63,11 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 
 -- Dumping data for table mourgos.catalogues: ~4 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
-	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
-	(2, 'Falafel House', '/images/falafel_house.png', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL),
-	(3, 'Greek Natural', '/images/greek_natural.png', 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL),
-	(4, 'Θάλασσα', '/images/thalassa.png', NULL, 'Thalassa', NULL);
+INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `HeroImage`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
+	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
+	(2, 'Falafel House', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL),
+	(3, 'Greek Natural', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL),
+	(4, 'Θάλασσα', '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', NULL, 'Thalassa', NULL);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -70,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~17 rows (approximately)
+-- Dumping data for table mourgos.categories: ~15 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(2, 'Wraps', 2),
@@ -105,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_category_id` (`category_id`),
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.products: ~141 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
@@ -185,10 +196,10 @@ INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `D
 	(81, 'Φρουτοσαλάτα με Παγωμένο Γιαούρτι', '', '/images/products/fruitsalad_froyo.jpg', 3.30, '[1,1,1,1,1,1,1]', 17),
 	(82, 'Μεσαίο donut με γέμιση', 'Γέμιση της επιλογής σας.', '/images/products/gemisi.jpg', 1.20, '[1,1,1,1,1,1,1]', 18),
 	(83, 'Μεσαίο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi.jpg', 1.40, '[1,1,1,1,1,1,1]', 18),
-	(84, 'Μεσαίο donut με γέμιση & επικάλυψη σπέσιαλ', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.70, '[1,1,1,1,1,1,1]', 18),
+	(84, 'Μεσαίο donut με γέμιση & επικάλυψη σπέσιαλ', 'Γέμιση, επικάλυψη και topping της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.70, '[1,1,1,1,1,1,1]', 18),
 	(85, 'Μεγάλο donut με γέμιση', 'Γέμιση της επιλογής σας.', '/images/products/gemisi.jpg', 1.40, '[1,1,1,1,1,1,1]', 18),
-	(86, 'Μεγάλο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.90, '[1,1,1,1,1,1,1]', 18),
-	(87, 'Μεγάλο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.90, '[1,1,1,1,1,1,1]', 18),
+	(86, 'Μεγάλο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/epikalypsi.jpg', 1.60, '[1,1,1,1,1,1,1]', 18),
+	(87, 'Μεγάλο donut με γέμιση & επικάλυψη σπέσιαλ', 'Γέμιση, επικάλυψη και topping της επιλογής σας.', '/images/products/epikalypsi_special.jpg', 1.90, '[1,1,1,1,1,1,1]', 18),
 	(88, 'Μικρά donuts με γέμιση & επικάλυψη (4άδα)', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/mikra_mazi.jpg', 3.80, '[1,1,1,1,1,1,1]', 18),
 	(89, 'Eri\'s glaze donut', '', '/images/products/glaze.jpeg', 3.20, '[1,1,1,1,1,1,1]', 18),
 	(90, 'Γάλα άσπρο', '', '/images/products/milk.jpg', 1.30, '[1,1,1,1,1,1,1]', 19),
@@ -197,60 +208,60 @@ INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `D
 	(93, 'Αριάνι', '', '/images/products/ariani.jpg', 1.40, '[1,1,1,1,1,1,1]', 19),
 	(94, 'Νερό', '', '/images/products/nero.jpg', 0.50, '[1,1,1,1,1,1,1]', 19),
 	(95, 'Χυμός (παιδικός)', '', '/images/products/juice.png', 0.80, '[1,1,1,1,1,1,1]', 19),
-	(150, 'Γαριδομακαρονάδα', '', '/images/products/thalassa/shrimps.jpg', 6.50, '[1,1,1,1,1,1,1]', 20),
-	(151, 'Ψαρόσπουπα', '', '/images/products/thalassa/soup.jpg', 5.50, '[1,1,1,1,1,1,1]', 20),
-	(152, 'Τορτίγια Ψαριού', '', '/images/products/thalassa/tortilla.jpg', 4.00, '[1,1,1,1,1,1,1]', 20),
-	(153, 'Μπακαλιάρος Σκορδαλιά', '', '/images/products/thalassa/baca.jpg', 7.00, '[0,1,0,0,0,0,0]', 20),
-	(154, 'Burger Ψαριού', '', '/images/products/thalassa/burger.jpg', 4.50, '[0,0,0,0,0,0,1]', 20),
-	(155, 'Μερίδα Σουβλάκι Τόνου με Πατάτες', '', '/images/products/thalassa/souvlaki.jpg', 6.50, '[1,1,1,1,1,1,1]', 20),
-	(156, 'Τσιπούρα Ιχθ. Σχάρας', '', '', 6.50, '[1,1,1,1,1,1,1]', 20),
-	(157, 'Λαυράκι Ιχθ. Σχάρας', '', '', 6.00, '[1,1,1,1,1,1,1]', 20),
-	(158, 'Χιόνα Ιχθ. Σχάρας', '', '', 6.50, '[1,1,1,1,1,1,1]', 20),
-	(159, 'Ψητά Λαχανικά', '', '', 3.80, '[1,1,1,1,1,1,1]', 20),
-	(160, 'Μπακαλιάρος Σκορδαλιά', '', '/images/products/thalassa/baca.jpg', 7.00, '[0,1,0,0,0,0,0]', 20),
-	(161, 'Πέρκα με Σωτέ Λαχανικά', '', '/images/products/thalassa/perka.jpg', 7.00, '[0,1,0,0,0,0,0]', 20),
-	(162, 'Λαχανοντολμάδες με Τόνο και Θαλασσινά', '', '', 7.00, '[0,0,1,0,0,0,0]', 20),
-	(163, 'Μυδοπίλαφο', '', '', 6.50, '[0,0,1,0,0,0,0]', 20),
-	(164, 'Σουπιές με Σπανάκι', '', '', 7.50, '[0,0,0,1,0,0,0]', 20),
-	(165, 'Χταπόδι με Κοφτό Μακαρόνι', '', '/images/products/thalassa/xtapodi.jpg', 6.50, '[0,0,0,1,0,0,0]', 20),
-	(166, 'Σουβλάκι Τόνου με Πουρέ Σελινόριζας', '', '/images/products/thalassa/souvlaki2.jpg', 6.50, '[0,0,0,0,1,0,0]', 20),
-	(167, 'Πένες με Σολομό και Σάλτσα Βενετσιάνα', '', '/images/products/thalassa/penes.jpg', 7.00, '[0,0,0,0,1,0,0]', 20),
-	(168, 'Γεμιστά με Θαλασσινά', '', '', 5.50, '[0,0,0,0,0,1,0]', 20),
-	(169, 'Θράψαλο Γεμιστό με Θαλασσινά', '', '', 7.00, '[0,0,0,0,0,1,0]', 20),
-	(170, 'Σολομός με Σωτέ Λαχανικά', '', '', 7.50, '[0,0,0,0,0,0,1]', 20),
-	(171, 'Burger Ψαριού', '', '/images/products/thalassa/burger.jpg', 4.50, '[0,0,0,0,0,0,1]', 20),
-	(172, 'Κριθαρώτο Θαλασσινών', '', '/images/products/thalassa/kritharoto.jpg', 7.00, '[1,0,0,0,0,0,0]', 20),
-	(173, 'Ψάρι αλά Σπατσιώτα', '', '', 6.50, '[1,0,0,0,0,0,0]', 20),
-	(174, 'Χόρτα (Αντίδια ή Βλήτα)', '', '', 2.50, '[1,1,1,1,1,1,1]', 21),
-	(175, 'Coca Cola Κουτί', '330ml', '/images/products/thalassa/cola_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(176, 'Coca Cola Zero Κουτί', '330ml', '/images/products/thalassa/cola_zero_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(177, 'Coca Cola Στέβια Κουτί', '330ml', '/images/products/thalassa/cola_stevia_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(178, 'Coca Cola Light Κουτί', '330ml', '/images/products/thalassa/cola_light_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(179, 'Fanta Πορτοκαλάδα', '330ml', '/images/products/thalassa/fanta_orange_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(180, 'Fanta Λεμονάδα', '330ml', '/images/products/thalassa/fanta_lemon_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(181, 'Sprite', '330ml', '/images/products/thalassa/sprite_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(182, 'Schweppes (Σόδα)', '330ml', '/images/products/thalassa/soda.png', 1.20, '[1,1,1,1,1,1,1]', 22),
-	(183, 'Coca Cola Μπουκάλι', '500ml', '/images/products/thalassa/cola_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(184, 'Coca Cola Zero Μπουκάλι', '500ml', '/images/products/thalassa/cola_zero_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(185, 'Coca Cola Light Μπουκάλι', '500ml', '/images/products/thalassa/cola_light_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(186, 'Νερό', '330ml', '/images/products/thalassa/nero.jpg', 0.50, '[1,1,1,1,1,1,1]', 22),
-	(187, 'Ούζο Πλωμάρι', '200ml', '/images/products/thalassa/plomari.jpg', 4.50, '[1,1,1,1,1,1,1]', 22),
-	(188, 'Ούζο Παπρά', '100ml', '/images/products/thalassa/papra.jpg', 2.50, '[1,1,1,1,1,1,1]', 22),
-	(189, 'Ούζο Μπαμπατζίμ', '200ml', '/images/products/thalassa/babatzim.png', 5.50, '[1,1,1,1,1,1,1]', 22),
-	(190, 'Τσίπουρο Δεκαράκι', '200ml', '/images/products/thalassa/dekaraki.jpg', 4.50, '[1,1,1,1,1,1,1]', 22),
-	(191, 'Τσίπουρο Μπαμπατζίμ (με Γλυκάνισο)', '200ml', '/images/products/thalassa/babatzim_tsipouro_me.png', 5.80, '[1,1,1,1,1,1,1]', 22),
-	(192, 'Τσίπουρο Μπαμπατζίμ (χωρίς Γλυκάνισο)', '200ml', '/images/products/thalassa/babatzim_tsipouro.png', 5.80, '[1,1,1,1,1,1,1]', 22),
-	(193, 'Τσίπουρο Παπρά (με Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
-	(194, 'Τσίπουρο Παπρά (χωρίς Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
-	(195, 'Τσίπουρο Παπρά (με Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
-	(196, 'Τσίπουρο Παπρά (χωρίς Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
-	(197, 'Μπύρα ΑΛΦΑ', '330ml', '/images/products/thalassa/alfa330.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(198, 'Μπύρα ΑΛΦΑ', '330ml', '/images/products/thalassa/alfa330.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(199, 'Amstel', '330ml', '/images/products/thalassa/amstel330.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(200, 'Amstel Free', '330ml', '/images/products/thalassa/amstel_free.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(201, 'Amstel Radler', '330ml', '/images/products/thalassa/asmtel_radler.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(202, 'Heineken', '330ml', '/images/products/thalassa/heineken.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
-	(203, 'Ρετσίνα Κεχριμπάρι', '300ml', '/images/products/thalassa/kexrimpari.jpg', 4.00, '[1,1,1,1,1,1,1]', 22);
+	(204, 'Γαριδομακαρονάδα', '', '/images/products/thalassa/shrimps.jpg', 6.50, '[1,1,1,1,1,1,1]', 20),
+	(205, 'Ψαρόσπουπα', '', '/images/products/thalassa/soup.jpg', 5.50, '[1,1,1,1,1,1,1]', 20),
+	(206, 'Τορτίγια Ψαριού', '', '/images/products/thalassa/tortilla.jpg', 4.00, '[1,1,1,1,1,1,1]', 20),
+	(207, 'Μπακαλιάρος Σκορδαλιά', '', '/images/products/thalassa/baca.jpg', 7.00, '[1,1,1,1,1,1,1]', 20),
+	(208, 'Burger Ψαριού', '', '/images/products/thalassa/burger.jpg', 4.50, '[1,1,1,1,1,1,1]', 20),
+	(209, 'Μερίδα Σουβλάκι Τόνου με Πατάτες', '', '/images/products/thalassa/souvlaki.jpg', 6.50, '[1,1,1,1,1,1,1]', 20),
+	(210, 'Τσιπούρα Ιχθ. Σχάρας', '', '', 6.50, '[1,1,1,1,1,1,1]', 20),
+	(211, 'Λαυράκι Ιχθ. Σχάρας', '', '', 6.00, '[1,1,1,1,1,1,1]', 20),
+	(212, 'Χιόνα Ιχθ. Σχάρας', '', '', 6.50, '[1,1,1,1,1,1,1]', 20),
+	(213, 'Ψητά Λαχανικά', '', '', 3.80, '[1,1,1,1,1,1,1]', 20),
+	(214, 'Μπακαλιάρος Σκορδαλιά', '', '/images/products/thalassa/baca.jpg', 7.00, '[0,1,0,0,0,0,0]', 20),
+	(215, 'Πέρκα με Σωτέ Λαχανικά', '', '/images/products/thalassa/perka.jpg', 7.00, '[0,1,0,0,0,0,0]', 20),
+	(216, 'Λαχανοντολμάδες με Τόνο και Θαλασσινά', '', '', 7.00, '[0,0,1,0,0,0,0]', 20),
+	(217, 'Μυδοπίλαφο', '', '', 6.50, '[0,0,1,0,0,0,0]', 20),
+	(218, 'Σουπιές με Σπανάκι', '', '', 7.50, '[0,0,0,1,0,0,0]', 20),
+	(219, 'Χταπόδι με Κοφτό Μακαρόνι', '', '/images/products/thalassa/xtapodi.jpg', 6.50, '[0,0,0,1,0,0,0]', 20),
+	(220, 'Σουβλάκι Τόνου με Πουρέ Σελινόριζας', '', '/images/products/thalassa/souvlaki2.jpg', 6.50, '[0,0,0,0,1,0,0]', 20),
+	(221, 'Πένες με Σολομό και Σάλτσα Βενετσιάνα', '', '/images/products/thalassa/penes.jpg', 7.00, '[0,0,0,0,1,0,0]', 20),
+	(222, 'Γεμιστά με Θαλασσινά', '', '', 5.50, '[0,0,0,0,0,1,0]', 20),
+	(223, 'Θράψαλο Γεμιστό με Θαλασσινά', '', '', 7.00, '[0,0,0,0,0,1,0]', 20),
+	(224, 'Σολομός με Σωτέ Λαχανικά', '', '', 7.50, '[0,0,0,0,0,0,1]', 20),
+	(225, 'Burger Ψαριού', '', '/images/products/thalassa/burger.jpg', 4.50, '[0,0,0,0,0,0,1]', 20),
+	(226, 'Κριθαρώτο Θαλασσινών', '', '/images/products/thalassa/kritharoto.jpg', 7.00, '[1,0,0,0,0,0,0]', 20),
+	(227, 'Ψάρι αλά Σπατσιώτα', '', '', 6.50, '[1,0,0,0,0,0,0]', 20),
+	(228, 'Χόρτα (Αντίδια ή Βλήτα)', '', '', 2.50, '[1,1,1,1,1,1,1]', 21),
+	(229, 'Coca Cola Κουτί', '330ml', '/images/products/thalassa/cola_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(230, 'Coca Cola Zero Κουτί', '330ml', '/images/products/thalassa/cola_zero_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(231, 'Coca Cola Στέβια Κουτί', '330ml', '/images/products/thalassa/cola_stevia_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(232, 'Coca Cola Light Κουτί', '330ml', '/images/products/thalassa/cola_light_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(233, 'Fanta Πορτοκαλάδα', '330ml', '/images/products/thalassa/fanta_orange_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(234, 'Fanta Λεμονάδα', '330ml', '/images/products/thalassa/fanta_lemon_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(235, 'Sprite', '330ml', '/images/products/thalassa/sprite_can.jpg', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(236, 'Schweppes (Σόδα)', '330ml', '/images/products/thalassa/soda.png', 1.20, '[1,1,1,1,1,1,1]', 22),
+	(237, 'Coca Cola Μπουκάλι', '500ml', '/images/products/thalassa/cola_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(238, 'Coca Cola Zero Μπουκάλι', '500ml', '/images/products/thalassa/cola_zero_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(239, 'Coca Cola Light Μπουκάλι', '500ml', '/images/products/thalassa/cola_light_bottle.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(240, 'Νερό', '330ml', '/images/products/thalassa/nero.jpg', 0.50, '[1,1,1,1,1,1,1]', 22),
+	(241, 'Ούζο Πλωμάρι', '200ml', '/images/products/thalassa/plomari.jpg', 4.50, '[1,1,1,1,1,1,1]', 22),
+	(242, 'Ούζο Παπρά', '100ml', '/images/products/thalassa/papra.jpg', 2.50, '[1,1,1,1,1,1,1]', 22),
+	(243, 'Ούζο Μπαμπατζίμ', '200ml', '/images/products/thalassa/babatzim.png', 5.50, '[1,1,1,1,1,1,1]', 22),
+	(244, 'Τσίπουρο Δεκαράκι', '200ml', '/images/products/thalassa/dekaraki.jpg', 4.50, '[1,1,1,1,1,1,1]', 22),
+	(245, 'Τσίπουρο Μπαμπατζίμ (με Γλυκάνισο)', '200ml', '/images/products/thalassa/babatzim_tsipouro_me.png', 5.80, '[1,1,1,1,1,1,1]', 22),
+	(246, 'Τσίπουρο Μπαμπατζίμ (χωρίς Γλυκάνισο)', '200ml', '/images/products/thalassa/babatzim_tsipouro.png', 5.80, '[1,1,1,1,1,1,1]', 22),
+	(247, 'Τσίπουρο Παπρά (με Γλυκάνισο)', '100ml', '/images/products/thalassa/papra_tsipouro.jpg', 2.50, '[1,1,1,1,1,1,1]', 22),
+	(248, 'Τσίπουρο Παπρά (χωρίς Γλυκάνισο)', '100ml', '/images/products/thalassa/papra_tsipouro.jpg', 2.50, '[1,1,1,1,1,1,1]', 22),
+	(249, 'Τσίπουρο Παπρά (με Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
+	(250, 'Τσίπουρο Παπρά (χωρίς Γλυκάνισο)', '700ml', '/images/products/thalassa/papra_tsipouro.jpg', 12.00, '[1,1,1,1,1,1,1]', 22),
+	(251, 'Μπύρα ΑΛΦΑ', '500ml', '/images/products/thalassa/alfa500.png', 2.00, '[1,1,1,1,1,1,1]', 22),
+	(252, 'Μπύρα ΑΛΦΑ', '330ml', '/images/products/thalassa/alfa330.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(253, 'Amstel', '330ml', '/images/products/thalassa/amstel330.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(254, 'Amstel Free', '330ml', '/images/products/thalassa/amstel_free.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(255, 'Amstel Radler', '330ml', '/images/products/thalassa/asmtel_radler.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(256, 'Heineken', '330ml', '/images/products/thalassa/heineken.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
+	(257, 'Ρετσίνα Κεχριμπάρι', '300ml', '/images/products/thalassa/kexrimpari.jpg', 4.00, '[1,1,1,1,1,1,1]', 22);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
