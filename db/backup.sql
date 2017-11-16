@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `attributes` (
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.attributes: ~4 rows (approximately)
+-- Dumping data for table mourgos.attributes: ~14 rows (approximately)
 /*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
 INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
 	(54, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 82),
@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   `Name` text DEFAULT NULL,
   `Image` text DEFAULT NULL,
   `HeroImage` text DEFAULT NULL,
+  `Exclusive` int(1) unsigned NOT NULL DEFAULT 0,
   `Description` text DEFAULT NULL,
   `FriendlyURL` text DEFAULT NULL,
   `WorkingDates` text DEFAULT NULL,
@@ -63,11 +64,11 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 
 -- Dumping data for table mourgos.catalogues: ~4 rows (approximately)
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `HeroImage`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
-	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
-	(2, 'Falafel House', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL),
-	(3, 'Greek Natural', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL),
-	(4, 'Θάλασσα', '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', NULL, 'Thalassa', NULL);
+INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`) VALUES
+	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL),
+	(2, 'Falafel House', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL),
+	(3, 'Greek Natural', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL),
+	(4, 'Θάλασσα', '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', NULL);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -103,6 +104,20 @@ INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(22, 'Ποτά - Αναψυκτικά', 4);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.globals
+DROP TABLE IF EXISTS `globals`;
+CREATE TABLE IF NOT EXISTS `globals` (
+  `Name` varchar(50) NOT NULL,
+  `Value` text NOT NULL,
+  UNIQUE KEY `Name` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.globals: ~0 rows (approximately)
+/*!40000 ALTER TABLE `globals` DISABLE KEYS */;
+INSERT IGNORE INTO `globals` (`Name`, `Value`) VALUES
+	('MinimumOrder', '5');
+/*!40000 ALTER TABLE `globals` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.products
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
@@ -121,34 +136,34 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Dumping data for table mourgos.products: ~141 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `category_id`) VALUES
-	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, '[1,1,1,1,1,1,1]', 2),
-	(10, 'Baba-Ganouj - Tabouleh Size L', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.00, '[1,1,1,1,1,1,1]', 2),
-	(11, 'Baba-Ganouj - Tabouleh Size XL', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.20, '[1,1,1,1,1,1,1]', 2),
-	(12, 'Baba-Ganouj - Fattoush Size M', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 2.80, '[1,1,1,1,1,1,1]', 2),
-	(13, 'Baba-Ganouj - Fattoush Size L', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 3.00, '[1,1,1,1,1,1,1]', 2),
-	(14, 'Baba-Ganouj - Fattoush Size XL', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '', 3.20, '[1,1,1,1,1,1,1]', 2),
-	(15, 'Hummus - Tabbouleh Size M', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 2.80, '[1,1,1,1,1,1,1]', 2),
-	(16, 'Hummus - Tabbouleh Size L', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.00, '[1,1,1,1,1,1,1]', 2),
-	(17, 'Hummus - Tabbouleh Size XL', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '', 3.20, '[1,1,1,1,1,1,1]', 2),
-	(18, 'Hummus - Fattoush Size M', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 2.80, '[1,1,1,1,1,1,1]', 2),
-	(19, 'Hummus - Fattoush Size L', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 3.00, '[1,1,1,1,1,1,1]', 2),
-	(20, 'Hummus - Fattoush Size XL', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '', 3.20, '[1,1,1,1,1,1,1]', 2),
-	(21, 'Αλοιφή Small', '', '', 2.00, '[1,1,1,1,1,1,1]', 5),
-	(22, 'Αλοιφή Big', '', '', 4.00, '[1,1,1,1,1,1,1]', 5),
-	(23, 'Σαλάτα Small', '', '', 2.00, '[1,1,1,1,1,1,1]', 5),
-	(24, 'Σαλάτα Big', '', '', 4.00, '[1,1,1,1,1,1,1]', 5),
-	(25, 'Φαλάφελ Small', '6 τεμάχια', '', 2.00, '[1,1,1,1,1,1,1]', 5),
-	(26, 'Φαλάφελ Big', '12 τεμάχια', '', 4.00, '[1,1,1,1,1,1,1]', 5),
-	(27, 'Φαλάφελ Full', '6 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '', 5.50, '[1,1,1,1,1,1,1]', 5),
-	(28, 'Φαλάφελ Full+', '12 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '', 7.50, '[1,1,1,1,1,1,1]', 5),
-	(29, 'Φρέσκες Τηγανητές Πατάτες', '', '', 2.50, '[1,1,1,1,1,1,1]', 5),
-	(30, 'Vegan Mayo Falafel Burger', 'Μπιφτέκι φαλάφελ, 100% vegan μαγιονέζα, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '', 4.20, '[1,1,1,1,1,1,1]', 8),
-	(31, 'Guacamole Falafel Burger', 'Μπιφτέκι φαλάφελ, guacamole, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '', 4.20, '[1,1,1,1,1,1,1]', 8),
-	(32, 'Τηγανητή Μπανάνα', '', '', 2.50, '[1,1,1,1,1,1,1]', 9),
-	(33, 'Green Machine', 'Φύλλα σπανάκι, αγγούρι, καρότο, πράσινο μήλο', '', 3.70, '[1,1,1,1,1,1,1]', 10),
-	(34, 'The Usual', 'Κόκκινο μήλο, πορτοκάλι, καρότο', '', 3.70, '[1,1,1,1,1,1,1]', 10),
-	(35, 'Sweetheart', 'Κόκκινο μήλο, πατζάρι, καρότο', '', 3.70, '[1,1,1,1,1,1,1]', 10),
-	(36, 'Mediterranean', 'Ντομάτα, καρότο, αγγούρι, μαϊντανός, κόκκινη πιπεριά, αλάτι, πιπέρι', '', 3.70, '[1,1,1,1,1,1,1]', 10),
+	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/baba_tab.png', 2.80, '[1,1,1,1,1,1,1]', 2),
+	(10, 'Baba-Ganouj - Tabouleh Size L', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/baba_tab.png', 3.00, '[1,1,1,1,1,1,1]', 2),
+	(11, 'Baba-Ganouj - Tabouleh Size XL', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/baba_tab.png', 3.20, '[1,1,1,1,1,1,1]', 2),
+	(12, 'Baba-Ganouj - Fattoush Size M', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '/images/products/images/FalafelHouse/baba_fat.png', 2.80, '[1,1,1,1,1,1,1]', 2),
+	(13, 'Baba-Ganouj - Fattoush Size L', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '/images/products/images/FalafelHouse/baba_fat.png', 3.00, '[1,1,1,1,1,1,1]', 2),
+	(14, 'Baba-Ganouj - Fattoush Size XL', 'Μελιτζάνα, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά ', '/images/products/images/FalafelHouse/baba_fat.png', 3.20, '[1,1,1,1,1,1,1]', 2),
+	(15, 'Hummus - Tabbouleh Size M', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/hum_tab.jpg', 2.80, '[1,1,1,1,1,1,1]', 2),
+	(16, 'Hummus - Tabbouleh Size L', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/hum_tab.jpg', 3.00, '[1,1,1,1,1,1,1]', 2),
+	(17, 'Hummus - Tabbouleh Size XL', 'Ρεβύθι, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/images/FalafelHouse/hum_tab.jpg', 3.20, '[1,1,1,1,1,1,1]', 2),
+	(18, 'Hummus - Fattoush Size M', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '/images/products/images/FalafelHouse/hum_fat.png', 2.80, '[1,1,1,1,1,1,1]', 2),
+	(19, 'Hummus - Fattoush Size L', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '/images/products/images/FalafelHouse/hum_fat.png', 3.00, '[1,1,1,1,1,1,1]', 2),
+	(20, 'Hummus - Fattoush Size XL', 'Ρεβύθι, ταχίνι, λάχανο, μαρούλι, αγγούρι, καρότο, πιπεριά', '/images/products/images/FalafelHouse/hum_fat.png', 3.20, '[1,1,1,1,1,1,1]', 2),
+	(21, 'Αλοιφή Small', '', '/images/products/images/FalafelHouse/dips.jpg', 2.00, '[1,1,1,1,1,1,1]', 5),
+	(22, 'Αλοιφή Big', '', '/images/products/images/FalafelHouse/dips.jpg', 4.00, '[1,1,1,1,1,1,1]', 5),
+	(23, 'Σαλάτα Small', '', '/images/products/images/FalafelHouse/salad1.jpg', 2.00, '[1,1,1,1,1,1,1]', 5),
+	(24, 'Σαλάτα Big', '', '/images/products/images/FalafelHouse/salad2.jpg', 4.00, '[1,1,1,1,1,1,1]', 5),
+	(25, 'Φαλάφελ Small', '6 τεμάχια', '/images/products/images/FalafelHouse/falafel.jpg', 2.00, '[1,1,1,1,1,1,1]', 5),
+	(26, 'Φαλάφελ Big', '12 τεμάχια', '/images/products/images/FalafelHouse/falafel.jpg', 4.00, '[1,1,1,1,1,1,1]', 5),
+	(27, 'Φαλάφελ Full', '6 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '/images/products/images/FalafelHouse/merida2.jpg', 5.50, '[1,1,1,1,1,1,1]', 5),
+	(28, 'Φαλάφελ Full+', '12 τεμάχια φαλάφελ, πατάτες, σαλάτα, αλοιφή, 1 πίτα', '/images/products/images/FalafelHouse/merida.jpg', 7.50, '[1,1,1,1,1,1,1]', 5),
+	(29, 'Φρέσκες Τηγανητές Πατάτες', '', '/images/products/images/FalafelHouse/fries.jpg', 2.50, '[1,1,1,1,1,1,1]', 5),
+	(30, 'Vegan Mayo Falafel Burger', 'Μπιφτέκι φαλάφελ, 100% vegan μαγιονέζα, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '/images/products/images/FalafelHouse/burger2.jpg', 4.20, '[1,1,1,1,1,1,1]', 8),
+	(31, 'Guacamole Falafel Burger', 'Μπιφτέκι φαλάφελ, guacamole, ντομάτα, κρεμμύδι, μαρούλι, πίκλες', '/images/products/images/FalafelHouse/burger.jpg', 4.20, '[1,1,1,1,1,1,1]', 8),
+	(32, 'Τηγανητή Μπανάνα', '', '/images/products/images/FalafelHouse/fried_banana.jpg', 2.50, '[1,1,1,1,1,1,1]', 9),
+	(33, 'Green Machine', 'Φύλλα σπανάκι, αγγούρι, καρότο, πράσινο μήλο', '/images/products/images/FalafelHouse/green.jpg', 3.70, '[1,1,1,1,1,1,1]', 10),
+	(34, 'The Usual', 'Κόκκινο μήλο, πορτοκάλι, καρότο', '/images/products/images/FalafelHouse/usual.jpg', 3.70, '[1,1,1,1,1,1,1]', 10),
+	(35, 'Sweetheart', 'Κόκκινο μήλο, πατζάρι, καρότο', '/images/products/images/FalafelHouse/sweetheart.jpg', 3.70, '[1,1,1,1,1,1,1]', 10),
+	(36, 'Mediterranean', 'Ντομάτα, καρότο, αγγούρι, μαϊντανός, κόκκινη πιπεριά, αλάτι, πιπέρι', '/images/products/images/FalafelHouse/mediterranean.jpg', 3.70, '[1,1,1,1,1,1,1]', 10),
 	(37, 'Αναψυκτικά', 'Green Cola, Ble, Coca Cola', '', 1.20, '[1,1,1,1,1,1,1]', 11),
 	(38, 'Μπύρες', 'Kaiser, Stella, Βεργίνα, Buckler', '', 1.70, '[1,1,1,1,1,1,1]', 11),
 	(39, 'Χυμοί', 'Ρόδι', '', 2.50, '[1,1,1,1,1,1,1]', 11),
