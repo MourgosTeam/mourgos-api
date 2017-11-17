@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~17 rows (approximately)
+-- Dumping data for table mourgos.categories: ~15 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(2, 'Wraps', 2),
@@ -117,6 +117,26 @@ CREATE TABLE IF NOT EXISTS `globals` (
 INSERT IGNORE INTO `globals` (`Name`, `Value`) VALUES
 	('MinimumOrder', '5');
 /*!40000 ALTER TABLE `globals` ENABLE KEYS */;
+
+-- Dumping structure for table mourgos.orders
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` varchar(5) NOT NULL,
+  `Name` text NOT NULL,
+  `Address` text NOT NULL,
+  `Orofos` text NOT NULL,
+  `Phone` text NOT NULL,
+  `Koudouni` text DEFAULT NULL,
+  `Comments` text DEFAULT NULL,
+  `Items` text NOT NULL,
+  `Total` double NOT NULL,
+  `Extra` int(11) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.orders: ~0 rows (approximately)
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
 DROP TABLE IF EXISTS `products`;

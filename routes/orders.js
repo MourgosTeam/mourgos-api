@@ -41,9 +41,10 @@ router.post('/', (req, res) => {
     order.id = base32.encode((Math.random() * 10000000 + Math.random() * 10000).toString()).toString().substr(pos,5);
     order.Items = JSON.stringify(order.Items);
     return knex.table('orders')
-    .insert(order).then((data)=>{
+    .insert(order)
+    .then(()=>{
       res.status(200);
-      res.send({"test":"HI"});
+      res.send(order);
     });
   }).catch(function(e){
     console.log(e);
