@@ -10,6 +10,7 @@ var catalogues = require('./routes/catalogues');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
 var attributes = require('./routes/attributes');
+var orders = require('./routes/orders');
 
 
 var app = express();
@@ -28,6 +29,7 @@ app.use('/globals', globals);
 app.use('/categories', categories);
 app.use('/products', products);
 app.use('/attributes', attributes);
+app.use('/orders', orders);
 
 
 module.exports = app;
