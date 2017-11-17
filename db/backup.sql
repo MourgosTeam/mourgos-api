@@ -122,6 +122,7 @@ INSERT IGNORE INTO `globals` (`Name`, `Value`) VALUES
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` varchar(5) NOT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT 0,
   `Name` text NOT NULL,
   `Address` text NOT NULL,
   `Orofos` text NOT NULL,
