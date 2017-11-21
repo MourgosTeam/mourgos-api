@@ -109,6 +109,12 @@ return Promise.reject(new Error('incorrect password'));
 }
 
 app.post('/login', (req, res) => {
+if (!req.body.username || !req.body.username) {
+res.status(400);
+res.send('Missing creds');
+
+return;
+}
 var theuser = {};
 knex.table('users').select('*').
 where({ username: req.body.username }).
