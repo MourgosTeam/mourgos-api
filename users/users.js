@@ -95,16 +95,18 @@ res.send(present(theuser));
 function checkGenerateToken(user, password) {
 var hashFn = CryptoJS.SHA256;
 var hash = hashFn(user.salt + password + user.salt).toString();
+console.log(user);
+console.log(password);
 if (hash === user.password) {
 // generate token
 var token = hashFn(Math.random().toString() + user.salt).toString();
 
 return knex.table('users').where({ id: user.id }).
-update('Token', token).
+update('token', token).
 then(() => token);
 }
 
-throw Error('incorrect password');
+return Promise.reject(new Error('incorrect password'));
 
 }
 
@@ -119,7 +121,7 @@ if (!user) {
 throw Error({ 'msg': 'No username' });
 }
 
-return checkGenerateToken(user, req.params.password).
+return checkGenerateToken(user, req.body.password).
 then((token) => {
 theuser.token = token;
 
