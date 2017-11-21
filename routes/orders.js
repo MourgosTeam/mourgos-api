@@ -3,16 +3,30 @@ var router = new express.Router();
 var knex = require('../db/db.js');
 var base32 = require('base32');
 
-/* GET users listing. */
+function checkUser(req,res) {
+  if(!req.sessionUser){
+    res.status(403);
+    res.send("You shall not pass");
+    return false;
+  }
+  return true;
+}
+
+
+/* GET ORDERS listing. */
 router.get('/', (req, res) => {
   knex.table('orders').select('*').
   then((data) => {
-    var result = {};
-    for (var ic = 0; ic < data.length; ic += 1) {
-      result[data[ic].Name] = data[ic].Value;
-    }
-    res.send(result);
+    res.send(data);
   });
+});
+
+
+router.get('/my', (req,res) => {
+  if(!checkUser(req,res))return false;
+  knex.table('orders').select('*').join("catalogues", "orders.catalogue_id", "=", "catalogues.id").
+where({ user_id : req.sessionUser.id }).
+then((data) => res.send(data));
 });
 
 router.get('/:id', (req, res) => {
@@ -32,7 +46,8 @@ router.post('/', (req, res) => {
     Name: ni.name,
     Orofos: ni.orofos,
     Phone: ni.phone,
-    Total: ni.basketTotal
+    Total: ni.basketTotal,
+    catalogue_id : ni.catalogue
   };
   verify(order).
   then(() => {
@@ -61,6 +76,12 @@ catch((err) => {
  */
 });
 
+
+
+
+
+
+
 function normalizeAttributes(attrs) {
   var nattrs = {};
   for (var ic = 0; ic < attrs.length; ic += 1) {
@@ -84,8 +105,11 @@ if (nattrs[id].Options.length <= opt || opt < -1) {
  money += parseFloat(nattrs[id].Price);
 }
 }
-
-return parseFloat(money) * parseInt(item.quantity, 10);
+money = parseFloat(money) * parseInt(item.quantity, 10)
+if (parseFloat(money).toFixed(2) !== parseFloat(item.TotalPrice).toFixed(2)) {
+ throw Error({ 'msg': 'The total is different than the one calculated for products' });
+}
+return money;
 }
 
 function verifyItem(item) {

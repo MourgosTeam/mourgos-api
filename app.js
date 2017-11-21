@@ -11,7 +11,8 @@ var categories = require('./routes/categories');
 var products = require('./routes/products');
 var attributes = require('./routes/attributes');
 var orders = require('./routes/orders');
-
+var UserManagment = require('./users/users').App;
+var UserMiddle = require('./users/users').Middleware;
 
 var app = express();
 
@@ -21,8 +22,12 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(UserMiddle);
+
 app.use(express.static(path.join(__dirname, 'files')));
 
+
+app.use('/users', UserManagment);
 
 app.use('/catalogues', catalogues);
 app.use('/globals', globals);

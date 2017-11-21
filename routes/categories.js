@@ -9,6 +9,16 @@ router.get('/', (req, res) => {
 then((data) => res.send(data));
 });
 
+router.get('/my', (req, res) => {
+// 	if(!req.sessionUser){
+// 		res.status(400);
+// 		res.send("Need session");
+// 	}
+// 	else
+//   knex.table('catalogues').select('*').where({user_id : req.sessionUser.id}).
+// then((data) => res.send(data));
+});
+
 router.get('/catalogue/:catid', (req, res) => {
   knex.table('categories').select('*').
 where({ catalogue_id: req.params.catid }).
