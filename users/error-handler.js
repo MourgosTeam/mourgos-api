@@ -1,11 +1,14 @@
 function createError(msg, input, extra) {
-	var error = {};
-	error.msg = msg;
-	if(input) error.input = input;
-	if(extra) error.extra = extra;
-	return error;
+var error = {};
+error.msg = msg;
+if (input) {
+error.input = input;
+}
+if (extra) {
+error.extra = extra;
 }
 
-module.exports = {
-	createError : createError
+return error;
 }
+
+module.exports = { createError };
