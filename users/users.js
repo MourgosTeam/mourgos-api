@@ -41,7 +41,6 @@ function middleware(req, res, next) {
 var token = req.get('Token');
 if (!token || token.length < 5) {
 next();
-
 return true;
 }
 getUser(token).then((user) => {
@@ -95,8 +94,6 @@ res.send(present(theuser));
 function checkGenerateToken(user, password) {
 var hashFn = CryptoJS.SHA256;
 var hash = hashFn(user.salt + password + user.salt).toString();
-console.log(user);
-console.log(password);
 if (hash === user.password) {
 // generate token
 var token = hashFn(Math.random().toString() + user.salt).toString();
