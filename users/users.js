@@ -41,6 +41,7 @@ function middleware(req, res, next) {
 var token = req.get('Token');
 if (!token || token.length < 5) {
 next();
+
 return true;
 }
 getUser(token).then((user) => {
