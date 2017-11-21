@@ -17,6 +17,7 @@ CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mourgos`;
 
 -- Dumping structure for table mourgos.attributes
+DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -30,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `attributes` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.catalogues
+DROP TABLE IF EXISTS `catalogues`;
 CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -47,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.categories
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -58,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.globals
+DROP TABLE IF EXISTS `globals`;
 CREATE TABLE IF NOT EXISTS `globals` (
   `Name` varchar(50) NOT NULL,
   `Value` text NOT NULL,
@@ -66,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `globals` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.orders
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` varchar(5) NOT NULL,
   `Status` tinyint(4) NOT NULL DEFAULT 0,
@@ -86,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.products
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -101,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 
 -- Data exporting was unselected.
 -- Dumping structure for table mourgos.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL DEFAULT '',
