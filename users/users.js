@@ -32,7 +32,7 @@ var [user] = data;
 if (user === null) {
  throw Error('Not a valid token!');
 } else {
- return Error(user);
+ return user;
 }
 });
 }
