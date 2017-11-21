@@ -9,13 +9,14 @@ router.get('/', (req, res) => {
 then((data) => res.send(data));
 });
 router.get('/my', (req, res) => {
-	if(!req.sessionUser){
-		res.status(400);
-		res.send("Need session");
-	}
-	else
-  knex.table('catalogues').select('*').where({user_id : req.sessionUser.id}).
-then((data) => res.send(data));
+if (typeof req.sessionUser === 'undefined') {
+ res.status(400);
+ res.send('Need session');
+} else {
+ knex.table('catalogues').select('*').
+ where({ user_id: req.sessionUser.id }).
+ then((data) => res.send(data));
+}
 });
 
 

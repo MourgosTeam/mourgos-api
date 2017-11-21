@@ -3,6 +3,18 @@ var router = new express.Router();
 
 var knex = require('../db/db.js');
 
+
+function checkUser(req, res) {
+  if (!req.sessionUser) {
+    res.status(403);
+    res.send('You shall not pass');
+
+return false;
+  }
+
+return true;
+}
+
 /* GET categories listing. */
 router.get('/', (req, res) => {
   knex.table('categories').select('*').
@@ -10,13 +22,12 @@ then((data) => res.send(data));
 });
 
 router.get('/my', (req, res) => {
-// 	if(!req.sessionUser){
-// 		res.status(400);
-// 		res.send("Need session");
-// 	}
-// 	else
-//   knex.table('catalogues').select('*').where({user_id : req.sessionUser.id}).
-// then((data) => res.send(data));
+if (!checkUser(req, res)) {
+ return;
+}
+ knex.table('catalogues').select('*').
+where({ user_id: req.sessionUser.id }).
+ then((data) => res.send(data));
 });
 
 router.get('/catalogue/:catid', (req, res) => {
