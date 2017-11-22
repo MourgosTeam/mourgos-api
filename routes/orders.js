@@ -23,14 +23,94 @@ router.get('/', (req, res) => {
   });
 });
 
+function formDescription(theproduct, attrs, item) {
+  var nattrs = normalizeAttributes(attrs);
+  var result = {
+    Attributes: [],
+    Comments: item.comments,
+    Name: theproduct.Name
+  };
+  for (var id in item.attributes) {
+    if (!isNaN(id)) {
+      var opts = JSON.parse(nattrs[id].Options);
+      result.Attributes.push({
+        Name: nattrs[id].Name,
+        Price: nattrs[id].Price,
+        Value: opts[item.attributes[id]]
+      });
+    }
+  }
 
+return result;
+}
+const PRODUCTSMAINFIELDS = [
+'Price',
+'Name',
+'Description',
+'id'
+];
+function getProductAndAttributes(item) {
+let prod = {};
+
+return knex.table('products').select(PRODUCTSMAINFIELDS).
+      where({ id: item.id }).
+      then((products) => {
+        [prod] = products;
+
+return knex.table('attributes').select('*').
+where({ product_id: prod.id });
+      }).
+then((attrs) => ({
+          attributes: attrs,
+          product: prod
+        }));
+}
+function calculateDescription(order) {
+  const items = JSON.parse(order.Items);
+  let ic = 0,
+len = 0;
+  const proms = [];
+  for (ic = 0, len = items.length; ic < len; ic += 1) {
+    const item = items[ic];
+    proms.push(getProductAndAttributes(item).
+    then((bundle) => formDescription(bundle.product, bundle.attributes, item)));
+  }
+
+return Promise.all(proms).
+  then((descriptions) => {
+    order.FullDescription = JSON.stringify(descriptions);
+
+return order;
+  });
+}
+
+const MYORDERFILEDS = [
+  'orders.id as id',
+  'orders.Name as Name',
+  'orders.Status as Status',
+  'orders.Address as Address',
+  'orders.Orofos as Orofos',
+  'orders.Phone as Phone',
+  'orders.Koudouni as Koudouni',
+  'orders.Comments as Comments',
+  'orders.Items as Items',
+  'orders.Extra as Extra',
+  'orders.Total as Total',
+  'orders.catalogue_id as CatalogueId'
+
+  /*
+   * I can include some fields
+   * from catalogues table
+   */
+];
 router.get('/my', (req, res) => {
   if (!checkUser(req, res)) {
  return false;
 }
-  knex.table('orders').select('*').
+  knex.table('orders').select(MYORDERFILEDS).
 join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
 where({ user_id: req.sessionUser.id }).
+map(calculateDescription).
 then((data) => res.send(data));
 
 return true;
