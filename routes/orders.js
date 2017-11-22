@@ -120,6 +120,7 @@ return true;
 router.get('/:id', (req, res) => {
   knex.table('orders').select('*').
 where({ id: req.params.id }).
+map(calculateDescription).
 then((data) => res.send(data[0]));
 });
 
