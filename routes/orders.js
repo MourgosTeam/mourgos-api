@@ -28,7 +28,8 @@ function formDescription(theproduct, attrs, item) {
   var result = {
     Attributes: [],
     Comments: item.comments,
-    Name: theproduct.Name
+    Name: theproduct.Name,
+    Quantity: item.quantity
   };
   for (var id in item.attributes) {
     if (!isNaN(id)) {
