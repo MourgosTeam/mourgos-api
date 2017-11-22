@@ -1,5 +1,5 @@
-module.exports = { 
-  MYORDERFILEDS : [
+module.exports = {
+  MYORDERFILEDS: [
   'orders.id as id',
   'orders.Name as Name',
   'orders.Status as Status',
@@ -13,7 +13,7 @@ module.exports = {
   'orders.Total as Total',
   'orders.catalogue_id as CatalogueId'
   ],
-  PRODUCTSMAINFIELDS : [
+  PRODUCTSMAINFIELDS: [
   'Price',
   'Name',
   'Description',
