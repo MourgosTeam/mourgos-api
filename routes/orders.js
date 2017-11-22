@@ -78,7 +78,7 @@ len = 0;
 
 return Promise.all(proms).
   then((descriptions) => {
-    order.FullDescription = JSON.stringify(descriptions);
+    order.FullDescription = descriptions;
 
 return order;
   });
