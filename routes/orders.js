@@ -2,6 +2,7 @@ var express = require('express');
 var router = new express.Router();
 var knex = require('../db/db.js');
 var base32 = require('base32');
+var Constants = require('../constants/constants');
 
 function checkUser(req, res) {
   if (!req.sessionUser) {
@@ -44,16 +45,10 @@ function formDescription(theproduct, attrs, item) {
 
 return result;
 }
-const PRODUCTSMAINFIELDS = [
-'Price',
-'Name',
-'Description',
-'id'
-];
 function getProductAndAttributes(item) {
 let prod = {};
 
-return knex.table('products').select(PRODUCTSMAINFIELDS).
+return knex.table('products').select(Constants.PRODUCTSMAINFIELDS).
       where({ id: item.id }).
       then((products) => {
         [prod] = products;
@@ -85,30 +80,11 @@ return order;
   });
 }
 
-const MYORDERFILEDS = [
-  'orders.id as id',
-  'orders.Name as Name',
-  'orders.Status as Status',
-  'orders.Address as Address',
-  'orders.Orofos as Orofos',
-  'orders.Phone as Phone',
-  'orders.Koudouni as Koudouni',
-  'orders.Comments as Comments',
-  'orders.Items as Items',
-  'orders.Extra as Extra',
-  'orders.Total as Total',
-  'orders.catalogue_id as CatalogueId'
-
-  /*
-   * I can include some fields
-   * from catalogues table
-   */
-];
 router.get('/my', (req, res) => {
   if (!checkUser(req, res)) {
  return false;
 }
-  knex.table('orders').select(MYORDERFILEDS).
+  knex.table('orders').select(Constants.MYORDERFILEDS).
 join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
 where({ user_id: req.sessionUser.id }).
 map(calculateDescription).
@@ -122,6 +98,32 @@ router.get('/:id', (req, res) => {
 where({ id: req.params.id }).
 map(calculateDescription).
 then((data) => res.send(data[0]));
+});
+
+router.post('/:id', (req, res) => {
+    if (!checkUser(req, res)) {
+ return false;
+}
+let order = {};
+
+return knex.table('orders').select('*').
+where({ id: req.params.id }).
+then((orders) => {
+ [order] = orders;
+
+return isMyCatalogue(orders[0].catid, req);
+}).
+then(() => knex.table('orders').where({ id: req.params.id }).
+update({ Status: parseInt(req.body.statusCode, 10) })).
+then(() => {
+ order.Status = parseInt(req.body.statusCode, 10);
+ res.send(order);
+}).
+catch(() => {
+    res.sendStatus(500);
+
+return true;
+});
 });
 
 router.post('/', (req, res) => {
@@ -165,7 +167,17 @@ catch((err) => {
  */
 });
 
+function isMyCatalogue(catid, req) {
+  return knex.table('catalogues').select('id').
+where({ user_id: req.sessionUser.id }).
+  then((catalogues) => {
+    if (catalogues.length) {
+ return catalogues[0].id;
+}
 
+return Error('not your stuff');
+  });
+}
 function normalizeAttributes(attrs) {
   var nattrs = {};
   for (var ic = 0; ic < attrs.length; ic += 1) {
