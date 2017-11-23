@@ -5,6 +5,11 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
+var app = express();
+// setup Sockets
+var http = require('./sockets/mobile')(app);
+
+// ROUTES
 var globals = require('./routes/globals');
 var catalogues = require('./routes/catalogues');
 var categories = require('./routes/categories');
@@ -13,8 +18,6 @@ var attributes = require('./routes/attributes');
 var orders = require('./routes/orders');
 var UserManagment = require('./users/users').App;
 var UserMiddle = require('./users/users').Middleware;
-
-var app = express();
 
 
 app.use(logger('dev'));
@@ -37,4 +40,7 @@ app.use('/attributes', attributes);
 app.use('/orders', orders);
 
 
-module.exports = app;
+module.exports = {
+ App: app,
+ Http: http
+};

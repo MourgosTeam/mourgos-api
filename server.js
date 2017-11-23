@@ -4,9 +4,9 @@
  * Module dependencies.
  */
 
-var app = require('./app');
+var app = require('./app').App;
 var debug = require('debug')('mourgos:server');
-var http = require('http');
+
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +19,10 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+// var server = http.createServer(app);
+
+// server is initialized in app -> sockets
+var server = require('./app').Http;
 
 /**
  * Listen on provided port, on all network interfaces.
