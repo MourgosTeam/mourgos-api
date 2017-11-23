@@ -8,7 +8,7 @@ var cors = require('cors');
 var app = express();
 // setup Sockets
 var apiPath = process.env.NODE_ENV === 'production'
-? '/api/socket.io'
+? ''
 : '';
 var http = require('./sockets/mobile')(app, apiPath);
 
