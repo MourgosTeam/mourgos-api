@@ -157,7 +157,7 @@ return knex.table('orders').
   }).
 catch((err) => {
     res.status(500);
-    res.send('This order shall not pass!' + err);
+    res.send('This order shall not pass!' + JSON.stringify(err));
   });
 
 /*
