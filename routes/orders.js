@@ -22,6 +22,7 @@ return true;
 /* GET ORDERS listing. */
 router.get('/', (req, res) => {
   knex.table('orders').select('*').
+  orderBy('postDate', 'desc').
   then((data) => {
     res.send(data);
   });
@@ -32,6 +33,7 @@ router.get('/my', (req, res) => {
  return false;
 }
   knex.table('orders').select(Constants.MYORDERFILEDS).
+orderBy('postDate', 'desc').
 join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
 where({ user_id: req.sessionUser.id }).
 map(Functions.calculateDescription).

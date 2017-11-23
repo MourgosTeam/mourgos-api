@@ -140,22 +140,46 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `Total` double(10,2) NOT NULL,
   `Extra` int(11) NOT NULL,
   `catalogue_id` int(10) unsigned NOT NULL,
+  `postDate` datetime NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `id` (`id`),
   KEY `FK_orders_catalogues` (`catalogue_id`),
   CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.orders: ~7 rows (approximately)
+-- Dumping data for table mourgos.orders: ~29 rows (approximately)
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` (`id`, `Status`, `Name`, `Address`, `Orofos`, `Phone`, `Koudouni`, `Comments`, `Items`, `Total`, `Extra`, `catalogue_id`) VALUES
-	('c9p6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
-	('cdht6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":43,"quantity":3,"comments":"","TotalPrice":7.5,"attributes":{}}]', 7.50, 0, 3),
-	('hq60w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
-	('k0d1k', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
-	('t3ce1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":9,"comments":"","TotalPrice":15.299999999999999,"attributes":{}}]', 15.30, 0, 1),
-	('tp6gt', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":11,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}}]', 3.20, 1, 2),
-	('v3cd1', 2, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":83,"quantity":5,"comments":"","TotalPrice":7,"attributes":{"61":2}}]', 7.00, 0, 1);
+INSERT INTO `orders` (`id`, `Status`, `Name`, `Address`, `Orofos`, `Phone`, `Koudouni`, `Comments`, `Items`, `Total`, `Extra`, `catalogue_id`, `postDate`) VALUES
+	('0ctk6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('1g74q', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', '', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{}}]', 1.70, 1, 1, '2017-11-23 19:05:47'),
+	('1m64r', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('2c1t7', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('8d9n6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('ae9m6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('c9m70', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('c9p6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, '2017-11-23 19:03:18'),
+	('cdht6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":43,"quantity":3,"comments":"","TotalPrice":7.5,"attributes":{}}]', 7.50, 0, 3, '2017-11-23 19:03:18'),
+	('ce1n6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('chm6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('d1q6w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('dhr6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('dtq6m', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('e9q64', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('e9q6m', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('ee1t7', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('hp60u', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('hq60w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, '2017-11-23 19:03:18'),
+	('k0c1g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('k0d1k', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, '2017-11-23 19:03:18'),
+	('kac1n', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('kcdtk', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('kgdhp', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('kjdht', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('r38e9', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":20}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('t3ce1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":9,"comments":"","TotalPrice":15.299999999999999,"attributes":{}}]', 15.30, 0, 1, '2017-11-23 19:03:18'),
+	('tkgch', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, '2017-11-23 19:03:18'),
+	('tp6gt', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":11,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}}]', 3.20, 1, 2, '2017-11-23 19:03:18'),
+	('v3cd1', 2, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":83,"quantity":5,"comments":"","TotalPrice":7,"attributes":{"61":2}}]', 7.00, 0, 1, '2017-11-23 19:03:18');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
@@ -336,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`) VALUES
-	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '042bfc550473239b79ab11e6bbadb5f0e9d2da2b284382e6d1788c7046606e1b', '0'),
+	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '90049698eac5a5cd56ccc2c822772579a4df8e3f6f4b375488a093c4a42829df', '0'),
 	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', 'a03ec9bf6cc00a97e8a88731e7ed6716def70fb45d457e975c9498ca007c2436', '');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
