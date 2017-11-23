@@ -1,4 +1,4 @@
-var io = require('socket.io-client')('http://localhost:3000?id=1');
+var io = require('socket.io-client')('http://localhost:3000/?id=1');
 
 io.on('connect', () => {
  console.log('Connected');

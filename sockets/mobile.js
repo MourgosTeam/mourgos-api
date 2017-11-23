@@ -35,7 +35,7 @@ function socketIt(app, path) {
   return globalSocket;
 }
  var http = httpServer(app);
- var io = ioModule(http, { path: path });
+ var io = ioModule(http, { path });
 
  io.mysockets = {};
  io.on('connection', onConnection);

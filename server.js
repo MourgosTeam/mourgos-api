@@ -22,6 +22,7 @@ app.set('port', port);
 // var server = http.createServer(app);
 
 // server is initialized in app -> sockets
+
 var server = require('./app').Http;
 
 /**
