@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `Koudouni` text DEFAULT NULL,
   `Comments` text DEFAULT NULL,
   `Items` text NOT NULL,
-  `Total` double NOT NULL,
+  `Total` double(10,2) NOT NULL,
   `Extra` int(11) NOT NULL,
   `catalogue_id` int(10) unsigned NOT NULL,
   UNIQUE KEY `id` (`id`),
@@ -145,16 +145,17 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.orders: ~1 rows (approximately)
+-- Dumping data for table mourgos.orders: ~7 rows (approximately)
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 INSERT INTO `orders` (`id`, `Status`, `Name`, `Address`, `Orofos`, `Phone`, `Koudouni`, `Comments`, `Items`, `Total`, `Extra`, `catalogue_id`) VALUES
-	('cdht6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":43,"quantity":3,"comments":"","TotalPrice":7.5,"attributes":{}}]', 7.5, 0, 3),
-	('hq60w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.2, 1, 1),
-	('k0d1k', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.2, 1, 1),
-	('t3ce1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":9,"comments":"","TotalPrice":15.299999999999999,"attributes":{}}]', 15.299999999999999, 0, 1),
-	('tp6gt', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":11,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}}]', 3.2, 1, 2),
-	('v3cd1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":83,"quantity":5,"comments":"","TotalPrice":7,"attributes":{"61":2}}]', 7, 0, 1);
+	('c9p6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
+	('cdht6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":43,"quantity":3,"comments":"","TotalPrice":7.5,"attributes":{}}]', 7.50, 0, 3),
+	('hq60w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
+	('k0d1k', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1),
+	('t3ce1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":9,"comments":"","TotalPrice":15.299999999999999,"attributes":{}}]', 15.30, 0, 1),
+	('tp6gt', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":11,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}}]', 3.20, 1, 2),
+	('v3cd1', 2, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":83,"quantity":5,"comments":"","TotalPrice":7,"attributes":{"61":2}}]', 7.00, 0, 1);
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
@@ -335,7 +336,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`) VALUES
-	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '5010f3eb7bf28c1d1576d3705ba8cc527786f02982873f0051f525447cf7c9a2', '0'),
+	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '042bfc550473239b79ab11e6bbadb5f0e9d2da2b284382e6d1788c7046606e1b', '0'),
 	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', 'a03ec9bf6cc00a97e8a88731e7ed6716def70fb45d457e975c9498ca007c2436', '');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
