@@ -30,12 +30,12 @@ io.mysockets[catid] = [];
   socket.on('disconnect', () => io.mysockets[catid].splice(position, 1));
 }
 
-function socketIt(app) {
+function socketIt(app, path) {
  if (!app) {
   return globalSocket;
 }
  var http = httpServer(app);
- var io = ioModule(http);
+ var io = ioModule(http, { path: path });
 
  io.mysockets = {};
  io.on('connection', onConnection);

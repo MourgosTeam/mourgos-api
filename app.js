@@ -7,7 +7,10 @@ var cors = require('cors');
 
 var app = express();
 // setup Sockets
-var http = require('./sockets/mobile')(app);
+var apiPath = process.env.NODE_ENV === 'development'
+? '/'
+: '/api';
+var http = require('./sockets/mobile')(app, apiPath);
 
 // ROUTES
 var globals = require('./routes/globals');
