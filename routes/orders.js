@@ -8,10 +8,8 @@ function checkUser(req, res) {
   if (!req.sessionUser) {
     res.status(403);
     res.send('You shall not pass');
-
 return false;
   }
-
 return true;
 }
 
@@ -156,9 +154,8 @@ return knex.table('orders').
     });
   }).
 catch((err) => {
-    console.log(err);
-    res.status(400);
-    res.send('This order shall not pass!');
+    res.status(500);
+    res.send('This order shall not pass!' + err);
   });
 
 /*
