@@ -60,18 +60,19 @@ where({ id: req.params.id }).
 then((orders) => {
  [order] = orders;
 
-return Functions.isMyCatalogue(orders[0].catid, req);
+ return Functions.isMyCatalogue(orders[0].catalogue_id, req);
 }).
 then(() => knex.table('orders').where({ id: req.params.id }).
 update({ Status: parseInt(req.body.statusCode, 10) })).
 then(() => {
  order.Status = parseInt(req.body.statusCode, 10);
+ io.sendToCatalogue(order.catalogue_id, 'new-order');
  res.send(order);
 }).
 catch(() => {
-    res.sendStatus(500);
+  res.sendStatus(500);
 
-return true;
+  return true;
 });
 });
 
