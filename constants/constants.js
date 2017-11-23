@@ -11,7 +11,8 @@ module.exports = {
   'orders.Items as Items',
   'orders.Extra as Extra',
   'orders.Total as Total',
-  'orders.catalogue_id as CatalogueId'
+  'orders.catalogue_id as CatalogueId',
+  'orders.postDate as PostDate'
   ],
   PRODUCTSMAINFIELDS: [
   'Price',
