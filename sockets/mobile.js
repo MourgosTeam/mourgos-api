@@ -35,7 +35,10 @@ function socketIt(app, path) {
   return globalSocket;
 }
  var http = httpServer(app);
- var io = ioModule(http, { path });
+ var io = ioModule(http, {
+  path,
+  pingTimeout: 30000
+ });
 
  io.mysockets = {};
  io.on('connection', onConnection);
