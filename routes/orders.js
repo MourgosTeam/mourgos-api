@@ -28,6 +28,17 @@ router.get('/', (req, res) => {
   });
 });
 
+router.get('/saw/:id', (req, res) => {
+ if (!checkUser(req, res) || req.params.id.length !== 5) {
+  return false;
+ }
+
+return knex.table('orders').where({ id: req.params.id }).
+ update({ hasOpened: 1 }).
+ then(() => res.sendStatus(200));
+});
+
+
 router.get('/my', (req, res) => {
   if (!checkUser(req, res)) {
  return false;

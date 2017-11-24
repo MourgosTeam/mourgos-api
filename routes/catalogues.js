@@ -10,7 +10,7 @@ then((data) => res.send(data));
 });
 router.get('/my', (req, res) => {
 if (typeof req.sessionUser === 'undefined') {
- res.status(400);
+ res.status(409);
  res.send('Need session');
 } else {
  knex.table('catalogues').select('*').

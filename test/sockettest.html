@@ -1,0 +1,13 @@
+<html>
+	<head>
+		<title>TEST</title>
+		<script type="text/javascript" src="http://mourgos.gr/api/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<script>
+			var socket = io("http://mourgos.gr/?id=1", {path: '/api/socket.io/'});
+			socket.on('connect', () => console.log("HEA"));
+			socket.on('new-order', () => console.log("HEA"));
+		</script>
+	</body>
+</html>

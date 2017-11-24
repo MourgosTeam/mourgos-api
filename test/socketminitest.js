@@ -1,5 +1,6 @@
-var io = require('socket.io-client')('http://localhost:3000/?id=1');
-
+var url = 'http://www.mourgos.gr/?id=1';
+var path = '/api/socket.io/';
+var io = require('socket.io-client')(url, { path });
 io.on('connect', () => {
  console.log('Connected');
 });
