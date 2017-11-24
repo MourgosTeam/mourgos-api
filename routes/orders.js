@@ -35,7 +35,7 @@ router.get('/saw/:id', (req, res) => {
 
 return knex.table('orders').where({ id: req.params.id }).
  update({ hasOpened: 1 }).
- then(() => res.send({msg: 'ok'});
+ then(() => res.send({ msg: 'ok' }));
 });
 
 
