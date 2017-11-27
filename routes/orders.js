@@ -4,19 +4,10 @@ var knex = require('../db/db.js');
 var base32 = require('base32');
 var Constants = require('../constants/constants');
 
+var auth = require('../helpers/auth');
+
 var Functions = require('./orderFunctions');
 var io = require('../sockets/mobile')();
-
-function checkUser(req, res) {
-  if (!req.sessionUser) {
-    res.status(403);
-    res.send('You shall not pass');
-
-return false;
-  }
-
-return true;
-}
 
 
 /* GET ORDERS listing. */
@@ -29,7 +20,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/saw/:id', (req, res) => {
- if (!checkUser(req, res) || req.params.id.length !== 5) {
+ if (!auth.checkUser(req, res) || req.params.id.length !== 5) {
   return false;
  }
 
@@ -40,7 +31,7 @@ return knex.table('orders').where({ id: req.params.id }).
 
 
 router.get('/my', (req, res) => {
-  if (!checkUser(req, res)) {
+  if (!auth.checkUser(req, res)) {
  return false;
 }
   knex.table('orders').select(Constants.MYORDERFILEDS).
@@ -61,7 +52,7 @@ then((data) => res.send(data[0]));
 });
 
 router.post('/:id', (req, res) => {
-    if (!checkUser(req, res)) {
+    if (!auth.checkUser(req, res)) {
  return false;
 }
 let order = {};

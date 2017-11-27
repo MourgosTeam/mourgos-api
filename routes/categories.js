@@ -1,19 +1,9 @@
 var express = require('express');
 var router = new express.Router();
 
+var auth = require('../helpers/auth');
+
 var knex = require('../db/db.js');
-
-
-function checkUser(req, res) {
-  if (!req.sessionUser) {
-    res.status(403);
-    res.send('You shall not pass');
-
-return false;
-  }
-
-return true;
-}
 
 /* GET categories listing. */
 router.get('/', (req, res) => {
@@ -22,7 +12,7 @@ then((data) => res.send(data));
 });
 
 router.get('/my', (req, res) => {
-if (!checkUser(req, res)) {
+if (!auth.checkUser(req, res)) {
  return;
 }
  knex.table('catalogues').select('*').
