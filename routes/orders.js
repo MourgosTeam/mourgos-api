@@ -26,7 +26,14 @@ router.get('/saw/:id', (req, res) => {
 
 return knex.table('orders').where({ id: req.params.id }).
  update({ hasOpened: 1 }).
- then(() => res.send({ msg: 'ok' }));
+ then(() =>
+  knex.table('orders').
+      select('catalogue_id').
+      where({ id: req.params.id })).
+ then((data) => {
+  io.sendToCatalogue(data[0].catalogue_id, 'new-order');
+  res.send({ msg: 'ok' });
+ });
 });
 
 

@@ -10,4 +10,4 @@ return false;
 return true;
 }
 
-export default { checkUser };
+module.exports = { checkUser };
