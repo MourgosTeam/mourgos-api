@@ -69,6 +69,12 @@ where({ id: req.params.id }).
 then((orders) => {
  [order] = orders;
 
+/*
+ *if (parseInt(req.body.statusCode, 10) < order.Status) {
+ *  throw new Error({ msg: 'No backtracing status' });
+ *}
+ */
+
  return Functions.isMyCatalogue(orders[0].catalogue_id, req);
 }).
 then(() => knex.table('orders').where({ id: req.params.id }).
