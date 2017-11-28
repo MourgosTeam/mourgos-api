@@ -81,7 +81,7 @@ then(() => knex.table('orders').where({ id: req.params.id }).
 update({ Status: parseInt(req.body.statusCode, 10) })).
 then(() => {
  order.Status = parseInt(req.body.statusCode, 10);
- io.sendToCatalogue(order.catalogue_id, 'new-order');
+ io.sendToCatalogue(order.catalogue_id, 'update-order');
  res.send(order);
 }).
 catch(() => {
