@@ -2,11 +2,11 @@ var express = require('express');
 var router = new express.Router();
 var knex = require('../db/db.js');
 var base32 = require('base32');
-var Constants = require('../constants/constants');
 
 var auth = require('../helpers/auth');
 
 var Functions = require('./orderFunctions');
+var Layer = require('./ordersLayer');
 var io = require('../sockets/mobile')();
 
 
@@ -41,12 +41,8 @@ router.get('/my', (req, res) => {
   if (!auth.checkUser(req, res)) {
  return false;
 }
-  knex.table('orders').select(Constants.MYORDERFILEDS).
-orderBy('postDate', 'desc').
-join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
-where({ user_id: req.sessionUser.id }).
-map(Functions.calculateDescription).
-then((data) => res.send(data));
+
+ Layer.sendShopOrders(req,res);
 
 return true;
 });
