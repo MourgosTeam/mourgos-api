@@ -92,16 +92,30 @@ res.send(present(theuser));
 });
 });
 
+function checkUpdateToken(user) {
+ var hashFn = CryptoJS.SHA256;
+ var Token = user.token;
+ var month = new Date().getMonth();
+ if (month > 9) {
+  month -= 10;
+ }
+ if (!user.token || parseInt(user.token[user.token.length - 1], 10) !== month) {
+  // generate token
+  Token = hashFn(Math.random().toString() + user.salt).toString() + month;
+ }
+
+return Token;
+}
 function checkGenerateToken(user, password) {
 var hashFn = CryptoJS.SHA256;
 var hash = hashFn(user.salt + password + user.salt).toString();
 if (hash === user.password) {
-// generate token
-var token = hashFn(Math.random().toString() + user.salt).toString();
+
+var Token = checkUpdateToken(user);
 
 return knex.table('users').where({ id: user.id }).
-update('token', token).
-then(() => token);
+update('token', Token).
+then(() => Token);
 }
 
 return Promise.reject(new Error('incorrect password'));
