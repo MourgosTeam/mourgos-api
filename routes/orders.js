@@ -1,7 +1,6 @@
 var express = require('express');
 var router = new express.Router();
 var knex = require('../db/db.js');
-var base32 = require('base32');
 
 var auth = require('../helpers/auth');
 
@@ -12,11 +11,18 @@ var io = require('../sockets/mobile')();
 
 /* GET ORDERS listing. */
 router.get('/', (req, res) => {
-  knex.table('orders').select('*').
-  orderBy('postDate', 'desc').
-  then((data) => {
-    res.send(data);
-  });
+
+res.sendStatus(404);
+
+return false;
+
+/*
+ *  knex.table('orders').select('*').
+ * orderBy('postDate', 'desc').
+ * then((data) => {
+ *   res.send(data);
+ * });
+ */
 });
 
 router.get('/saw/:id', (req, res) => {
@@ -24,25 +30,17 @@ router.get('/saw/:id', (req, res) => {
   return false;
  }
 
-return knex.table('orders').where({ id: req.params.id }).
- update({ hasOpened: 1 }).
- then(() =>
-  knex.table('orders').
-      select('catalogue_id').
-      where({ id: req.params.id })).
- then((data) => {
-  io.sendToCatalogue(data[0].catalogue_id, 'update-order');
-  res.send({ msg: 'ok' });
- });
+return Layer.orderOpened(req.params.id).
+ then(() => Layer.notifyOrder(req.params.id)).
+ then(() => res.send({ msg: 'OK' }));
 });
 
 
 router.get('/my', (req, res) => {
   if (!auth.checkUser(req, res)) {
- return false;
-}
-
- Layer.sendShopOrders(req, res);
+    return false;
+  }
+  Layer.sendShopOrders(req, res);
 
 return true;
 });
@@ -56,63 +54,31 @@ then((data) => res.send(data[0]));
 
 router.post('/:id', (req, res) => {
     if (!auth.checkUser(req, res)) {
- return false;
-}
-let order = {};
+        return false;
+    }
+ const status = parseInt(req.body.statusCode, 10);
 
-return knex.table('orders').select('*').
-where({ id: req.params.id }).
-then((orders) => {
- [order] = orders;
+ return Layer.updateOrderStatus(req, res, req.params.id, status).
+ then((order) => {
+  order.Status = status;
+  res.send(order);
 
-/*
- *if (parseInt(req.body.statusCode, 10) < order.Status) {
- *  throw new Error({ msg: 'No backtracing status' });
- *}
- */
-
- return Functions.isMyCatalogue(orders[0].catalogue_id, req);
-}).
-then(() => knex.table('orders').where({ id: req.params.id }).
-update({ Status: parseInt(req.body.statusCode, 10) })).
-then(() => {
- order.Status = parseInt(req.body.statusCode, 10);
- io.sendToCatalogue(order.catalogue_id, 'update-order');
- res.send(order);
-}).
-catch(() => {
+  return order;
+ }).
+ then((order) => Layer.notifyOrder(order.id)).
+ catch(() => {
   res.sendStatus(500);
 
   return true;
-});
+ });
 });
 
 router.post('/', (req, res) => {
-  var ni = req.body;
-  var order = {
-    Address: ni.address,
-    Comments: ni.comments,
-    Extra: ni.hasExtra,
-    Items: ni.basketItems,
-    Koudouni: ni.koudouni,
-    Name: ni.name,
-    Orofos: ni.orofos,
-    Phone: ni.phone,
-    Total: ni.basketTotal,
-    catalogue_id: ni.catalogue
-  };
+  var order = Layer.castToOrder(req.body);
   Functions.verify(order).
+  then(() => Layer.insertOrder(order)).
   then(() => {
-    // verified
-    var pos = parseInt(Math.random() * 5, 10) + 2;
-    var hash = base32.encode((Math.random() * 10000000).toString());
-    order.id = hash.toString().substr(pos, 5);
-    order.Items = JSON.stringify(order.Items);
-
-return knex.table('orders').insert(order);
-  }).
-  then(() => {
-    io.sendToCatalogue(ni.catalogue, 'new-order');
+    io.sendToCatalogue(order.catalogue_id, 'new-order');
     res.status(200);
     res.send(order);
   }).
@@ -120,11 +86,6 @@ return knex.table('orders').insert(order);
     res.status(500);
     res.send(err);
   });
-
-/*
- *   knex.table('orders').insert(order).
- * then((data) => res.send(data));
- */
 });
 
 
