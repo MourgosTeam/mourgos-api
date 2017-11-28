@@ -18,7 +18,7 @@ var attributes = require('./routes/attributes');
 var orders = require('./routes/orders');
 var UserManagment = require('./users/users').App;
 var UserMiddle = require('./users/users').Middleware;
-
+var sessionHandler = require('./routes/session');
 
 app.use(logger('dev'));
 app.use(cors());
@@ -30,6 +30,7 @@ app.use(UserMiddle);
 app.use(express.static(path.join(__dirname, 'files')));
 
 
+app.use('/check', sessionHandler);
 app.use('/users', UserManagment);
 
 app.use('/catalogues', catalogues);
