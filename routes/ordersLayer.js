@@ -21,7 +21,7 @@ function castToOrder (ni) {
   };
 }
 
-function insertOrder (order){
+function insertOrder (order) {
     var pos = parseInt(Math.random() * 5, 10) + 2;
     var hash = base32.encode((Math.random() * 10000000).toString());
     order.id = hash.toString().substr(pos, 5);
