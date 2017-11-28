@@ -31,7 +31,7 @@ return knex.table('orders').where({ id: req.params.id }).
       select('catalogue_id').
       where({ id: req.params.id })).
  then((data) => {
-  io.sendToCatalogue(data[0].catalogue_id, 'new-order');
+  io.sendToCatalogue(data[0].catalogue_id, 'update-order');
   res.send({ msg: 'ok' });
  });
 });
