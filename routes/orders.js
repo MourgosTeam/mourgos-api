@@ -42,7 +42,7 @@ router.get('/my', (req, res) => {
  return false;
 }
 
- Layer.sendShopOrders(req,res);
+ Layer.sendShopOrders(req, res);
 
 return true;
 });
