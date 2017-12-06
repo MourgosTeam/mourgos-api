@@ -8,21 +8,30 @@ var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
 var io = require('../sockets/mobile')();
 
+var Logger = require('../helpers/logger');
 
 /* GET ORDERS listing. */
 router.get('/', (req, res) => {
 
-res.sendStatus(404);
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
 
-return false;
+  return Layer.sendAllOrders().
+  then((data) => {
+    res.send(data);
+  });
+});
 
-/*
- *  knex.table('orders').select('*').
- * orderBy('postDate', 'desc').
- * then((data) => {
- *   res.send(data);
- * });
- */
+router.get('/logs', (req, res) => {
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
+
+  return Layer.sendOrderLogs().
+  then((data) => {
+    res.send(data);
+  });
 });
 
 router.get('/saw/:id', (req, res) => {
@@ -30,9 +39,16 @@ router.get('/saw/:id', (req, res) => {
   return false;
  }
 
+  if (auth.isDelivery(req)) {
+
+    return Logger.logIfNotExists(req, 'Orders', 'Seen', req.params.id).
+    then(() => res.send({ msg: 'OK' }));
+  }
+
 return Layer.orderOpened(req.params.id).
  then(() => Layer.notifyOrder(req.params.id)).
- then(() => res.send({ msg: 'OK' }));
+ then(() => res.send({ msg: 'OK' })).
+ then(() => Logger.log(req, 'Orders', 'Seen', req.params.id));
 });
 
 
@@ -40,9 +56,65 @@ router.get('/my', (req, res) => {
   if (!auth.checkUser(req, res)) {
     return false;
   }
-  Layer.sendShopOrders(req, res);
+  if (auth.isShop(req)) {
+    Layer.sendShopOrders(req, res);
+  } else if (auth.isDelivery(req)) {
+    Layer.sendDeliveryOrders(req, res);
+  } else {
+    res.sendStatus(403);
+  }
 
 return true;
+});
+
+router.get('/free', (req, res) => {
+  if (!auth.checkUser(req, res)) {
+    return false;
+  }
+  if (auth.isDelivery(req)) {
+    Layer.sendFreeOrders(req, res);
+  } else {
+    res.sendStatus(403);
+  }
+
+return true;
+});
+
+router.get('/assign/:id', (req, res) => {
+  if (!auth.checkUser(req, res) || req.params.id.length !== 5) {
+    return false;
+  }
+  if (auth.isDelivery(req)) {
+    Layer.assignMeOrder(req, res, req.params.id).
+    then(() => Logger.log(req, 'Orders', 'Assigned', req.params.id));
+  }
+
+  return true;
+});
+
+router.get('/free/:id', (req, res) => {
+  if (!auth.checkUser(req, res) || req.params.id.length !== 5) {
+    return false;
+  }
+  if (auth.isDelivery(req)) {
+    Layer.freeOrder(req, res, req.params.id).
+    then(() => Logger.log(req, 'Orders', 'Freed', req.params.id));
+  }
+
+  return true;
+});
+router.get('/delivered/:id', (req, res) => {
+  if (!auth.checkUser(req, res) || req.params.id.length !== 5) {
+    return false;
+  }
+  if (auth.isDelivery(req)) {
+    Layer.orderDelivered(req, res, req.params.id).
+    then(() => Layer.notifyOrder(req.params.id)).
+    then(() => res.send({ msg: 'OK' })).
+    then(() => Logger.log(req, 'Orders', 'Delivered', req.params.id));
+  }
+
+  return true;
 });
 
 router.get('/:id', (req, res) => {
@@ -53,9 +125,9 @@ then((data) => res.send(data[0]));
 });
 
 router.post('/:id', (req, res) => {
-    if (!auth.checkUser(req, res)) {
-        return false;
-    }
+  if (!auth.checkUser(req, res)) {
+      return false;
+  }
  const status = parseInt(req.body.statusCode, 10);
 
  return Layer.updateOrderStatus(req, res, req.params.id, status).
@@ -87,6 +159,5 @@ router.post('/', (req, res) => {
     res.send(err);
   });
 });
-
 
 module.exports = router;

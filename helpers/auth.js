@@ -10,4 +10,39 @@ return false;
 return true;
 }
 
-module.exports = { checkUser };
+function getUserID(req) {
+    if (!req.sessionUser) {
+     return false;
+    }
+
+    return req.sessionUser.id;
+}
+
+function hasRole(req, role) {
+ if (!req.sessionUser || req.sessionUser.role !== role) {
+
+  return false;
+ }
+
+ return true;
+}
+
+function isAdmin(req) {
+ return hasRole(req, 0);
+}
+
+function isDelivery(req) {
+ return hasRole(req, 2);
+}
+
+function isShop(req) {
+ return hasRole(req, 1);
+}
+
+module.exports = {
+ checkUser,
+ getUserID,
+ isAdmin,
+ isDelivery,
+ isShop
+};

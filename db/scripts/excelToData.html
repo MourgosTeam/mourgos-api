@@ -342,7 +342,7 @@ function normalizeAttr(){
       	continue;
       }
       if(j=='Options'){
-      	obj[j] = (""+obj[j]).split(" ").join('');
+      	//obj[j] = (""+obj[j]).split(" ").join('');
       	obj[j] = (""+obj[j]).split(",").join('\\\",\\\"');
       	obj[j] = "[\\\""+obj[j]+"\\\"]";
       }
