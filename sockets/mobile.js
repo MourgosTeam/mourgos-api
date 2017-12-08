@@ -4,16 +4,16 @@ var ioModule = require('socket.io');
 var globalSocket = null;
 
 
+// Double Spend on all channel
 function sendToCatalogue(id, event, data) {
-  var io = globalSocket;
-  var sss = io.mysockets[id];
-  if (!sss || !sss.length) {
-    return false;
+  const io = globalSocket;
+  const sss = io.mysockets[id];
+  if (sss && sss.length) {
+    for (let ic = 0; ic < sss.length; ic += 1) {
+      sss[ic].emit(event, data);
+    }
   }
-  for (let ic = 0; ic < sss.length; ic += 1) {
-    sss[ic].emit(event, data);
-  }
-  var allch = io.mysockets.all;
+  const allch = io.mysockets.all;
   for (let ic = 0; ic < allch.length; ic += 1) {
     allch[ic].emit(event, data);
   }

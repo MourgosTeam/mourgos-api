@@ -18,6 +18,7 @@ module.exports = {
   'orders.hasOpened as Opened',
   'catalogues.Name as ShopName',
   'catalogues.Address as ShopAddress',
+  'catalogues.Phone as ShopPhone',
   'catalogues.Latitude as ShopLatitude',
   'catalogues.Longitude as ShopLongitude'
   ],

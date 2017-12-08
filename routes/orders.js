@@ -34,7 +34,7 @@ router.get('/logs', (req, res) => {
   });
 });
 
-router.get('/saw/:id', (req, res) => {
+router.post('/saw/:id', (req, res) => {
  if (!auth.checkUser(req, res) || req.params.id.length !== 5) {
   return false;
  }
@@ -45,7 +45,7 @@ router.get('/saw/:id', (req, res) => {
     then(() => res.send({ msg: 'OK' }));
   }
 
-return Layer.orderOpened(req.params.id).
+return Layer.orderOpened(req, req.params.id).
  then(() => Layer.notifyOrder(req.params.id)).
  then(() => res.send({ msg: 'OK' })).
  then(() => Logger.log(req, 'Orders', 'Seen', req.params.id));
