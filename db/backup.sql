@@ -27,26 +27,28 @@ CREATE TABLE IF NOT EXISTS `attributes` (
   UNIQUE KEY `id` (`id`),
   KEY `fk_product_id` (`product_id`),
   CONSTRAINT `fk_product_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.attributes: ~14 rows (approximately)
+-- Dumping data for table mourgos.attributes: ~16 rows (approximately)
 DELETE FROM `attributes`;
 /*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
 INSERT INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
-	(54, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 82),
-	(55, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 83),
-	(56, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 84),
-	(57, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 85),
-	(58, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 86),
-	(59, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 87),
-	(60, 'Γέμιση', '["σοκολάτα","βανίλια","Μπουένο","fererro","toffee","φυστικοβουτυρο","ταχίνι","καρύδα","Μόκα","λευκήσοκολάτα","bitter","μπανάνα","καραμέλα","μπισκοτο","λεμόνι","πορτοκάλι","τσιζκέικ","σαμπάνια","φράουλα","κεράσι","βερίκοκο","μήλο","ρόδι","blueberry"]', 0.00, 88),
-	(61, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 83),
-	(62, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 84),
-	(63, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 86),
-	(64, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 87),
-	(65, 'Επικάλυψη', '["σοκολάτα","λευκήσοκολάτα","bitter","whitewaffles","chocooreo","φράουλα","μπανάνα","πορτοκάλι","καραμέλα","chocofreta"]', 0.00, 88),
-	(66, 'Topping', '["τρούφες","μπισκοτο","ινδοκαρυδο","καραμελωμενοφυστίκι","ορεο","άχνηζάχαρη"]', 0.00, 84),
-	(67, 'Topping', '["τρούφες","μπισκοτο","ινδοκαρυδο","καραμελωμενοφυστίκι","ορεο","άχνηζάχαρη"]', 0.00, 87);
+	(84, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 82),
+	(85, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 83),
+	(86, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 84),
+	(87, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 85),
+	(88, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 86),
+	(89, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 87),
+	(90, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 88),
+	(91, 'Επικάλυψη', '["σοκολάτα"," λευκή σοκολάτα"," bitter"," white waffles"," choco oreo"," φράουλα"," μπανάνα"," πορτοκάλι"," καραμέλα"," chocofreta"]', 0.00, 83),
+	(92, 'Επικάλυψη', '["σοκολάτα"," λευκή σοκολάτα"," bitter"," white waffles"," choco oreo"," φράουλα"," μπανάνα"," πορτοκάλι"," καραμέλα"," chocofreta"]', 0.00, 84),
+	(93, 'Επικάλυψη', '["σοκολάτα"," λευκή σοκολάτα"," bitter"," white waffles"," choco oreo"," φράουλα"," μπανάνα"," πορτοκάλι"," καραμέλα"," chocofreta"]', 0.00, 86),
+	(94, 'Επικάλυψη', '["σοκολάτα"," λευκή σοκολάτα"," bitter"," white waffles"," choco oreo"," φράουλα"," μπανάνα"," πορτοκάλι"," καραμέλα"," chocofreta"]', 0.00, 87),
+	(95, 'Επικάλυψη', '["σοκολάτα"," λευκή σοκολάτα"," bitter"," white waffles"," choco oreo"," φράουλα"," μπανάνα"," πορτοκάλι"," καραμέλα"," chocofreta"]', 0.00, 88),
+	(96, 'Topping Απλό', '["τρούφες"," μπισκότο"," ινδοκάρυδο"," καραμελωμένο φυστίκι"," oreo"," άχνη ζάχαρη"]', 0.00, 83),
+	(97, 'Topping Απλό', '["τρούφες"," μπισκότο"," ινδοκάρυδο"," καραμελωμένο φυστίκι"," oreo"," άχνη ζάχαρη"]', 0.00, 86),
+	(98, 'Topping Σπέσιαλ', '["ολόκληρα μπισκότα"," γεμιστά πουράκια"," σοκολατορυζομπαλίτσες"," φιλέ αμυγδάλου"," δάκρυα φυστικοβούτυρου"]', 0.00, 84),
+	(99, 'Topping Σπέσιαλ', '["ολόκληρα μπισκότα"," γεμιστά πουράκια"," σοκολατορυζομπαλίτσες"," φιλέ αμυγδάλου"," δάκρυα φυστικοβούτυρου"]', 0.00, 87);
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
@@ -54,6 +56,8 @@ DROP TABLE IF EXISTS `catalogues`;
 CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
+  `Phone` text DEFAULT NULL,
+  `Address` text DEFAULT NULL,
   `Image` text DEFAULT NULL,
   `HeroImage` text DEFAULT NULL,
   `Exclusive` int(1) unsigned NOT NULL DEFAULT 0,
@@ -61,6 +65,8 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
   `FriendlyURL` text DEFAULT NULL,
   `WorkingDates` text DEFAULT NULL,
   `user_id` int(10) unsigned NOT NULL,
+  `Latitude` double NOT NULL,
+  `Longitude` double NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `FK_catalogues_users` (`user_id`),
   CONSTRAINT `FK_catalogues_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -69,11 +75,11 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 -- Dumping data for table mourgos.catalogues: ~4 rows (approximately)
 DELETE FROM `catalogues`;
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT INTO `catalogues` (`id`, `Name`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`) VALUES
-	(1, 'Eri\'s Donuts', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL, 1),
-	(2, 'Falafel House', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL, 2),
-	(3, 'Greek Natural', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL, 2),
-	(4, 'Θάλασσα', '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', NULL, 2);
+INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`, `Latitude`, `Longitude`) VALUES
+	(1, 'Eri\'s Donuts', '231 550 7270', 'Τσιμισκή 124, Θεσσαλονίκη 546 21', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL, 1, 40.628575, 22.949541100000033),
+	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL, 2, 40.6294776, 22.952889599999935),
+	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL, 2, 40.6317409, 22.951557099999945),
+	(4, 'Θάλασσα', '2310262443', NULL, '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', NULL, 2, 0, 0);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -125,6 +131,25 @@ INSERT INTO `globals` (`Name`, `Value`) VALUES
 	('MinimumOrder', '5');
 /*!40000 ALTER TABLE `globals` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.logs
+DROP TABLE IF EXISTS `logs`;
+CREATE TABLE IF NOT EXISTS `logs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Type` text NOT NULL DEFAULT '0',
+  `Value` text NOT NULL DEFAULT '0',
+  `EntityID` text DEFAULT NULL,
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `FK_logs_users` (`user_id`),
+  CONSTRAINT `FK_logs_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.logs: ~134 rows (approximately)
+DELETE FROM `logs`;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.orders
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
@@ -139,48 +164,22 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `Items` text NOT NULL,
   `Total` double(10,2) NOT NULL,
   `Extra` int(11) NOT NULL,
+  `Latitude` double NOT NULL,
+  `Longitude` double NOT NULL,
   `hasOpened` tinyint(1) NOT NULL DEFAULT 0,
+  `delivery_id` int(10) unsigned DEFAULT NULL,
   `catalogue_id` int(10) unsigned NOT NULL,
   `postDate` datetime NOT NULL DEFAULT current_timestamp(),
   UNIQUE KEY `id` (`id`),
   KEY `FK_orders_catalogues` (`catalogue_id`),
-  CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
+  KEY `FK_orders_users` (`delivery_id`),
+  CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`),
+  CONSTRAINT `FK_orders_users` FOREIGN KEY (`delivery_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.orders: ~30 rows (approximately)
+-- Dumping data for table mourgos.orders: ~19 rows (approximately)
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` (`id`, `Status`, `Name`, `Address`, `Orofos`, `Phone`, `Koudouni`, `Comments`, `Items`, `Total`, `Extra`, `hasOpened`, `catalogue_id`, `postDate`) VALUES
-	('0ctk6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('1g74q', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', '', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{}}]', 1.70, 1, 1, 1, '2017-11-23 19:05:47'),
-	('1m64r', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('2c1t7', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('8d9n6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('ae9m6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('c9m70', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('c9p6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, 1, '2017-11-23 19:03:18'),
-	('cdht6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":43,"quantity":3,"comments":"","TotalPrice":7.5,"attributes":{}}]', 7.50, 0, 1, 3, '2017-11-23 19:03:18'),
-	('ce1n6', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('chm6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('d1q6w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('dhr6g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('dtq6m', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('e9q64', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('e9q6m', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('ee1t7', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('hp60u', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('hq60w', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, 1, '2017-11-23 19:03:18'),
-	('k0c1g', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('k0d1k', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}}]', 1.20, 1, 1, 1, '2017-11-23 19:03:18'),
-	('kac1n', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('kcdtk', 1, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('kgdhp', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('kjdht', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('r38e9', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":20}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('t3ce1', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":9,"comments":"","TotalPrice":15.299999999999999,"attributes":{}}]', 15.30, 0, 1, 1, '2017-11-23 19:03:18'),
-	('tkgch', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"56":14}}]', 1.70, 1, 1, 1, '2017-11-23 19:03:18'),
-	('tp6gt', 0, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":11,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}}]', 3.20, 1, 1, 2, '2017-11-23 19:03:18'),
-	('v3cd1', 2, 'Nikos Atlas', 'Τσιμισκή 25', '5', '6983110533', 'Test', 'Ouden sxolion', '[{"id":83,"quantity":5,"comments":"","TotalPrice":7,"attributes":{"61":2}}]', 7.00, 0, 1, 1, '2017-11-23 19:03:18');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
@@ -345,6 +344,24 @@ INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `
 	(257, 'Ρετσίνα Κεχριμπάρι', '300ml', '/images/products/thalassa/kexrimpari.jpg', 4.00, '[1,1,1,1,1,1,1]', 22);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.roles
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12349 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.roles: ~3 rows (approximately)
+DELETE FROM `roles`;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` (`id`, `Name`) VALUES
+	(-1, 'No role'),
+	(0, 'Admin'),
+	(1, 'Shop'),
+	(2, 'Delivery');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -354,15 +371,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `salt` text NOT NULL DEFAULT '',
   `token` text NOT NULL DEFAULT '',
   `email` text DEFAULT '',
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `role` int(5) DEFAULT -1,
+  `phone` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  KEY `id` (`id`),
+  KEY `FK_users_roles` (`role`),
+  CONSTRAINT `FK_users_roles` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.users: ~2 rows (approximately)
+-- Dumping data for table mourgos.users: ~5 rows (approximately)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`) VALUES
-	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '90049698eac5a5cd56ccc2c822772579a4df8e3f6f4b375488a093c4a42829df', '0'),
-	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', 'a03ec9bf6cc00a97e8a88731e7ed6716def70fb45d457e975c9498ca007c2436', '');
+INSERT INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`, `role`, `phone`, `name`) VALUES
+	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '0317c3dfe2396ededc3560fe9a5d058a8bd80f5bfdd355f27bf96ecd9367ea151', '0', 1, '21023568', 'Eris'),
+	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', '8b029c2c486f093d55e5b96494fd3212f1dec997e786a6d2aafb2b31ef0ac3140', '', 1, '2102565856', 'Falafel'),
+	(4, 'mourgos', '2dd66779e9d9bd2e5cd438cfda6591e18ae23a78b5b75c94bb03f88d5c386a89', 'aa37680232bba75852392e52ad61e031', 'ca49696492e153e590f6fea21d139fdacb899e7599f75607118820a4ae74ee171', '', 2, '6983659568', 'Takis'),
+	(5, 'admin', '6675754a69d1b94b6730ef8958007dbac8406c7b93c133db60571f121e7d88e9', 'cd98ebd996f0ef0dc1939e336b6cba2c', 'd545fa562f2b046c75f97e570a946881b0efabf129483f0524ef0b9caad9a7431', '', 0, '69999999', 'Admin'),
+	(9, 'testads', 'f6a42cfe5ab0365f2626ac0bef06688cfd9b8cc60ba7bee7241f4bc44e4d1a41', '57f235373d94a096cbdcb0e93c866b18', '', 'sss', 1, 'dsa', 'asd');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
