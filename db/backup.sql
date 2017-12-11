@@ -348,7 +348,7 @@ INSERT INTO `roles` (`id`, `Name`) VALUES
 DROP TABLE IF EXISTS `userlogs`;
 CREATE TABLE IF NOT EXISTS `userlogs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Type` text DEFAULT NULL,
+  `Type` text DEFAULT '0',
   `Value` text DEFAULT '0',
   `EntityID` text DEFAULT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT 0,
