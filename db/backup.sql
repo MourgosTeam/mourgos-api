@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `globals` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.globals: ~2 rows (approximately)
+-- Dumping data for table mourgos.globals: ~1 rows (approximately)
 DELETE FROM `globals`;
 /*!40000 ALTER TABLE `globals` DISABLE KEYS */;
 INSERT INTO `globals` (`Name`, `Value`) VALUES
@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12349 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.roles: ~4 rows (approximately)
+-- Dumping data for table mourgos.roles: ~3 rows (approximately)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `Name`) VALUES
@@ -348,8 +348,8 @@ INSERT INTO `roles` (`id`, `Name`) VALUES
 DROP TABLE IF EXISTS `userlogs`;
 CREATE TABLE IF NOT EXISTS `userlogs` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Type` text NOT NULL DEFAULT '0',
-  `Value` text NOT NULL DEFAULT '0',
+  `Type` text DEFAULT NULL,
+  `Value` text DEFAULT '0',
   `EntityID` text DEFAULT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT 0,
   `created_on` datetime NOT NULL DEFAULT current_timestamp(),
@@ -358,11 +358,9 @@ CREATE TABLE IF NOT EXISTS `userlogs` (
   CONSTRAINT `FK_logs_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.userlogs: ~0 rows (approximately)
+-- Dumping data for table mourgos.userlogs: ~1 rows (approximately)
 DELETE FROM `userlogs`;
 /*!40000 ALTER TABLE `userlogs` DISABLE KEYS */;
-INSERT INTO `userlogs` (`id`, `Type`, `Value`, `EntityID`, `user_id`, `created_on`) VALUES
-	(1, '0', '0', NULL, 1, '2017-12-11 13:35:42');
 /*!40000 ALTER TABLE `userlogs` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.users
