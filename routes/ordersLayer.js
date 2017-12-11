@@ -34,7 +34,6 @@ function castToOrder (ni) {
     Address: ni.address,
     Comments: ni.comments,
     Extra: ni.hasExtra,
-    Hashtag: ni.coupon,
     Items: ni.basketItems,
     Koudouni: ni.koudouni,
     Latitude: ni.latitude,
