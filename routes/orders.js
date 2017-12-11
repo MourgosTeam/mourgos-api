@@ -123,8 +123,8 @@ router.get('/delivered/:id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  knex.table('orders').select(Constants.ORDERFIELDS).
-  join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
+  knex.table('orders').select('*').//Constants.ORDERFIELDS).
+  //join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   where({ 'orders.id': req.params.id }).
   map(Functions.calculateDescription).
   then((data) => res.send(data[0]));
