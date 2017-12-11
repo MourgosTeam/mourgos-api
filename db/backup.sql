@@ -52,11 +52,11 @@ INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`)
 -- Dumping structure for table mourgos.campaigns
 CREATE TABLE IF NOT EXISTS `campaigns` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Name` text NOT NULL DEFAULT '0',
+  `Name` text NOT NULL,
   `Formula` int(11) NOT NULL DEFAULT 0,
   `LiveFrom` datetime DEFAULT NULL,
   `LiveTill` datetime DEFAULT NULL,
-  `Hashtag` text NOT NULL DEFAULT '0',
+  `Hashtag` text NOT NULL,
   `MaxUsages` int(11) NOT NULL DEFAULT 0,
   `CurrentUsages` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
