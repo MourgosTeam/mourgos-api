@@ -151,7 +151,7 @@ router.post('/:id', (req, res) => {
   res.sendStatus(500);
 
   return true;
- });
+ }).then(() => Logger.log(req, 'Orders', 'StatusChange : ' + req.body.statusCode, req.params.id));
 });
 
 router.post('/', (req, res) => {
