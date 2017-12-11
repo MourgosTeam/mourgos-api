@@ -6,7 +6,11 @@ var auth = require('../helpers/auth');
 
 var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
+var HashtagLayer = require('./hashtagLayer');
 var io = require('../sockets/mobile')();
+
+
+var Constants = require('../constants/constants');
 
 var Logger = require('../helpers/logger');
 
@@ -46,6 +50,8 @@ router.post('/saw/:id', (req, res) => {
   }
 
 return Layer.orderOpened(req, req.params.id).
+ then(() =>
+  Logger.logIfNotExists(req, 'Orders', 'Seen - Getting ready', req.params.id)).
  then(() => Layer.notifyOrder(req.params.id)).
  then(() => res.send({ msg: 'OK' })).
  then(() => Logger.log(req, 'Orders', 'Seen', req.params.id));
@@ -118,8 +124,9 @@ router.get('/delivered/:id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  knex.table('orders').select('*').
-  where({ id: req.params.id }).
+  knex.table('orders').select(Constants.ORDERFIELDS).
+  join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
+  where({ 'orders.id': req.params.id }).
   map(Functions.calculateDescription).
   then((data) => res.send(data[0]));
 });
@@ -148,6 +155,7 @@ router.post('/:id', (req, res) => {
 router.post('/', (req, res) => {
   var order = Layer.castToOrder(req.body);
   Functions.verify(order).
+  then(() => HashtagLayer.updateHashtag(order.Hashtag)).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');

@@ -8,6 +8,18 @@ var knex = require('../db/db.js');
 /* GET users listing. */
 router.get('/', (req, res) => {
   knex.table('catalogues').select('*').
+  then((data) => {
+    const newdata = [];
+    const today = new Date().getDay();
+    for (let ic = 0; ic < data.length; ic += 1) {
+        const wd = JSON.parse(data[ic].WorkingDates);
+        if (wd[today] === 1) {
+            newdata.push(data[ic]);
+        }
+    }
+
+    return newdata;
+  }).
 then((data) => res.send(data));
 });
 

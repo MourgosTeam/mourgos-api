@@ -34,6 +34,7 @@ function castToOrder (ni) {
     Address: ni.address,
     Comments: ni.comments,
     Extra: ni.hasExtra,
+    Hashtag: ni.coupon,
     Items: ni.basketItems,
     Koudouni: ni.koudouni,
     Latitude: ni.latitude,
@@ -45,6 +46,7 @@ function castToOrder (ni) {
     catalogue_id: ni.catalogue
   };
 }
+
 
 function freeOrder(req, res, orderId) {
  return knex.table('orders').
@@ -107,7 +109,7 @@ function insertOrder (order) {
 
 function notifyOrder (id) {
 
- return knex.table('orders').
+  return knex.table('orders').
       select('catalogue_id').
       where({ id }).
       then((data) => io.sendToCatalogue(data[0].catalogue_id, 'update-order'));

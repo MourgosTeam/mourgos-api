@@ -11,6 +11,7 @@ var http = require('./sockets/mobile')(app);
 
 // ROUTES
 var globals = require('./routes/globals');
+var campaigns = require('./routes/campaigns');
 var catalogues = require('./routes/catalogues');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'files')));
 app.use('/check', sessionHandler);
 app.use('/users', UserManagment);
 
+app.use('/campaigns', campaigns);
 app.use('/catalogues', catalogues);
 app.use('/globals', globals);
 app.use('/categories', categories);
