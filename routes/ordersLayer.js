@@ -144,7 +144,7 @@ function sendFreeOrders (req, res) {
 
 function sendOrderLogs() {
   return knex.table('userlogs').
-  join('users', 'logs.user_id', '=', 'users.id').
+  join('users', 'userlogs.user_id', '=', 'users.id').
   where({ Type: 'Orders' }).
   orderBy('created_on', 'desc').
   limit(200).
