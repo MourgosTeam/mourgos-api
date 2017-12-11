@@ -9,7 +9,7 @@ var Layer = require('./ordersLayer');
 var io = require('../sockets/mobile')();
 
 
-var Constants = require('../constants/constants');
+// var Constants = require('../constants/constants');
 
 var Logger = require('../helpers/logger');
 
@@ -123,8 +123,11 @@ router.get('/delivered/:id', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  knex.table('orders').select('*').//Constants.ORDERFIELDS).
-  //join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
+
+  // Constants.ORDERFIELDS).
+  knex.table('orders').select('*').
+
+  // join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   where({ 'orders.id': req.params.id }).
   map(Functions.calculateDescription).
   then((data) => res.send(data[0]));
