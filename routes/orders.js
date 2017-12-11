@@ -155,7 +155,6 @@ router.post('/:id', (req, res) => {
 router.post('/', (req, res) => {
   var order = Layer.castToOrder(req.body);
   Functions.verify(order).
-  then(() => HashtagLayer.updateHashtag(order.Hashtag)).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
