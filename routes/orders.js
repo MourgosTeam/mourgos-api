@@ -163,6 +163,13 @@ router.post('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+
+  res.sendStatus(407);
+  const aaa = true;
+  if (aaa) {
+    return;
+  }
+
   var order = Layer.castToOrder(req.body);
   Functions.verify(order).
   then(() => Layer.insertOrder(order)).
