@@ -53,7 +53,7 @@ return Layer.orderOpened(req, req.params.id).
   Logger.logIfNotExists(req, 'Orders', 'Seen - Getting ready', req.params.id)).
  then(() => Layer.notifyOrder(req.params.id)).
  then(() => res.send({ msg: 'OK' })).
- then(() => Logger.log(req, 'Orders', 'Seen', req.params.id));
+ then(() => Logger.logIfNotExists(req, 'Orders', 'Seen', req.params.id));
 });
 
 
@@ -91,7 +91,7 @@ router.get('/assign/:id', (req, res) => {
   }
   if (auth.isDelivery(req)) {
     Layer.assignMeOrder(req, res, req.params.id).
-    then(() => Logger.log(req, 'Orders', 'Assigned', req.params.id));
+    then(() => Logger.logIfNotExists(req, 'Orders', 'Assigned', req.params.id));
   }
 
   return true;
@@ -103,7 +103,7 @@ router.get('/free/:id', (req, res) => {
   }
   if (auth.isDelivery(req)) {
     Layer.freeOrder(req, res, req.params.id).
-    then(() => Logger.log(req, 'Orders', 'Freed', req.params.id));
+    then(() => Logger.logIfNotExists(req, 'Orders', 'Freed', req.params.id));
   }
 
   return true;
@@ -116,7 +116,8 @@ router.get('/delivered/:id', (req, res) => {
     Layer.orderDelivered(req, res, req.params.id).
     then(() => Layer.notifyOrder(req.params.id)).
     then(() => res.send({ msg: 'OK' })).
-    then(() => Logger.log(req, 'Orders', 'Delivered', req.params.id));
+    then(() =>
+      Logger.logIfNotExists(req, 'Orders', 'Delivered', req.params.id));
   }
 
   return true;
@@ -153,7 +154,7 @@ router.post('/:id', (req, res) => {
   return true;
  }).
  then(() =>
-  Logger.log(
+  Logger.logIfNotExists(
             req,
             'Orders',
             'StatusChange : ' + req.body.statusCode,
