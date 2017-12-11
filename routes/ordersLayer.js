@@ -143,7 +143,7 @@ function sendFreeOrders (req, res) {
 }
 
 function sendOrderLogs() {
-  return knex.table('logs').
+  return knex.table('userlogs').
   join('users', 'logs.user_id', '=', 'users.id').
   where({ Type: 'Orders' }).
   orderBy('created_on', 'desc').
