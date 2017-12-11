@@ -34,7 +34,7 @@ function logIt(...data) {
 
   const log = formLog(uid, type, value, entityid);
 
-  return knex.table('logs').insert(log).
+  return knex.table('userlogs').insert(log).
   catch((err) => console.log(err));
 }
 
