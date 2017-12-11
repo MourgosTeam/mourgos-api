@@ -58,7 +58,7 @@ const whereClause = {
             user_id: uid
         };
 
-return knex.table('logs').where(whereClause).
+return knex.table('userlogs').where(whereClause).
         select('*').
         then((cols) => {
             if (cols.length === 0) {
