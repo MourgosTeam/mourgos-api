@@ -38,12 +38,6 @@ module.exports = {
   'orders.postDate as PostDate',
   'orders.hasOpened as Opened'
   ],
-  PRODUCTSMAINFIELDS: [
-  'Price',
-  'Name',
-  'Description',
-  'id'
-  ],
   ORDERFIELDS: [
   'orders.id as id',
   'orders.Name as Name',
@@ -60,5 +54,11 @@ module.exports = {
   'orders.postDate as PostDate',
   'orders.Hashtag as Hashtag',
   'campaigns.Formula as HashtagFormula'
+  ],
+  PRODUCTSMAINFIELDS: [
+  'Price',
+  'Name',
+  'Description',
+  'id'
   ]
 };
