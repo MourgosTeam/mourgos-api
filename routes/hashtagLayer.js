@@ -31,7 +31,7 @@ function updateHashtag (hash) {
 return checkHashtag(hash).
   then((item) => {
     console.log(item);
-    
+
     return knex.table('campaigns').
       where({ id: item.id }).
       update({ CurrentUsages: item.CurrentUsages + 1 });
