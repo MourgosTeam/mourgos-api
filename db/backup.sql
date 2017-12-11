@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `globals` (
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.globals: ~0 rows (approximately)
+-- Dumping data for table mourgos.globals: ~2 rows (approximately)
 DELETE FROM `globals`;
 /*!40000 ALTER TABLE `globals` DISABLE KEYS */;
 INSERT INTO `globals` (`Name`, `Value`) VALUES
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12349 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.roles: ~3 rows (approximately)
+-- Dumping data for table mourgos.roles: ~4 rows (approximately)
 DELETE FROM `roles`;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `Name`) VALUES
