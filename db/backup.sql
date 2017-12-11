@@ -76,10 +76,10 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 DELETE FROM `catalogues`;
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
 INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`, `Latitude`, `Longitude`) VALUES
-	(1, 'Eri\'s Donuts', '231 550 7270', 'Τσιμισκή 124, Θεσσαλονίκη 546 21', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', NULL, 1, 40.628575, 22.949541100000033),
-	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', NULL, 2, 40.6294776, 22.952889599999935),
-	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', NULL, 2, 40.6317409, 22.951557099999945),
-	(4, 'Θάλασσα', '2310262443', NULL, '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', NULL, 2, 0, 0);
+	(1, 'Eri\'s Donuts', '231 550 7270', 'Τσιμισκή 124, Θεσσαλονίκη 546 21', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', '[1,1,1,1,1,1,1]', 1, 40.628575, 22.949541100000033),
+	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', '[0,0,0,0,0,0,0]', 2, 40.6294776, 22.952889599999935),
+	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', '[0,0,0,0,0,0,0]', 2, 40.6317409, 22.951557099999945),
+	(4, 'Θάλασσα', '2310262443', NULL, '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', '[0,0,0,0,0,0,0]', 2, 0, 0);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -128,7 +128,8 @@ CREATE TABLE IF NOT EXISTS `globals` (
 DELETE FROM `globals`;
 /*!40000 ALTER TABLE `globals` DISABLE KEYS */;
 INSERT INTO `globals` (`Name`, `Value`) VALUES
-	('MinimumOrder', '5');
+	('MinimumOrder', '5'),
+	('MourgosIsLive', '1');
 /*!40000 ALTER TABLE `globals` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.logs
@@ -145,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   CONSTRAINT `FK_logs_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.logs: ~134 rows (approximately)
+-- Dumping data for table mourgos.logs: ~0 rows (approximately)
 DELETE FROM `logs`;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   CONSTRAINT `FK_orders_users` FOREIGN KEY (`delivery_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.orders: ~19 rows (approximately)
+-- Dumping data for table mourgos.orders: ~0 rows (approximately)
 DELETE FROM `orders`;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;

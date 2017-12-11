@@ -119,9 +119,9 @@ router.get('/delivered/:id', (req, res) => {
 
 router.get('/:id', (req, res) => {
   knex.table('orders').select('*').
-where({ id: req.params.id }).
-map(Functions.calculateDescription).
-then((data) => res.send(data[0]));
+  where({ id: req.params.id }).
+  map(Functions.calculateDescription).
+  then((data) => res.send(data[0]));
 });
 
 router.post('/:id', (req, res) => {
