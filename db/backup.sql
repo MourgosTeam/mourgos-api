@@ -17,7 +17,6 @@ CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mourgos`;
 
 -- Dumping structure for table mourgos.attributes
-DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -30,9 +29,8 @@ CREATE TABLE IF NOT EXISTS `attributes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.attributes: ~16 rows (approximately)
-DELETE FROM `attributes`;
 /*!40000 ALTER TABLE `attributes` DISABLE KEYS */;
-INSERT INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
+INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
 	(84, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 82),
 	(85, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 83),
 	(86, 'Γέμιση', '["σοκολάτα"," βανίλια"," μπουένο"," fererro"," toffee"," φυστικοβούτυρο"," ταχίνι"," καρύδα"," μόκα"," λευκή σοκολάτα"," bitter"," μπανάνα"," καραμέλα"," μπισκότο"," λεμόνι"," πορτοκάλι"," τσιζ κέικ"," σαμπάνια"," φράουλα"," κεράσι"," βερίκοκο"," μήλο"," ρόδι"," blueberry"]', 0.00, 84),
@@ -51,8 +49,26 @@ INSERT INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`) VALUES
 	(99, 'Topping Σπέσιαλ', '["ολόκληρα μπισκότα"," γεμιστά πουράκια"," σοκολατορυζομπαλίτσες"," φιλέ αμυγδάλου"," δάκρυα φυστικοβούτυρου"]', 0.00, 87);
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.campaigns
+CREATE TABLE IF NOT EXISTS `campaigns` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Name` text NOT NULL DEFAULT '0',
+  `Formula` int(11) NOT NULL DEFAULT 0,
+  `LiveFrom` datetime DEFAULT NULL,
+  `LiveTill` datetime DEFAULT NULL,
+  `Hashtag` text NOT NULL DEFAULT '0',
+  `MaxUsages` int(11) NOT NULL DEFAULT 0,
+  `CurrentUsages` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.campaigns: ~1 rows (approximately)
+/*!40000 ALTER TABLE `campaigns` DISABLE KEYS */;
+INSERT IGNORE INTO `campaigns` (`id`, `Name`, `Formula`, `LiveFrom`, `LiveTill`, `Hashtag`, `MaxUsages`, `CurrentUsages`) VALUES
+	(1, 'MeliCampaign', 5, '2017-12-11 14:55:17', '2017-12-11 16:52:55', 'mourgosalpha', 5, 0);
+/*!40000 ALTER TABLE `campaigns` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.catalogues
-DROP TABLE IF EXISTS `catalogues`;
 CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -73,9 +89,8 @@ CREATE TABLE IF NOT EXISTS `catalogues` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.catalogues: ~4 rows (approximately)
-DELETE FROM `catalogues`;
 /*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`, `Latitude`, `Longitude`) VALUES
+INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`, `Latitude`, `Longitude`) VALUES
 	(1, 'Eri\'s Donuts', '231 550 7270', 'Τσιμισκή 124, Θεσσαλονίκη 546 21', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', '[1,1,1,1,1,1,1]', 1, 40.628575, 22.949541100000033),
 	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', '[0,0,0,0,0,0,0]', 2, 40.6294776, 22.952889599999935),
 	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', '[0,0,0,0,0,0,0]', 2, 40.6317409, 22.951557099999945),
@@ -83,7 +98,6 @@ INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -94,9 +108,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.categories: ~17 rows (approximately)
-DELETE FROM `categories`;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
+INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(2, 'Wraps', 2),
 	(5, 'Μερίδες', 2),
 	(8, 'Burgers', 2),
@@ -117,55 +130,20 @@ INSERT INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.globals
-DROP TABLE IF EXISTS `globals`;
 CREATE TABLE IF NOT EXISTS `globals` (
   `Name` varchar(50) NOT NULL,
   `Value` text NOT NULL,
   UNIQUE KEY `Name` (`Name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.globals: ~1 rows (approximately)
-DELETE FROM `globals`;
+-- Dumping data for table mourgos.globals: ~2 rows (approximately)
 /*!40000 ALTER TABLE `globals` DISABLE KEYS */;
-INSERT INTO `globals` (`Name`, `Value`) VALUES
+INSERT IGNORE INTO `globals` (`Name`, `Value`) VALUES
 	('MinimumOrder', '5'),
 	('MourgosIsLive', '1');
 /*!40000 ALTER TABLE `globals` ENABLE KEYS */;
 
--- Dumping structure for table mourgos.orders
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` varchar(5) NOT NULL,
-  `Status` tinyint(4) NOT NULL DEFAULT 0,
-  `Name` text NOT NULL,
-  `Address` text NOT NULL,
-  `Orofos` text NOT NULL,
-  `Phone` text NOT NULL,
-  `Koudouni` text DEFAULT NULL,
-  `Comments` text DEFAULT NULL,
-  `Items` text NOT NULL,
-  `Total` double(10,2) NOT NULL,
-  `Extra` int(11) NOT NULL,
-  `Latitude` double NOT NULL,
-  `Longitude` double NOT NULL,
-  `hasOpened` tinyint(1) NOT NULL DEFAULT 0,
-  `delivery_id` int(10) unsigned DEFAULT NULL,
-  `catalogue_id` int(10) unsigned NOT NULL,
-  `postDate` datetime NOT NULL DEFAULT current_timestamp(),
-  UNIQUE KEY `id` (`id`),
-  KEY `FK_orders_catalogues` (`catalogue_id`),
-  KEY `FK_orders_users` (`delivery_id`),
-  CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`),
-  CONSTRAINT `FK_orders_users` FOREIGN KEY (`delivery_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table mourgos.orders: ~0 rows (approximately)
-DELETE FROM `orders`;
-/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
-
 -- Dumping structure for table mourgos.products
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -180,9 +158,8 @@ CREATE TABLE IF NOT EXISTS `products` (
 ) ENGINE=InnoDB AUTO_INCREMENT=258 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.products: ~141 rows (approximately)
-DELETE FROM `products`;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `category_id`) VALUES
+INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `category_id`) VALUES
 	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/FalafelHouse/baba_tab.png', 2.80, '[1,1,1,1,1,1,1]', 2),
 	(10, 'Baba-Ganouj - Tabouleh Size L', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/FalafelHouse/baba_tab.png', 3.00, '[1,1,1,1,1,1,1]', 2),
 	(11, 'Baba-Ganouj - Tabouleh Size XL', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/FalafelHouse/baba_tab.png', 3.20, '[1,1,1,1,1,1,1]', 2),
@@ -327,44 +304,22 @@ INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.roles
-DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12349 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.roles: ~3 rows (approximately)
-DELETE FROM `roles`;
+-- Dumping data for table mourgos.roles: ~4 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` (`id`, `Name`) VALUES
+INSERT IGNORE INTO `roles` (`id`, `Name`) VALUES
 	(-1, 'No role'),
 	(0, 'Admin'),
 	(1, 'Shop'),
 	(2, 'Delivery');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
--- Dumping structure for table mourgos.userlogs
-DROP TABLE IF EXISTS `userlogs`;
-CREATE TABLE IF NOT EXISTS `userlogs` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `Type` text NOT NULL,
-  `Value` text NOT NULL,
-  `EntityID` text,
-  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
-  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`),
-  KEY `FK_logs_users` (`user_id`),
-  CONSTRAINT `FK_logs_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8;
-
--- Dumping data for table mourgos.userlogs: ~1 rows (approximately)
-DELETE FROM `userlogs`;
-/*!40000 ALTER TABLE `userlogs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `userlogs` ENABLE KEYS */;
-
 -- Dumping structure for table mourgos.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL DEFAULT '',
@@ -381,9 +336,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.users: ~5 rows (approximately)
-DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`, `role`, `phone`, `name`) VALUES
+INSERT IGNORE INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`, `role`, `phone`, `name`) VALUES
 	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '0317c3dfe2396ededc3560fe9a5d058a8bd80f5bfdd355f27bf96ecd9367ea151', '0', 1, '21023568', 'Eris'),
 	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', '8b029c2c486f093d55e5b96494fd3212f1dec997e786a6d2aafb2b31ef0ac3140', '', 1, '2102565856', 'Falafel'),
 	(4, 'mourgos', '2dd66779e9d9bd2e5cd438cfda6591e18ae23a78b5b75c94bb03f88d5c386a89', 'aa37680232bba75852392e52ad61e031', 'ca49696492e153e590f6fea21d139fdacb899e7599f75607118820a4ae74ee171', '', 2, '6983659568', 'Takis'),
