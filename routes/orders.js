@@ -6,7 +6,6 @@ var auth = require('../helpers/auth');
 
 var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
-var HashtagLayer = require('./hashtagLayer');
 var io = require('../sockets/mobile')();
 
 
