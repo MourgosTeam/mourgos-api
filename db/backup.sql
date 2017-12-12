@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `campaigns` (
   `Hashtag` text NOT NULL,
   `MaxUsages` int(11) NOT NULL DEFAULT 0,
   `CurrentUsages` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
+  UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.campaigns: ~1 rows (approximately)
@@ -357,7 +357,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12349 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table mourgos.roles: ~4 rows (approximately)
@@ -425,7 +425,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `role` int(5) DEFAULT -1,
   `phone` text DEFAULT NULL,
   `name` text DEFAULT NULL,
-  KEY `id` (`id`),
+  UNIQUE KEY `id` (`id`),
   KEY `FK_users_roles` (`role`),
   CONSTRAINT `FK_users_roles` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
