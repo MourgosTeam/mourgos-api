@@ -41,7 +41,8 @@ function isShop(req) {
 }
 
 function isSiteOpen() {
- return knex.table('globals').select('Value').where({ Name: 'MourgosIsLive' }).
+ return knex.table('globals').select('Value').
+where({ Name: 'MourgosIsLive' }).
  then((data) => data[0].Value === '1');
 }
 
