@@ -17,6 +17,7 @@ CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `mourgos`;
 
 -- Dumping structure for table mourgos.attributes
+DROP TABLE IF EXISTS `attributes`;
 CREATE TABLE IF NOT EXISTS `attributes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -50,6 +51,7 @@ INSERT IGNORE INTO `attributes` (`id`, `Name`, `Options`, `Price`, `product_id`)
 /*!40000 ALTER TABLE `attributes` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.campaigns
+DROP TABLE IF EXISTS `campaigns`;
 CREATE TABLE IF NOT EXISTS `campaigns` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
@@ -69,6 +71,7 @@ INSERT IGNORE INTO `campaigns` (`id`, `Name`, `Formula`, `LiveFrom`, `LiveTill`,
 /*!40000 ALTER TABLE `campaigns` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.catalogues
+DROP TABLE IF EXISTS `catalogues`;
 CREATE TABLE IF NOT EXISTS `catalogues` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -98,6 +101,7 @@ INSERT IGNORE INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `Her
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -130,6 +134,7 @@ INSERT IGNORE INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.globals
+DROP TABLE IF EXISTS `globals`;
 CREATE TABLE IF NOT EXISTS `globals` (
   `Name` varchar(50) NOT NULL,
   `Value` text NOT NULL,
@@ -143,12 +148,56 @@ INSERT IGNORE INTO `globals` (`Name`, `Value`) VALUES
 	('MourgosIsLive', '1');
 /*!40000 ALTER TABLE `globals` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.orders
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` varchar(5) NOT NULL,
+  `Status` tinyint(4) NOT NULL DEFAULT 0,
+  `Name` text NOT NULL,
+  `Address` text NOT NULL,
+  `Orofos` text NOT NULL,
+  `Phone` text NOT NULL,
+  `Koudouni` text DEFAULT NULL,
+  `Comments` text DEFAULT NULL,
+  `Items` text NOT NULL,
+  `Total` double(10,2) NOT NULL,
+  `Extra` int(11) NOT NULL,
+  `Latitude` double NOT NULL,
+  `Longitude` double NOT NULL,
+  `hasOpened` tinyint(1) NOT NULL DEFAULT 0,
+  `delivery_id` int(10) unsigned DEFAULT NULL,
+  `catalogue_id` int(10) unsigned NOT NULL,
+  `postDate` datetime NOT NULL DEFAULT current_timestamp(),
+  UNIQUE KEY `id` (`id`),
+  KEY `FK_orders_catalogues` (`catalogue_id`),
+  KEY `FK_orders_users` (`delivery_id`),
+  CONSTRAINT `FK_orders_catalogues` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`),
+  CONSTRAINT `FK_orders_users` FOREIGN KEY (`delivery_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.orders: ~11 rows (approximately)
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT IGNORE INTO `orders` (`id`, `Status`, `Name`, `Address`, `Orofos`, `Phone`, `Koudouni`, `Comments`, `Items`, `Total`, `Extra`, `Latitude`, `Longitude`, `hasOpened`, `delivery_id`, `catalogue_id`, `postDate`) VALUES
+	('1t74w', 10, 'Δημητρα', 'Λεωνίδα Ιασωνίδου 19, Θεσσαλονίκη 546 35, Ελλάδα', 'Κουιμτζιδου', '6943851676', '', '', '[{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":2,"96":2}},{"id":86,"quantity":1,"comments":"","TotalPrice":1.6,"attributes":{"88":2,"93":4}},{"id":87,"quantity":1,"comments":"","TotalPrice":1.9,"attributes":{"89":1,"94":9}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":5,"91":9}},{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":13,"95":4}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"91":5}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":7}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":2,"96":4}}]', 14.30, 0, 40.6354741, 22.949929699999984, 0, 4, 1, '2017-12-11 15:40:29'),
+	('c9m6r', 99, 'Test', 'Τσιμισκή 25, Θεσσαλονίκη 546 24, Ελλάδα', '4', '2100000000', 'Test koudouni', 'ασδ', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{}}]', 1.70, 1, 40.6342349, 22.940777199999957, 0, NULL, 1, '2017-12-11 15:18:39'),
+	('c9n64', 99, 'Test', 'Τσιμισκή 25, Θεσσαλονίκη 546 24, Ελλάδα', '4', '2100000000', 'Test koudouni', 'ασδ', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"98":1}}]', 1.70, 1, 40.6342349, 22.940777199999957, 0, NULL, 1, '2017-12-11 15:28:16'),
+	('ctr6g', 10, 'Ελενη Τόπλη', 'Aristotelous 33, Thessaloniki 546 31, Greece', '3', '6977468515', '', '', '[{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"86":13}},{"id":86,"quantity":1,"comments":"","TotalPrice":1.6,"attributes":{"88":3,"93":4,"97":4}},{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":5,"95":1}}]', 7.10, 0, 40.63869820000001, 22.946345000000065, 0, 4, 1, '2017-12-11 16:02:44'),
+	('dhk6c', 99, 'Test', 'Al. Svolou 12, Thessaloniki 546 22, Greece', '5', 'Sdvff', '', 'Vbdd', '[{"id":86,"quantity":5,"comments":"","TotalPrice":8,"attributes":{"88":7,"93":5}}]', 8.00, 0, 40.6319776, 22.948213799999962, 0, NULL, 1, '2017-12-11 15:28:29'),
+	('e1j74', 10, 'Νικήτας Χατζηπαζαρλής', 'Μουδανιών 31, Αγ. Παύλος 546 36, Ελλάδα', 'Ισόγειο', '6940719404', '', 'Δεν έχει κουδούνι απο έξω, οπότε ή πατήστε κόρνα ή πάρτε τηλέφωνο όταν φτάσεται.', '[{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":23,"91":1,"96":4}},{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"92":3,"98":2}},{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":16,"95":5}},{"id":85,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"87":3}},{"id":89,"quantity":1,"comments":"","TotalPrice":3.2,"attributes":{}},{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":23,"95":1}}]', 15.30, 0, 40.63592749999999, 22.96034140000006, 0, 4, 1, '2017-12-11 16:35:54'),
+	('kac9j', 99, 'Test', 'Al. Svolou 12, Thessaloniki 546 22, Greece', '5', 'Sdvff', '', 'Vbdd', '[{"id":84,"quantity":4,"comments":"","TotalPrice":6.8,"attributes":{"86":13,"92":7}}]', 6.80, 0, 40.6319776, 22.948213799999962, 0, NULL, 1, '2017-12-11 15:22:16'),
+	('t3ge1', 2, 'Dimitrios Iakovakis', 'Εγνατία 4555, Θεσσαλονίκη 546 36, Ελλάδα', '6ος', '6982791753', '', 'Κτήριο Δ, Αν δεν βρει το κτήριο ας με πάρει τηλέφωνο να κατέβω στην είσοδο της Πολυτεχνικής.', '[{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":2,"95":2}},{"id":88,"quantity":1,"comments":"","TotalPrice":3.8,"attributes":{"90":5,"95":2}}]', 7.60, 0, 40.6267365, 22.959750699999972, 0, 4, 1, '2017-12-11 15:48:38'),
+	('tj6mt', 10, 'Μιχάλης Δαφνομήλης', 'Agiou Nikolaou 10, Thessaloniki 546 33, Greece', '2ος', '6983393575', '', '', '[{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":7,"91":9,"96":1}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":11,"91":2,"96":1}},{"id":83,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"85":16,"91":4}},{"id":84,"quantity":1,"comments":"","TotalPrice":1.7,"attributes":{"86":17,"92":2,"98":1}},{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{"84":12}},{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{"84":14}}]', 8.30, 0, 40.638984, 22.948679900000002, 0, 4, 1, '2017-12-11 15:53:05'),
+	('tj6ru', 2, 'Αμπατζης Βασίλης', 'Αμαλίας 8, Θεσσαλονίκη 546 40, Ελλάδα', '4ος', '6981455009', '', '', '[{"id":86,"quantity":2,"comments":"","TotalPrice":3.2,"attributes":{"88":2,"93":3}},{"id":85,"quantity":1,"comments":"","TotalPrice":1.4,"attributes":{"87":9}},{"id":82,"quantity":1,"comments":"","TotalPrice":1.2,"attributes":{}},{"id":82,"quantity":2,"comments":"","TotalPrice":2.4,"attributes":{"84":9}}]', 8.20, 0, 40.6206487, 22.95650580000006, 0, 4, 1, '2017-12-11 15:44:53'),
+	('tkadh', 99, 'Test', 'Al. Svolou 12, Thessaloniki 546 22, Greece', '5', 'Sdvff', '', 'Vbdd', '[{"id":88,"quantity":2,"comments":"","TotalPrice":7.6,"attributes":{"90":14,"95":2}}]', 7.60, 0, 40.6319776, 22.948213799999962, 0, NULL, 1, '2017-12-11 15:30:36');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.products
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` text NOT NULL,
-  `Description` text NOT NULL DEFAULT '',
-  `Image` text NOT NULL DEFAULT '',
+  `Description` text NOT NULL,
+  `Image` text NOT NULL,
   `Price` decimal(10,2) NOT NULL,
   `Days` text NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
@@ -304,6 +353,7 @@ INSERT IGNORE INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `D
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.roles
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` text DEFAULT NULL,
@@ -319,14 +369,59 @@ INSERT IGNORE INTO `roles` (`id`, `Name`) VALUES
 	(2, 'Delivery');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
+-- Dumping structure for table mourgos.userlogs
+DROP TABLE IF EXISTS `userlogs`;
+CREATE TABLE IF NOT EXISTS `userlogs` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `Type` text NOT NULL,
+  `Value` text NOT NULL,
+  `EntityID` text DEFAULT NULL,
+  `Location` text DEFAULT NULL,
+  `user_id` int(10) unsigned NOT NULL DEFAULT 0,
+  `created_on` datetime NOT NULL DEFAULT current_timestamp(),
+  UNIQUE KEY `id` (`id`),
+  KEY `FK_logs_users` (`user_id`),
+  CONSTRAINT `FK_logs_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table mourgos.userlogs: ~24 rows (approximately)
+/*!40000 ALTER TABLE `userlogs` DISABLE KEYS */;
+INSERT IGNORE INTO `userlogs` (`id`, `Type`, `Value`, `EntityID`, `Location`, `user_id`, `created_on`) VALUES
+	(150, 'Orders', 'Seen - Getting ready', 'tj6ru', NULL, 1, '2017-12-11 15:56:29'),
+	(151, 'Orders', 'Seen', 'tj6ru', NULL, 1, '2017-12-11 15:56:29'),
+	(152, 'Orders', 'Seen - Getting ready', 't3ge1', NULL, 1, '2017-12-11 16:04:57'),
+	(153, 'Orders', 'Seen', 't3ge1', NULL, 1, '2017-12-11 16:04:57'),
+	(154, 'Orders', 'Seen - Getting ready', 'tj6mt', NULL, 1, '2017-12-11 16:10:47'),
+	(155, 'Orders', 'Seen', 'tj6mt', NULL, 1, '2017-12-11 16:10:47'),
+	(156, 'Orders', 'Assigned', 'tj6ru', NULL, 4, '2017-12-11 16:18:33'),
+	(157, 'Orders', 'Assigned', 't3ge1', NULL, 4, '2017-12-11 16:18:49'),
+	(158, 'Orders', 'Delivered', '1t74w', NULL, 4, '2017-12-11 16:19:01'),
+	(159, 'Orders', 'Seen - Getting ready', 'ctr6g', NULL, 1, '2017-12-11 16:20:27'),
+	(160, 'Orders', 'Seen', 'ctr6g', NULL, 1, '2017-12-11 16:20:27'),
+	(161, 'Orders', 'Assigned', 'tj6mt', NULL, 4, '2017-12-11 16:21:12'),
+	(162, 'Orders', 'StatusChange : 2', 'ctr6g', NULL, 1, '2017-12-11 16:25:23'),
+	(163, 'Orders', 'Seen - Getting ready', 'e1j74', NULL, 1, '2017-12-11 16:51:14'),
+	(164, 'Orders', 'Seen', 'e1j74', NULL, 1, '2017-12-11 16:51:14'),
+	(165, 'Orders', 'StatusChange : 2', 'e1j74', NULL, 1, '2017-12-11 16:56:46'),
+	(166, 'Orders', 'Seen', 'e1j74', NULL, 4, '2017-12-11 18:10:00'),
+	(167, 'Orders', 'Assigned', 'e1j74', NULL, 4, '2017-12-11 18:10:02'),
+	(168, 'Orders', 'Seen', 'tkadh', NULL, 4, '2017-12-11 18:10:04'),
+	(169, 'Orders', 'Seen', 'ctr6g', NULL, 4, '2017-12-11 18:10:07'),
+	(170, 'Orders', 'Assigned', 'ctr6g', NULL, 4, '2017-12-11 18:10:08'),
+	(171, 'Orders', 'Delivered', 'e1j74', NULL, 4, '2017-12-11 18:10:14'),
+	(172, 'Orders', 'Delivered', 'ctr6g', NULL, 4, '2017-12-11 18:10:17'),
+	(173, 'Orders', 'Delivered', 'tj6mt', NULL, 4, '2017-12-11 18:10:21');
+/*!40000 ALTER TABLE `userlogs` ENABLE KEYS */;
+
 -- Dumping structure for table mourgos.users
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `username` text NOT NULL DEFAULT '',
-  `password` text NOT NULL DEFAULT '',
-  `salt` text NOT NULL DEFAULT '',
-  `token` text NOT NULL DEFAULT '',
-  `email` text DEFAULT '',
+  `username` text NOT NULL,
+  `password` text NOT NULL,
+  `salt` text NOT NULL,
+  `token` text NOT NULL,
+  `email` text DEFAULT NULL,
   `role` int(5) DEFAULT -1,
   `phone` text DEFAULT NULL,
   `name` text DEFAULT NULL,
@@ -335,14 +430,13 @@ CREATE TABLE IF NOT EXISTS `users` (
   CONSTRAINT `FK_users_roles` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.users: ~5 rows (approximately)
+-- Dumping data for table mourgos.users: ~4 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT IGNORE INTO `users` (`id`, `username`, `password`, `salt`, `token`, `email`, `role`, `phone`, `name`) VALUES
 	(1, 'erisdonuts', 'b6430e53e6e0320b429e94f0ff01f1d959691efb56b0f530c321fd1ca654a62e', 'd1c8a767550ea8006902ca09cbde09e1', '0317c3dfe2396ededc3560fe9a5d058a8bd80f5bfdd355f27bf96ecd9367ea151', '0', 1, '21023568', 'Eris'),
 	(2, 'falafelhouse', '883fd3e8dea6a2e6b7029759ccda95399e7b4a23c8895e7c9bf5499d2d2589f7', 'bc1ec782c20a521c91b3bf6dc78bbeaf', '8b029c2c486f093d55e5b96494fd3212f1dec997e786a6d2aafb2b31ef0ac3140', '', 1, '2102565856', 'Falafel'),
 	(4, 'mourgos', '2dd66779e9d9bd2e5cd438cfda6591e18ae23a78b5b75c94bb03f88d5c386a89', 'aa37680232bba75852392e52ad61e031', 'ca49696492e153e590f6fea21d139fdacb899e7599f75607118820a4ae74ee171', '', 2, '6983659568', 'Takis'),
-	(5, 'admin', '6675754a69d1b94b6730ef8958007dbac8406c7b93c133db60571f121e7d88e9', 'cd98ebd996f0ef0dc1939e336b6cba2c', 'd545fa562f2b046c75f97e570a946881b0efabf129483f0524ef0b9caad9a7431', '', 0, '69999999', 'Admin'),
-	(9, 'testads', 'f6a42cfe5ab0365f2626ac0bef06688cfd9b8cc60ba7bee7241f4bc44e4d1a41', '57f235373d94a096cbdcb0e93c866b18', '', 'sss', 1, 'dsa', 'asd');
+	(5, 'admin', '6675754a69d1b94b6730ef8958007dbac8406c7b93c133db60571f121e7d88e9', 'cd98ebd996f0ef0dc1939e336b6cba2c', 'd545fa562f2b046c75f97e570a946881b0efabf129483f0524ef0b9caad9a7431', '', 0, '69999999', 'Admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
