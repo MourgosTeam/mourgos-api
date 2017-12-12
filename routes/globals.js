@@ -21,7 +21,7 @@ then((data) => res.send(data[0]));
 
 router.get('/:name', (req, res) => {
   knex.table('globals').select('*').
-where({ FriendlyURL: req.params.name }).
+where({ Name: req.params.name }).
 then((data) => res.send(data[0]));
 });
 

@@ -1,3 +1,4 @@
+var knex = require('../db/db.js');
 
 function checkUser(req, res) {
   if (!req.sessionUser) {
@@ -39,10 +40,16 @@ function isShop(req) {
  return hasRole(req, 1);
 }
 
+function isSiteOpen() {
+ return knex.table('globals').select('Value').where({ Name: 'MourgosIsLive' }).
+ then((data) => data[0].Value === '1');
+}
+
 module.exports = {
  checkUser,
  getUserID,
  isAdmin,
  isDelivery,
- isShop
+ isShop,
+ isSiteOpen
 };

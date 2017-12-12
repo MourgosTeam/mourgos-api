@@ -163,15 +163,18 @@ router.post('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  let order = Layer.castToOrder(req.body);
 
-  res.sendStatus(407);
-  const aaa = true;
-  if (aaa) {
-    return;
-  }
-
-  var order = Layer.castToOrder(req.body);
-  Functions.verify(order).
+  return auth.isSiteOpen().
+  then((flag) => {
+    if (flag === false) {
+      let err = new Error("Site is closed!");
+      err.errorObject = {msg: 'Site is closed!', code: 8888};
+      throw err;
+    }
+    return flag;
+  }).
+  then(() => Functions.verify(order)).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
@@ -179,8 +182,13 @@ router.post('/', (req, res) => {
     res.send(order);
   }).
   catch((err) => {
-    res.status(500);
-    res.send(err);
+    if(err.errorObject.code === 8888){
+      res.status(503);
+    }
+    else {
+      res.status(500);
+    }
+    res.send(err.errorObject);
   });
 });
 
