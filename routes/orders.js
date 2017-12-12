@@ -163,16 +163,20 @@ router.post('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  let order = Layer.castToOrder(req.body);
+  const order = Layer.castToOrder(req.body);
 
   return auth.isSiteOpen().
   then((flag) => {
     if (flag === false) {
-      let err = new Error("Site is closed!");
-      err.errorObject = {msg: 'Site is closed!', code: 8888};
+      const err = new Error('Site is closed!');
+      err.errorObject = {
+       code: 8888,
+       msg: 'Site is closed!'
+      };
       throw err;
     }
-    return flag;
+
+return flag;
   }).
   then(() => Functions.verify(order)).
   then(() => Layer.insertOrder(order)).
@@ -182,10 +186,9 @@ router.post('/', (req, res) => {
     res.send(order);
   }).
   catch((err) => {
-    if(err.errorObject.code === 8888){
+    if (err.errorObject.code === 8888) {
       res.status(503);
-    }
-    else {
+    } else {
       res.status(500);
     }
     res.send(err.errorObject);
