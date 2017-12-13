@@ -11,6 +11,7 @@ var http = require('./sockets/mobile')(app);
 
 // ROUTES
 var adminRoute = require('./routes/admin');
+var logs = require('./routes/logs');
 var globals = require('./routes/globals');
 var campaigns = require('./routes/campaigns');
 var catalogues = require('./routes/catalogues');
@@ -34,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'files')));
 
 app.use('/check', sessionHandler);
 app.use('/users', UserManagment);
+
+app.use('/log', logs);
 
 app.use('/admin', adminRoute);
 app.use('/campaigns', campaigns);

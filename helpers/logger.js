@@ -5,8 +5,8 @@ var auth = require('../helpers/auth');
 function formLog(...data) {
     const [
     uid,
-    v,
     t,
+    v,
     eid
     ] = data;
 
@@ -20,8 +20,8 @@ function formLog(...data) {
 function logIt(...data) {
   const [
     req,
-    value,
     type,
+    value,
     entityid
   ] = data;
 
