@@ -1,3 +1,12 @@
+const statusTexts = [
+  'ΝΕΑ ΠΑΡΑΓΓΕΛΙΑ',
+  'ΕΤΟΙΜΑΖΕΤΑΙ',
+  'ΕΤΟΙΜΑΣΤΗΚΕ',
+  'ΣΤΟΝ ΔΡΟΜΟ'
+];
+statusTexts[10] = 'ΠΑΡΑΔΟΘΗΚΕ';
+statusTexts[99] = 'ΑΠΟΡΡΙΦΘΗΚΕ';
+
 module.exports = {
   MYORDERDELIVERYFIELDS: [
   'orders.id as id',
@@ -60,5 +69,6 @@ module.exports = {
   'Name',
   'Description',
   'id'
-  ]
+  ],
+  statusTexts
 };
