@@ -5,10 +5,12 @@ var Constants = require('../constants/constants');
 function addFinalPrice(data) {
   return data.map((item) => {
     const extra = item.Extra * Constants.extraCharge;
-    item.FinalPrice = Math.max(item.Total + extra -
-                              (item.Hashtag && item.Hashtag.length > 3)
-                              ? item.HashtagFormula
-                              : 0, 0);
+    const hasHash = item.Hashtag !== null && item.Hashtag.length > 3;
+    const calculated = parseFloat(item.Total) + extra -
+                    (hasHash === true
+                    ? parseFloat(item.HashtagFormula)
+                    : 0);
+    item.FinalPrice = Math.max(calculated, 0);
 
     return item;
   });
