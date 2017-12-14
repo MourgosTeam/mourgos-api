@@ -8,6 +8,7 @@ var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
 var io = require('../sockets/mobile')();
 
+var HashtagLayer = require('./HashtagLayer');
 
 var Constants = require('../constants/constants');
 
@@ -126,12 +127,12 @@ router.get('/delivered/:id', (req, res) => {
 router.get('/:id', (req, res) => {
 
   // Constants.ORDERFIELDS).
-  knex.table('orders').select(Constants.MYORDERDELIVERYFIELDS).
+  knex.table('orders').select(Constants.ORDERFIELDS).
   join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
-  // join('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
+  leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   where({ 'orders.id': req.params.id }).
   map(Functions.calculateDescription).
-  then((data) => res.send(data[0]));
+  then((data) => res.send(data[0] || {}));
 });
 
 router.post('/:id', (req, res) => {
@@ -176,9 +177,10 @@ router.post('/', (req, res) => {
       throw err;
     }
 
-return flag;
+    return flag;
   }).
   then(() => Functions.verify(order)).
+  then(() => HashtagLayer.updateHashtag(order.Hashtag)).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
@@ -186,9 +188,10 @@ return flag;
     res.send(order);
   }).
   catch((err) => {
+    console.log(err);
     if (err.errorObject.code === 8888) {
       res.status(503);
-    } else {
+    }  else {
       res.status(500);
     }
     res.send(err.errorObject);

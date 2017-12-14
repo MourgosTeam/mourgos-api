@@ -2,12 +2,10 @@ var knex = require('../db/db.js');
 
 function checkHashtag (hash) {
   const hashtag = hash;
-  if (hashtag !== '' && hashtag !== null) {
-
+  if (hashtag !== '' && hashtag !== null && typeof hashtag !== 'undefined') {
     return knex.table('campaigns').where({ Hashtag: hashtag }).
     select('*').
     then((data) => {
-      console.log(data);
       if (data.length === 0) {
         throw new Error({ msg: 'This hashtag doesnt exist.' });
       }
@@ -19,23 +17,36 @@ function checkHashtag (hash) {
         });
       }
 
-return item;
+      return item;
     });
   }
-  throw new Error('Provide hashtag');
+  const error = new Error('No code. Received hashtag: ' + hash);
+  error.errorObject = {
+    code: 8001,
+    msg: 'No code'
+  };
+
+  return Promise.reject(error);
 }
 
 function updateHashtag (hash) {
   console.log(hash);
 
-return checkHashtag(hash).
+return (
+  checkHashtag(hash).
   then((item) => {
     console.log(item);
 
     return knex.table('campaigns').
       where({ id: item.id }).
       update({ CurrentUsages: item.CurrentUsages + 1 });
-    });
+  }).
+  catch((err) => {
+    if (err.errorObject.code === 8001) {
+      return true;
+    }
+    throw err;
+  }));
 }
 
 module.exports = {
