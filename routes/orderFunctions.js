@@ -6,8 +6,9 @@ function addFinalPrice(data) {
   return data.map((item) => {
     const extra = item.Extra * Constants.extraCharge;
     item.FinalPrice = Math.max(item.Total + extra -
-                              (item.HashtagFormula || 0), 0);
-
+                              (item.Hashtag && item.Hashtag.length > 3)
+                              ? item.HashtagFormula
+                              : 0, 0);
     return item;
   });
 }
