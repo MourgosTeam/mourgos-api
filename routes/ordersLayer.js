@@ -121,7 +121,8 @@ function sendAllOrders() {
   join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
   orderBy('postDate', 'desc').
   limit(200).
-  map(Functions.calculateDescription);
+  map(Functions.calculateDescription).
+  then(Functions.addFinalPrice);
 }
 
 function sendDeliveryOrders (req, res) {
@@ -131,6 +132,7 @@ function sendDeliveryOrders (req, res) {
  where({ delivery_id: req.sessionUser.id }).
  limit(100).
  map(Functions.calculateDescription).
+ then(Functions.addFinalPrice).
  then((data) => res.send(data));
 }
 
@@ -141,6 +143,7 @@ function sendFreeOrders (req, res) {
  where({ delivery_id: null }).
  limit(100).
  map(Functions.calculateDescription).
+ then(Functions.addFinalPrice).
  then((data) => res.send(data));
 }
 
@@ -159,6 +162,7 @@ function sendShopOrders (req, res) {
  join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
  where({ user_id: req.sessionUser.id }).
  map(Functions.calculateDescription).
+ then(Functions.addFinalPrice).
  then((data) => res.send(data));
 }
 
