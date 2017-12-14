@@ -8,7 +8,7 @@ var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
 var io = require('../sockets/mobile')();
 
-var HashtagLayer = require('./HashtagLayer');
+var HashtagLayer = require('./hashtagLayer');
 
 var Constants = require('../constants/constants');
 
