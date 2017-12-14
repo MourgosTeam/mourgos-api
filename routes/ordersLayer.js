@@ -117,8 +117,9 @@ function notifyOrder (id) {
 
 function sendAllOrders() {
   return knex.table('orders').
-  select(Constants.MYORDERDELIVERYFIELDS).
+  select(Constants.ORDERFIELDS).
   join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
+  leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   orderBy('postDate', 'desc').
   limit(200).
   map(Functions.calculateDescription).
@@ -126,9 +127,10 @@ function sendAllOrders() {
 }
 
 function sendDeliveryOrders (req, res) {
- return knex.table('orders').select(Constants.MYORDERDELIVERYFIELDS).
+ return knex.table('orders').select(Constants.ORDERFIELDS).
  orderBy('postDate', 'desc').
  join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
+  leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
  where({ delivery_id: req.sessionUser.id }).
  limit(100).
  map(Functions.calculateDescription).
@@ -137,9 +139,10 @@ function sendDeliveryOrders (req, res) {
 }
 
 function sendFreeOrders (req, res) {
- return knex.table('orders').select(Constants.MYORDERDELIVERYFIELDS).
+ return knex.table('orders').select(Constants.ORDERFIELDS).
  orderBy('postDate', 'desc').
  join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
+ leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
  where({ delivery_id: null }).
  limit(100).
  map(Functions.calculateDescription).
@@ -162,7 +165,6 @@ function sendShopOrders (req, res) {
  join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
  where({ user_id: req.sessionUser.id }).
  map(Functions.calculateDescription).
- then(Functions.addFinalPrice).
  then((data) => res.send(data));
 }
 
