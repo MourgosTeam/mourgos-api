@@ -191,7 +191,7 @@ router.post('/', (req, res) => {
     console.log(err);
     if (err.errorObject.code === 8888) {
       res.status(503);
-    }  else {
+    } else {
       res.status(500);
     }
     res.send(err.errorObject);
