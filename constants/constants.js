@@ -6,6 +6,7 @@ const statusTexts = [
 ];
 statusTexts[10] = 'ΠΑΡΑΔΟΘΗΚΕ';
 statusTexts[99] = 'ΑΠΟΡΡΙΦΘΗΚΕ';
+const extraCharge = 0.5;
 
 module.exports = {
   MYORDERDELIVERYFIELDS: [
@@ -78,5 +79,6 @@ module.exports = {
   'Description',
   'id'
   ],
+  extraCharge,
   statusTexts
 };

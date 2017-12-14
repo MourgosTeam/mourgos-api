@@ -2,6 +2,15 @@ var knex = require('../db/db.js');
 var Constants = require('../constants/constants');
 
 
+function addFinalPrice(data) {
+  return data.map((item) => {
+    const extra = item.Extra * Constants.extraCharge;
+    item.FinalPrice = Math.max(item.Total + extra -
+                              (item.HashtagFormula || 0), 0);
+
+    return item;
+  });
+}
 function isMyCatalogue(catid, req) {
   return knex.table('catalogues').select('id').
 where({ user_id: req.sessionUser.id }).
@@ -175,6 +184,7 @@ return order;
 }
 
 module.exports = {
+  addFinalPrice,
   calculateDescription,
   calculateMoney,
   getAttributePrice,

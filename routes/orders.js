@@ -132,6 +132,7 @@ router.get('/:id', (req, res) => {
   leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   where({ 'orders.id': req.params.id }).
   map(Functions.calculateDescription).
+  then(Functions.addFinalPrice).
   then((data) => res.send(data[0] || {}));
 });
 
