@@ -9,6 +9,7 @@ function addFinalPrice(data) {
                               (item.Hashtag && item.Hashtag.length > 3)
                               ? item.HashtagFormula
                               : 0, 0);
+
     return item;
   });
 }
