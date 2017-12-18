@@ -2,7 +2,7 @@ var express = require('express');
 var router = new express.Router();
 
 var HashtagLayer = require('./hashtagLayer');
-
+var auth = require('../helpers/auth');
 var knex = require('../db/db.js');
 
 /* GET users listing. */
@@ -33,7 +33,42 @@ router.post('/', (req, res) => {
   res.sendStatus(500);
 
   return false;
-  // knex.table('catalogues').insert(req.body).then((data) => res.send(data));
+  // knex.table('campaigns').insert(req.body).then((data) => res.send(data));
 });
+
+
+router.post('/new', (req, res) => {
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
+
+  const item = {
+    CurrentUsages: 0,
+    Formula: req.body.formula,
+    Hashtag: req.body.hashtag,
+    MaxUsages: req.body.usages,
+    Name: req.body.name
+  };
+
+  return knex.table('campaigns').insert(item).
+       then((data) => res.send(data));
+});
+
+router.post('/edit/:id', (req, res) => {
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
+
+  const maxUsages = parseInt(req.body.maxUsages, 10);
+  if (isNaN(maxUsages)) {
+    return res.sendStatus(400);
+  }
+
+  return knex.table('campaigns').
+              where({ id: req.params.id }).
+              update({ MaxUsages: maxUsages }).
+       then(() => res.send({ msg: 'OK' }));
+});
+
 
 module.exports = router;
