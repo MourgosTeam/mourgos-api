@@ -7,7 +7,8 @@
     "start": "supervisor server.js",
     "test": "echo \"No test specified\" && exit 0",
     "lint": "eslint .",
-    "nikatlas": "cross-env NODE_ENV=nikatlas supervisor server.js"
+    "nikatlas": "cross-env NODE_ENV=nikatlas supervisor server.js",
+    "development": "cross-env NODE_ENV=development supervisor server.js"
   },
   "author": "",
   "license": "ISC",
