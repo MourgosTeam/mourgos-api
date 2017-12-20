@@ -2,9 +2,9 @@
   "client": "mariasql",
   "connection": {
     "host": "127.0.0.1",
-    "port": 3306,
+    "port": 32770,
     "user": "root",
-    "password": "m0urg0$",
+    "password": "development",
     "db": "mourgos",
     "charset": "utf8"
   }

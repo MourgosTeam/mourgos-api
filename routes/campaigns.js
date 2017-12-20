@@ -59,14 +59,21 @@ router.post('/edit/:id', (req, res) => {
     return res.sendStatus(403);
   }
 
-  const maxUsages = parseInt(req.body.maxUsages, 10);
-  if (isNaN(maxUsages)) {
-    return res.sendStatus(400);
+  const EDITFIELDS = {
+    Formula: 1,
+    MaxUsages: 1
+  };
+
+  const upobj = req.body;
+  for (var key in upobj) {
+    if (isNaN(upobj[key]) || EDITFIELDS[key] !== 1) {
+      return res.sendStatus(400);
+    }
   }
 
   return knex.table('campaigns').
               where({ id: req.params.id }).
-              update({ MaxUsages: maxUsages }).
+              update(upobj).
        then(() => res.send({ msg: 'OK' }));
 });
 
