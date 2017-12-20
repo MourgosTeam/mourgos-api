@@ -45,7 +45,7 @@ INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`
 	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', '[0,0,0,0,0,0,0]', 2, 40.6294776, 22.952889599999935),
 	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', '[1,1,1,1,1,1,1]', 12, 40.6317409, 22.951557099999945),
 	(4, 'Θάλασσα', '2310262443', NULL, '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', '[0,0,0,0,0,0,0]', 2, 0, 0),
-	(5, 'Κούκος', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Γλυκά', 'Κούκος', '[1,1,1,1,1,1,1]', 12, 40.6317409, 22.951557099999945);
+	(5, 'Κούκος', '2310242403', 'Βογατσικού 10, Θεσσαλονίκη 546 22', '/images/koukos.jpg', '/images/hero/koukos.jpg', 0, 'Γλυκά', 'Κούκος', '[1,1,1,1,1,1,1]', 12, 40.6303529, 22.9424582);
 /*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.categories
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.categories: ~17 rows (approximately)
+-- Dumping data for table mourgos.categories: ~18 rows (approximately)
 DELETE FROM `categories`;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 INSERT INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
 	(20, 'Θαλασσινά', 4),
 	(21, 'Σαλατικά - Συνοδευτικά', 4),
 	(22, 'Ποτά - Αναψυκτικά', 4),
-	(23, 'Γλυκά', 5);
+	(23, 'Χριστουγεννιάτικα Γλυκά', 5);
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
 -- Dumping structure for table mourgos.products
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.products: ~141 rows (approximately)
+-- Dumping data for table mourgos.products: ~147 rows (approximately)
 DELETE FROM `products`;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `category_id`) VALUES
@@ -243,12 +243,14 @@ INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `
 	(255, 'Amstel Radler', '330ml', '/images/products/thalassa/asmtel_radler.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
 	(256, 'Heineken', '330ml', '/images/products/thalassa/heineken.jpg', 1.60, '[1,1,1,1,1,1,1]', 22),
 	(257, 'Ρετσίνα Κεχριμπάρι', '300ml', '/images/products/thalassa/kexrimpari.jpg', 4.00, '[1,1,1,1,1,1,1]', 22),
-	(258, 'Μελομακάρονα 500gr', 'Μελομακάρονα 500 γραμμάρια', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23),
-	(259, 'Μελομακάρονα 1kg', 'Μελομακάρονα 1 κιλό', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23),
-	(260, 'Κουραμπιέδες 500gr', 'Κουραμπιέδες 500 γραμμάρια', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23),
-	(261, 'Κουραμπιέδες 1kg', 'Κουραμπιέδες 1 κιλό', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23),
-	(262, 'Γαλακτομπούρεκο τεμάχιο', 'Γαλακτομπούρεκο τεμάχιο', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23),
-	(263, 'Γαλακτομπούρεκο ταψί(4τμχ)', 'Γαλακτομπούρεκο ταψί 4 τεμάχια', '/images/products/t', 6.50, '[1,1,1,1,1,1,1]', 23);
+	(264, 'Μελομακάρονα 500gr', 'Μελομακάρονα 500 γραμμάρια', '/images/products/melo1.jpg', 6.50, '[1,1,1,1,1,1,1]', 23),
+	(265, 'Μελομακάρονα 1kg', 'Μελομακάρονα 1 κιλό', '/images/products/melo1.jpg', 13.00, '[1,1,1,1,1,1,1]', 23),
+	(266, 'Μελομακάρονα με σοκολάτα 500gr', 'Μελομακάρονα με σοκολάτα 500 γραμμάρια', '/images/products/melo_soko.jpg', 7.50, '[1,1,1,1,1,1,1]', 23),
+	(267, 'Μελομακάρονα με σοκολάτα 1kg', 'Μελομακάρονα με σοκολάτα 1 κιλό', '/images/products/melo_soko.jpg', 15.00, '[1,1,1,1,1,1,1]', 23),
+	(268, 'Κουραμπιέδες 500gr', 'Κουραμπιέδες 500 γραμμάρια', '/images/products/kourampiedes.jpg', 7.50, '[1,1,1,1,1,1,1]', 23),
+	(269, 'Κουραμπιέδες 1kg', 'Κουραμπιέδες 1 κιλό', '/images/products/kourampiedes.jpg', 15.00, '[1,1,1,1,1,1,1]', 23),
+	(270, 'Γαλακτομπούρεκο τεμάχιο', 'Γαλακτομπούρεκο τεμάχιο', '/images/products/t', 3.00, '[0,0,0,0,0,0,0]', 23),
+	(271, 'Γαλακτομπούρεκα ταψί (4τμχ)', 'Γαλακτομπούρεκα ταψί 4 τεμάχια', '/images/products/t', 11.00, '[0,0,0,0,0,0,0]', 23);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

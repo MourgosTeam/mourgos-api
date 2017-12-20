@@ -32,7 +32,7 @@ router.get('/locations', (req, res) => {
         return res.sendStatus(403);
     }
 
-    return knex('userlogs').where({ Value: 'Location' }).
+    return knex('userlogs').where({ Type: 'Location' }).
            select('*').
            then((data) => res.send(data));
 });
