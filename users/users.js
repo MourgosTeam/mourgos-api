@@ -174,11 +174,11 @@ app.post('/login', (req, res) => {
                     theuser.token = token;
 
                     return res.send(present(theuser));
-        }).
-        catch(() => {
-            res.status(403);
-            res.send('Bad creds');
         });
+    }).
+    catch(() => {
+        res.status(403);
+        res.send('Bad creds');
     });
 });
 

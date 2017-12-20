@@ -90,11 +90,9 @@ function orderDelivered(req, res, orderId) {
 }
 
 function orderOpened (req, id) {
+
  return knex.table('orders').
- where({
-   catalogue_id: req.sessionUser.id,
-   id
- }).
+ where({ id }).
  update({ Status: 1 });
 }
 
