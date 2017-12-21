@@ -34,6 +34,7 @@ router.get('/locations', (req, res) => {
 
     return knex('userlogs').where({ Type: 'Location' }).
            select('*').
+           orderBy('created_on', 'desc').
            then((data) => res.send(data));
 });
 
