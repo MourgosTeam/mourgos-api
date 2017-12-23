@@ -62,6 +62,8 @@ router.get('/my', (req, res) => {
   if (!auth.checkUser(req, res)) {
     return false;
   }
+
+  console.log(req.sessionUser);
   if (auth.isShop(req)) {
     Layer.sendShopOrders(req, res);
   } else if (auth.isDelivery(req)) {
