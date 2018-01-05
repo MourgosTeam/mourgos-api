@@ -33,6 +33,7 @@ function castToOrder (ni) {
  return {
     Address: ni.address,
     Comments: ni.comments,
+    Email: ni.email,
     Extra: ni.hasExtra,
     Hashtag: ni.hashtag,
     Items: ni.basketItems,
