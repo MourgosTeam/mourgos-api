@@ -184,6 +184,11 @@ router.post('/', (req, res) => {
   }).
   then(() => Functions.verify(order)).
   then(() => HashtagLayer.updateHashtag(order.Hashtag)).
+  then((formula) => {
+    if (order.Hashtag && !isNaN(formula)) {
+      order.HashtagDiscount = formula;
+    }
+  }).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
@@ -192,7 +197,7 @@ router.post('/', (req, res) => {
   }).
   catch((err) => {
     console.log(err);
-    if (err.errorObject.code === 8888) {
+    if (err.errorObject && err.errorObject.code === 8888) {
       res.status(503);
     } else {
       res.status(500);
