@@ -36,8 +36,7 @@ function updateHashtag (hash) {
   checkHashtag(hash).
   then((item) => knex.table('campaigns').
       where({ id: item.id }).
-      update({ CurrentUsages: item.CurrentUsages + 1 }).
-      then(() => item.Formula)).
+      update({ CurrentUsages: item.CurrentUsages + 1 })).
   catch((err) => {
     if (err.errorObject && err.errorObject.code === 8001) {
       return true;

@@ -184,11 +184,6 @@ router.post('/', (req, res) => {
   }).
   then(() => Functions.verify(order)).
   then(() => HashtagLayer.updateHashtag(order.Hashtag)).
-  then((formula) => {
-    if (order.Hashtag && !isNaN(formula)) {
-      order.HashtagDiscount = formula;
-    }
-  }).
   then(() => Layer.insertOrder(order)).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
