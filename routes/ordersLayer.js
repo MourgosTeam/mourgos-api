@@ -116,7 +116,7 @@ function notifyOrder (id) {
 
 function sendAllOrders() {
   return knex.table('orders').
-  select(Constants.ORDERFIELDS).
+  select(Constants.ADMINORDERFIELDS).
   join('catalogues', 'orders.catalogue_id', '=', 'catalogues.id').
   leftJoin('campaigns', 'campaigns.Hashtag', '=', 'orders.Hashtag').
   orderBy('postDate', 'desc').

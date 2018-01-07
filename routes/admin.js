@@ -30,5 +30,18 @@ router.get('/site/close', (req, res) => {
   catch((err) => res.send(err));
 });
 
+/* GET Couriers REQUEST. */
+router.get('/couriers', (req, res) => {
+  if (!auth.isAdmin(req)) {
+
+    return res.sendStatus(403);
+  }
+
+  return knex.table('users').where({ role: 2 }).
+  select('*').
+  then((data) => res.send(data)).
+  catch((err) => res.send(err));
+});
+
 
 module.exports = router;
