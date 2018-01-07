@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `Description` text NOT NULL,
   `Image` text NOT NULL,
   `Price` decimal(10,2) NOT NULL,
-  `Days` text NOT NULL DEFAULT '[1,1,1,1,1,1,1]',
+  `Days` text NOT NULL,
   `category_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_category_id` (`category_id`),
