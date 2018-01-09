@@ -16,16 +16,26 @@ function addFinalPrice(data) {
   });
 }
 function isMyCatalogue(catid, req) {
+
+  if (req.sessionUser.role === 0) {
+    return Promise.resolve(true);
+  }
+
   return knex.table('catalogues').select('id').
-where({ user_id: req.sessionUser.id }).
-  then((catalogues) => {
+              where({ user_id: req.sessionUser.id }).
+              then((catalogues) => {
+                  if (catalogues.length) {
+                    console.log(catalogues[0].id === catid);
+                    console.log(catalogues[0].id);
+                    console.log(catid);
 
-    if (catalogues.length) {
- return catalogues[0].id;
-}
+return catalogues[0].id === catid
+                    ? true
+                    : Promise.reject(Error('not your stuff'));
+                  }
 
-return Error('not your stuff');
-  });
+                return Promise.reject(Error('not your stuff'));
+              });
 }
 function normalizeAttributes(attrs) {
   var nattrs = {};

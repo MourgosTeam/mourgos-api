@@ -145,25 +145,25 @@ router.post('/:id', (req, res) => {
  const status = parseInt(req.body.statusCode, 10);
 
  return Layer.updateOrderStatus(req, res, req.params.id, status).
- then((order) => {
-  order.Status = status;
-  res.send(order);
+             then((order) => {
+              order.Status = status;
+              res.send(order);
 
-  return order;
- }).
- then((order) => Layer.notifyOrder(order.id)).
- catch(() => {
-  res.sendStatus(500);
+              return order;
+             }).
+             then((order) => Layer.notifyOrder(order.id)).
+             then(() =>
+              Logger.logIfNotExists(
+                req,
+                'Orders',
+                'StatusChange : ' + Constants.statusTexts[req.body.statusCode],
+                req.params.id
+              )).
+             catch(() => {
+              res.sendStatus(403);
 
-  return true;
- }).
- then(() =>
-  Logger.logIfNotExists(
-            req,
-            'Orders',
-            'StatusChange : ' + Constants.statusTexts[req.body.statusCode],
-            req.params.id
-            ));
+              return true;
+             });
 });
 
 router.post('/', (req, res) => {

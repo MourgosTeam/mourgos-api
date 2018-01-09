@@ -11,78 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Dumping database structure for mourgos
-CREATE DATABASE IF NOT EXISTS `mourgos` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `mourgos`;
-
--- Dumping structure for table mourgos.catalogues
-DROP TABLE IF EXISTS `catalogues`;
-CREATE TABLE IF NOT EXISTS `catalogues` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Name` text DEFAULT NULL,
-  `Phone` text DEFAULT NULL,
-  `Address` text DEFAULT NULL,
-  `Image` text DEFAULT NULL,
-  `HeroImage` text DEFAULT NULL,
-  `Exclusive` int(1) unsigned NOT NULL DEFAULT 0,
-  `Description` text DEFAULT NULL,
-  `FriendlyURL` text DEFAULT NULL,
-  `WorkingDates` text DEFAULT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `Latitude` double NOT NULL,
-  `Longitude` double NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_catalogues_users` (`user_id`),
-  CONSTRAINT `FK_catalogues_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
--- Dumping data for table mourgos.catalogues: ~5 rows (approximately)
-DELETE FROM `catalogues`;
-/*!40000 ALTER TABLE `catalogues` DISABLE KEYS */;
-INSERT INTO `catalogues` (`id`, `Name`, `Phone`, `Address`, `Image`, `HeroImage`, `Exclusive`, `Description`, `FriendlyURL`, `WorkingDates`, `user_id`, `Latitude`, `Longitude`) VALUES
-	(1, 'Eri\'s Donuts', '231 550 7270', 'Τσιμισκή 124, Θεσσαλονίκη 546 21', '/images/eris_donuts.png', '/images/hero/eris_hero.jpg', 1, 'Τα περίφημα πιο λαχταριστά donuts της Θεσσαλονίκης', 'ErisDonuts', '[1,1,1,1,1,1,1]', 1, 40.628575, 22.949541100000033),
-	(2, 'Falafel House', '231 023 8091', 'Αλεξάνδρου Σβώλου 54, Θεσσαλονίκη 546 21', '/images/falafel_house.png', '/images/hero/falafel_hero.jpg', 0, 'Φαλάφελ, Σαλάτες, Φρέσκοι χυμοί', 'FalafelHouse', '[0,0,0,0,0,0,0]', 2, 40.6294776, 22.952889599999935),
-	(3, 'Greek Natural', '231 024 0250', 'Δημητρίου Γούναρη 48, Θεσσαλονίκη 546 21', '/images/greek_natural.png', '/images/hero/greek_natural_hero.jpg', 0, 'Λαχταριστές σαλάτες, φρέσκοι χυμοί και δροσερά smoothies', 'GreekNatural', '[1,1,1,1,1,1,1]', 12, 40.6317409, 22.951557099999945),
-	(4, 'Θάλασσα', '2310262443', NULL, '/images/thalassa.png', '/images/hero/thalassa_hero.jpg', 0, NULL, 'Thalassa', '[0,0,0,0,0,0,0]', 2, 0, 0),
-	(5, 'Κούκος', '2310242403', 'Βογατσικού 10, Θεσσαλονίκη 546 22', '/images/koukos.jpg', '/images/hero/koukos.jpg', 0, 'Γλυκά', 'Κούκος', '[1,1,1,1,1,1,1]', 12, 40.6303529, 22.9424582);
-/*!40000 ALTER TABLE `catalogues` ENABLE KEYS */;
-
--- Dumping structure for table mourgos.categories
-DROP TABLE IF EXISTS `categories`;
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `Name` text DEFAULT NULL,
-  `catalogue_id` int(10) unsigned NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`),
-  KEY `fk_catalogue_id` (`catalogue_id`),
-  CONSTRAINT `fk_catalogue_id` FOREIGN KEY (`catalogue_id`) REFERENCES `catalogues` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
-
--- Dumping data for table mourgos.categories: ~18 rows (approximately)
-DELETE FROM `categories`;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` (`id`, `Name`, `catalogue_id`) VALUES
-	(2, 'Wraps', 2),
-	(5, 'Μερίδες', 2),
-	(8, 'Burgers', 2),
-	(9, 'Γλυκά', 2),
-	(10, 'Φρέσκοι Χυμοί', 2),
-	(11, 'Ψυγείο', 2),
-	(12, 'Φρέσκες Σαλάτες', 3),
-	(13, 'Χυμοί Φρούτων Smoothies με Γάλα & Γιαούρτι', 3),
-	(14, 'Χυμοί Φρούτων Smoothies με Γιαούρτι', 3),
-	(15, 'Χυμοί Φρούτων Smoothies με Σορμπέ', 3),
-	(16, 'Φυσικοί Χυμοί', 3),
-	(17, 'Φρουτοσαλάτες', 3),
-	(18, 'Donuts', 1),
-	(19, 'Ροφήματα', 1),
-	(20, 'Θαλασσινά', 4),
-	(21, 'Σαλατικά - Συνοδευτικά', 4),
-	(22, 'Ποτά - Αναψυκτικά', 4),
-	(23, 'Χριστουγεννιάτικα Γλυκά', 5);
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
-
 -- Dumping structure for table mourgos.products
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
@@ -96,10 +24,9 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`),
   KEY `fk_category_id` (`category_id`),
   CONSTRAINT `fk_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=264 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=274 DEFAULT CHARSET=utf8;
 
--- Dumping data for table mourgos.products: ~147 rows (approximately)
-DELETE FROM `products`;
+-- Dumping data for table mourgos.products: ~149 rows (approximately)
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
 INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `category_id`) VALUES
 	(9, 'Baba-Ganouj - Tabouleh Size M', 'Μελιτζάνα, ταχίνι, ντομάτα, μαϊντανός, φρέσκο κρεμμύδι, πλιγούρι', '/images/products/FalafelHouse/baba_tab.png', 2.80, '[1,1,1,1,1,1,1]', 2),
@@ -134,47 +61,47 @@ INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `
 	(38, 'Μπύρες', 'Kaiser, Stella, Βεργίνα, Buckler', '/images/products/FalafelHouse/kaiser.jpg', 1.20, '[1,1,1,1,1,1,1]', 11),
 	(39, 'Χυμοί', 'Ρόδι', '/images/products/FalafelHouse/pomegranate.jpg', 2.50, '[1,1,1,1,1,1,1]', 11),
 	(40, 'Νερό', '500ml', '/images/products/FalafelHouse/nero.jpg', 0.50, '[1,1,1,1,1,1,1]', 11),
-	(41, 'Caesar\'s', 'Τρυφερό φιλέτο κοτόπουλο, μαρούλι, iceberg, σουσάμι', '/images/products/caesars.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(42, 'Τονοσαλάτα', 'Μαρούλι, καλαμπόκι, τόνος, καρύδι, σως μαγιονέζας', '/images/products/tuna.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(43, 'Μποτσαρέλα', 'Μαρούλι, ρόκα, λιαστή ντομάτα, μποτσαρέλα, σουσάμι, σως παλαιωμένου βαλσαμικού, ανθόμελο', '/images/products/mozzarella.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(44, 'Σαλάτα Φρούτων', 'Iceberg, μαρούλι, διάφορα φρούτα, mix nuts, σως παλαιωμένου βαλσαμικού, ανθόμελο', '/images/products/withfruits.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(45, 'Φακοσαλάτα', 'Φακές, ρύζι, τυρί, ντομάτα, πιπεριά, φρέσκο κρεμμυδάκι, μαϊντανός, άνηθος, ρίγανη', '/images/products/lentils.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(46, 'Σαλάτα Ζυμαρικών', 'Ζυμαρικά, ντομάτα, ελιές, κάπαρη, τόνος', '/images/products/pastasalad.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
-	(47, 'Πάρτυ Φράουλας', 'Φράουλες, μπανάνα, γάλα, μέλι & παγωμένο γιαούρτι', '/images/products/strawberry_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(48, 'Δροσερή Μπανάνα', 'Μπανάνα, γάλα, μέλι, σιρόπι βανίλιας & παγωμένο γιαούρτι', '/images/products/banana_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(49, 'Σοκολατοπειρασμός', 'Μπανάνα, σοκολάτα, γάλα, σιρόπι βανίλιας & παγωμένο γιαούρτι', '/images/products/choco_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(50, 'Πρωινή Απόλαυση', 'Καφές, γάλα, σιρόπι βανίλιας, μπανάνα & παγωμένο γιαούρτι', '/images/products/coffee_banana_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(51, 'Γεύση Ροδάκινου', 'Μπανάνα, ροδάκινο, γάλα & παγωμένο γιαούρτι', '/images/products/peach_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(52, 'Πρωινή Δύναμη', 'Μπανάνα, αχλάδι, γάλα, μέλι, σιρόπι βανίλιας, δημητριακά & παγωμένο γιαούρτι', '/images/products/banana_cereal_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(53, 'Διάλλειμα για Καφέ', 'Καφές, γάλα & παγωμένο γιαούρτι', '/images/products/coffee_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 13),
-	(54, 'Φραουλοκοκτέιλ', 'Φράουλες, μπανάνα, μήλο, ροδάκινο & παγωμένο γιαούρτι', '/images/products/strawberry_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(55, 'Πανδαισία Μούρων', 'Μούρα εποχής, μήλο & παγωμένο γιαούρτι', '/images/products/berries_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(56, 'Μανγκομαγεία', 'Μάνγκο, μπανάνα, ανανάς & παγωμένο γιαούρτι', '/images/products/mango_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(57, 'Ανανάς Εξωτικός', 'Ανανάς, ροδάκινο & παγωμένο γιαούρτι', '/images/products/pineapple_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(58, 'Χυμώδες Ροδάκινο', 'Ροδάκινο, μήλο, μέλι & παγωμένο γιαούρτι', '/images/products/peach_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(59, 'Μυθικό Πρωινό', 'Μπανάνα, φράουλες, ανανάς, δημητριακά, μέλι & παγωμένο γιαούρτι', '/images/products/banana_cereal_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(60, 'Ονειρεμένο Μάνγκο', 'Μάνγκο, πορτοκάλι, μέλι & παγωμένο γιαούρτι', '/images/products/mango_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 14),
-	(61, 'Έκρηξη Ροδάκινου', 'Ροδάκινο, μήλο & σορμπέ φράουλα', '/images/products/peach_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(62, 'Άγριο Καρπούζι', 'Καρπούζι, μούρα & σορμπέ φράουλα', '/images/products/watermelon_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(63, 'Καλή Γραμμή', 'Ανανάς, μούρα, μήλο & σορμπέ μούρου', '/images/products/pineapple_berries_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(64, 'Γεύση Καρύδας', 'Ανανάς, μπανάνα, καρύδα & σορμπέ λεμονιού', '/images/products/coconut_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(65, 'Φρουτοσαλάτα', 'Φρουτοσαλάτα & σορμπέ λεμονιού', '/images/products/fruitsalad_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(66, 'Μανγκομανία', 'Μάνγκο, μπανάνα, φράουλες, ανανάς & σορμπέ μάνγκο', '/images/products/mango_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(67, 'Άρωμα Φρεσκάδας', 'Μπανάνα, ροδάκινο, φράουλες, ανανάς & σορμπέ φράουλα', '/images/products/peach_smoothie.jpg', 3.00, '[1,1,1,1,1,1,1]', 15),
-	(68, 'Μπαχάμες', 'Μπανάνα, ανανάς, πορτοκάλι & μέλι', '/images/products/banana_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(69, 'Τροπικό Τανγκό', 'Ανανάς, ροδάκινο, πορτοκάλι & πεπόνι', '/images/products/pineapple_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(70, 'Επανενεργοποίηση', 'Μπανάνα, ανανάς, φράουλες & πορτοκάλι', '/images/products/pineapple_banana_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(71, 'Δυνατό Ξεκίνημα', 'Ανανάς, πορτοκάλι, γκρέιπφρουτ & λεμόνι', '/images/products/pineapple_orange_juice.gif', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(72, 'Καλοκαιρινή Πανδαισία', 'Φράουλες, μήλο, πεπόνι & καρπούζι', '/images/products/watermelon_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(73, 'Φρεσκάδα Δυόσμου', 'Ανανάς, μήλο & δυόσμος', '/images/products/spearmint_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(74, 'Βιταμινούχο Αδυνάτισμα', 'Ανανάς, πορτοκάλι, μήλο & ακτινίδιο', '/images/products/pineapple_kiwi_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(75, 'Φυσικός Χυμός Πορτοκάλι', '', '/images/products/orange_juice.jpg', 1.50, '[1,1,1,1,1,1,1]', 16),
-	(76, 'Φυσικός Χυμός Πορτοκάλι - Ρόδι', '', '/images/products/orange_rodi_juice.jpg', 2.50, '[1,1,1,1,1,1,1]', 16),
-	(77, 'Φρουτοσαλάτα', 'Διάφορα φρούτα εποχής', '/images/products/fruitsalad.jpg', 2.00, '[1,1,1,1,1,1,1]', 17),
-	(78, 'Φρουτοσαλάτα με Γιαούρτι, Μέλι και Δημητριακά', '', '/images/products/fruitsalad_cereal.jpg', 2.50, '[1,1,1,1,1,1,1]', 17),
-	(79, 'Φρουτοσαλάτα με Πραλίνα Σοκολάτα ή Μέλι', '', '/images/products/fruitsalad_choco.jpg', 2.50, '[1,1,1,1,1,1,1]', 17),
-	(80, 'Φρουτοσαλάτα με Μούρα', '', '/images/products/fruitsalad_berries.jpg', 2.50, '[1,1,1,1,1,1,1]', 17),
-	(81, 'Φρουτοσαλάτα με Παγωμένο Γιαούρτι', '', '/images/products/fruitsalad_froyo.jpg', 3.30, '[1,1,1,1,1,1,1]', 17),
+	(41, 'Caesar\'s', 'Τρυφερό φιλέτο κοτόπουλο, μαρούλι, iceberg, σουσάμι', '/images/products/caesars.jpg', 3.00, '[1,1,1,1,1,1,1]', 12),
+	(42, 'Τονοσαλάτα', 'Μαρούλι, καλαμπόκι, τόνος, καρύδι, σως μαγιονέζας', '/images/products/tuna.jpg', 3.00, '[1,1,1,1,1,1,1]', 12),
+	(43, 'Μοτσαρέλα', 'Μαρούλι, ρόκα, λιαστή ντομάτα, μοτσαρέλα, σουσάμι, σως παλαιωμένου βαλσαμικού, ανθόμελο', '/images/products/mozzarella.jpg', 2.50, '[1,1,1,1,1,1,1]', 12),
+	(44, 'Σαλάτα Φρούτων', 'Iceberg, μαρούλι, διάφορα φρούτα, mix nuts, σως παλαιωμένου βαλσαμικού, ανθόμελο', '/images/products/withfruits.jpg', 3.00, '[1,1,1,1,1,1,1]', 12),
+	(45, 'Φακοσαλάτα', 'Φακές, ρύζι, τυρί, ντομάτα, πιπεριά, φρέσκο κρεμμυδάκι, μαϊντανός, άνηθος, ρίγανη', '/images/products/lentils.jpg', 3.00, '[1,1,1,1,1,1,1]', 12),
+	(46, 'Σαλάτα Ζυμαρικών', 'Ζυμαρικά, ντομάτα, ελιές, κάπαρη, τόνος', '/images/products/pastasalad.jpg', 3.00, '[1,1,1,1,1,1,1]', 12),
+	(47, 'Πάρτυ Φράουλας', 'Φράουλες, μπανάνα, γάλα, μέλι & παγωμένο γιαούρτι', '/images/products/strawberry_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(48, 'Δροσερή Μπανάνα', 'Μπανάνα, γάλα, μέλι, σιρόπι βανίλιας & παγωμένο γιαούρτι', '/images/products/banana_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(49, 'Σοκολατοπειρασμός', 'Μπανάνα, σοκολάτα, γάλα, σιρόπι βανίλιας & παγωμένο γιαούρτι', '/images/products/choco_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(50, 'Πρωινή Απόλαυση', 'Καφές, γάλα, σιρόπι βανίλιας, μπανάνα & παγωμένο γιαούρτι', '/images/products/coffee_banana_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(51, 'Γεύση Ροδάκινου', 'Μπανάνα, ροδάκινο, γάλα & παγωμένο γιαούρτι', '/images/products/peach_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(52, 'Πρωινή Δύναμη', 'Μπανάνα, αχλάδι, γάλα, μέλι, σιρόπι βανίλιας, δημητριακά & παγωμένο γιαούρτι', '/images/products/banana_cereal_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(53, 'Διάλλειμα για Καφέ', 'Καφές, γάλα & παγωμένο γιαούρτι', '/images/products/coffee_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 13),
+	(54, 'Φραουλοκοκτέιλ', 'Φράουλες, μπανάνα, μήλο, ροδάκινο & παγωμένο γιαούρτι', '/images/products/strawberry_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(55, 'Πανδαισία Μούρων', 'Μούρα εποχής, μήλο & παγωμένο γιαούρτι', '/images/products/berries_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(56, 'Μανγκομαγεία', 'Μάνγκο, μπανάνα, ανανάς & παγωμένο γιαούρτι', '/images/products/mango_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(57, 'Ανανάς Εξωτικός', 'Ανανάς, ροδάκινο & παγωμένο γιαούρτι', '/images/products/pineapple_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(58, 'Χυμώδες Ροδάκινο', 'Ροδάκινο, μήλο, μέλι & παγωμένο γιαούρτι', '/images/products/peach_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(59, 'Μυθικό Πρωινό', 'Μπανάνα, φράουλες, ανανάς, δημητριακά, μέλι & παγωμένο γιαούρτι', '/images/products/banana_cereal_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(60, 'Ονειρεμένο Μάνγκο', 'Μάνγκο, πορτοκάλι, μέλι & παγωμένο γιαούρτι', '/images/products/mango_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 14),
+	(61, 'Έκρηξη Ροδάκινου', 'Ροδάκινο, μήλο & σορμπέ φράουλα', '/images/products/peach_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(62, 'Άγριο Καρπούζι', 'Καρπούζι, μούρα & σορμπέ φράουλα', '/images/products/watermelon_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(63, 'Καλή Γραμμή', 'Ανανάς, μούρα, μήλο & σορμπέ μούρου', '/images/products/pineapple_berries_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(64, 'Γεύση Καρύδας', 'Ανανάς, μπανάνα, καρύδα & σορμπέ λεμονιού', '/images/products/coconut_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(65, 'Φρουτοσαλάτα', 'Φρουτοσαλάτα & σορμπέ λεμονιού', '/images/products/fruitsalad_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(66, 'Μανγκομανία', 'Μάνγκο, μπανάνα, φράουλες, ανανάς & σορμπέ μάνγκο', '/images/products/mango_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(67, 'Άρωμα Φρεσκάδας', 'Μπανάνα, ροδάκινο, φράουλες, ανανάς & σορμπέ φράουλα', '/images/products/peach_smoothie.jpg', 3.50, '[1,1,1,1,1,1,1]', 15),
+	(68, 'Μπαχάμες', 'Μπανάνα, ανανάς, πορτοκάλι & μέλι', '/images/products/banana_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(69, 'Τροπικό Τανγκό', 'Ανανάς, ροδάκινο, πορτοκάλι & πεπόνι', '/images/products/pineapple_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(70, 'Επανενεργοποίηση', 'Μπανάνα, ανανάς, φράουλες & πορτοκάλι', '/images/products/pineapple_banana_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(71, 'Δυνατό Ξεκίνημα', 'Ανανάς, πορτοκάλι, γκρέιπφρουτ & λεμόνι', '/images/products/pineapple_orange_juice.gif', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(72, 'Καλοκαιρινή Πανδαισία', 'Φράουλες, μήλο, πεπόνι & καρπούζι', '/images/products/watermelon_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(73, 'Φρεσκάδα Δυόσμου', 'Ανανάς, μήλο & δυόσμος', '/images/products/spearmint_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(74, 'Βιταμινούχο Αδυνάτισμα', 'Ανανάς, πορτοκάλι, μήλο & ακτινίδιο', '/images/products/pineapple_kiwi_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(75, 'Φυσικός Χυμός Πορτοκάλι', '', '/images/products/orange_juice.jpg', 2.00, '[1,1,1,1,1,1,1]', 16),
+	(76, 'Φυσικός Χυμός Πορτοκάλι - Ρόδι', '', '/images/products/orange_rodi_juice.jpg', 3.00, '[1,1,1,1,1,1,1]', 16),
+	(77, 'Φρουτοσαλάτα', 'Διάφορα φρούτα εποχής', '/images/products/fruitsalad.jpg', 2.50, '[1,1,1,1,1,1,1]', 17),
+	(78, 'Φρουτοσαλάτα με Γιαούρτι, Μέλι και Δημητριακά', '', '/images/products/fruitsalad_cereal.jpg', 3.00, '[1,1,1,1,1,1,1]', 17),
+	(79, 'Φρουτοσαλάτα με Πραλίνα Σοκολάτα ή Μέλι', '', '/images/products/fruitsalad_choco.jpg', 3.00, '[1,1,1,1,1,1,1]', 17),
+	(80, 'Φρουτοσαλάτα με Μούρα', '', '/images/products/fruitsalad_berries.jpg', 3.00, '[1,1,1,1,1,1,1]', 17),
+	(81, 'Φρουτοσαλάτα με Παγωμένο Γιαούρτι', '', '/images/products/fruitsalad_froyo.jpg', 3.80, '[1,1,1,1,1,1,1]', 17),
 	(82, 'Μεσαίο donut με γέμιση', 'Γέμιση της επιλογής σας.', '/images/products/gemisi_mesaio.jpg', 1.20, '[1,1,1,1,1,1,1]', 18),
 	(83, 'Μεσαίο donut με γέμιση & επικάλυψη', 'Γέμιση και επικάλυψη της επιλογής σας.', '/images/products/mesaio_gemisi_epikal.jpg', 1.40, '[1,1,1,1,1,1,1]', 18),
 	(84, 'Μεσαίο donut με γέμιση & επικάλυψη σπέσιαλ', 'Γέμιση, επικάλυψη και topping της επιλογής σας.', '/images/products/special_mesaio.jpg', 1.70, '[1,1,1,1,1,1,1]', 18),
@@ -250,7 +177,9 @@ INSERT INTO `products` (`id`, `Name`, `Description`, `Image`, `Price`, `Days`, `
 	(268, 'Κουραμπιέδες 500gr', 'Κουραμπιέδες 500 γραμμάρια', '/images/products/kourampiedes.jpg', 7.50, '[1,1,1,1,1,1,1]', 23),
 	(269, 'Κουραμπιέδες 1kg', 'Κουραμπιέδες 1 κιλό', '/images/products/kourampiedes.jpg', 15.00, '[1,1,1,1,1,1,1]', 23),
 	(270, 'Γαλακτομπούρεκο τεμάχιο', 'Γαλακτομπούρεκο τεμάχιο', '/images/products/t', 3.00, '[0,0,0,0,0,0,0]', 23),
-	(271, 'Γαλακτομπούρεκα ταψί (4τμχ)', 'Γαλακτομπούρεκα ταψί 4 τεμάχια', '/images/products/t', 11.00, '[0,0,0,0,0,0,0]', 23);
+	(271, 'Γαλακτομπούρεκα ταψί (4τμχ)', 'Γαλακτομπούρεκα ταψί 4 τεμάχια', '/images/products/t', 11.00, '[0,0,0,0,0,0,0]', 23),
+	(272, 'Σαλάτα του Chef', 'Πράσινη σαλάτα, ντομάτα, αγγούρι, ζαμπόν, ένταμ, αυγό, σως chef ', '/images/products/chef_salad.jpg', 3.50, '[1,1,1,1,1,1,1]', 12),
+	(273, 'Σαλάτα Ζυμαρικών με Κοτόπουλο', 'Ζυμαρικά, κοτόπουλο, καλαμπόκι, ντομάτα, αγγούρι, άνηθος, σως γιαουρτιού.', '/images/products/chicken_pasta.jpg', 3.50, '[1,1,1,1,1,1,1]', 12);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
