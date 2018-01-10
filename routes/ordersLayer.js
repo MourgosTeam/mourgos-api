@@ -185,9 +185,14 @@ function updateOrderStatus (req, res, ...data) {
  *  throw new Error({ msg: 'No backtracing status' });
  *}
  */
+            return Functions.isMyCatalogue(orders[0].catalogue_id, req).
+                   catch((err) => {
+                      if (order.delivery_id === req.sessionUser.id) {
+                        return true;
+                      }
 
-            return Functions.isMyCatalogue(orders[0].catalogue_id, req) ||
-                   order.delivery_id === req.sessionUser.id;
+                      throw err;
+                   });
         }).
         then(() => knex.table('orders').
                       where({ id }).
