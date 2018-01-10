@@ -3,16 +3,27 @@ var Constants = require('../constants/constants');
 
 
 function addFinalPrice(data) {
-  return data.map((item) => {
-    const extra = item.Extra * Constants.extraCharge;
-    const hasHash = item.Hashtag !== null && item.Hashtag.length > 3;
-    const calculated = parseFloat(item.Total) + extra -
-                    (hasHash === true
-                    ? parseFloat(item.HashtagFormula)
-                    : 0);
-    item.FinalPrice = Math.max(calculated, 0);
+  return data.map((order) => {
+    const extra = order.Extra * Constants.extraCharge;
+    const hasHash = order.Hashtag !== null && order.Hashtag.length > 3;
+    const finalNoTag = parseFloat(order.Total) + extra;
+    const formula = parseFloat(order.HashtagFormula);
+    let calculated = 0;
+    if (parseInt(formula, 10) === 100) {
+      calculated = finalNoTag -
+                  (hasHash === true
+                  ? (formula - 100) * finalNoTag
+                  : 0);
+    } else {
+      calculated = finalNoTag -
+                  (hasHash === true
+                  ? formula
+                  : 0);
+    }
 
-    return item;
+    order.FinalPrice = Math.max(calculated, 0);
+
+    return order;
   });
 }
 function isMyCatalogue(catid, req) {
