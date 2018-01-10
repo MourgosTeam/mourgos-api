@@ -186,7 +186,8 @@ function updateOrderStatus (req, res, ...data) {
  *}
  */
 
-            return Functions.isMyCatalogue(orders[0].catalogue_id, req);
+            return Functions.isMyCatalogue(orders[0].catalogue_id, req) ||
+                   order.delivery_id === req.sessionUser.id;
         }).
         then(() => knex.table('orders').
                       where({ id }).

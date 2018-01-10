@@ -40,7 +40,7 @@ function isMyCatalogue(catid, req) {
                     console.log(catalogues[0].id);
                     console.log(catid);
 
-return catalogues[0].id === catid
+                    return catalogues[0].id === catid
                     ? true
                     : Promise.reject(Error('not your stuff'));
                   }
