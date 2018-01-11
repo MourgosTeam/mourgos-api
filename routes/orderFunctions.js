@@ -54,7 +54,7 @@ function normalizeAttributes(attrs) {
    nattrs[attrs[ic].id] = attrs[ic];
   }
 
-return nattrs;
+  return nattrs;
 }
 function getAttributePrice(nattr, attribute) {
 if (!nattr) {
@@ -84,29 +84,36 @@ money = parseFloat(money) * parseInt(item.quantity, 10);
 return money;
 }
 
+function getAttributes(product) {
+  return knex.table('productattributes').select('*').
+        where({ ProductID: product.id }).
+        then((data) => knex.table('attributes').select('*').
+                        whereIn('id', data.map((item) => item.AttributeID)));
+}
+
 function verifyItem(item) {
   if (!item) {
- return Promise.reject(Error({ 'msg': 'Item is not in my view' }));
-}
+   return Promise.reject(Error({ 'msg': 'Item is not in my view' }));
+  }
   // check attributes
 
-return knex.table('products').select('*').
+  return knex.table('products').select('*').
       where({ id: item.id }).
       then((data) => {
         const [product] = data;
 
-return knex.table('attributes').select('*').
-where({ product_id: product.id }).
-            then((attrs) => calculateMoney(product, attrs, item));
-      }).
-      then((money) => {
-if (parseFloat(money).toFixed(2) !== parseFloat(item.TotalPrice).toFixed(2)) {
-  return Promise.reject(Error({ 'msg': 'The total is wrong' }));
-}
+        return getAttributes(product).
+        then((attrs) => calculateMoney(product, attrs, item)).
+        then((money) => {
+  if (parseFloat(money).toFixed(2) !== parseFloat(item.TotalPrice).toFixed(2)) {
+    return Promise.reject(Error({ 'msg': 'The total is wrong' }));
+  }
 
-return money;
+          return money;
+        });
       });
 }
+
 function verify(order) {
   if (!order.Name || !order.Address ||
       !order.Orofos || !order.Phone ||
@@ -181,14 +188,14 @@ return knex.table('products').select(Constants.PRODUCTSMAINFIELDS).
       then((products) => {
         [prod] = products;
 
-return knex.table('attributes').select('*').
-where({ product_id: prod.id });
-      }).
-then((attrs) => ({
+        return getAttributes(prod).
+        then((attrs) => ({
           attributes: attrs,
           product: prod
-        }));
+          }));
+      });
 }
+
 function calculateDescription(order) {
   const items = JSON.parse(order.Items);
   let ic = 0,
