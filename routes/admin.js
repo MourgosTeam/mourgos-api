@@ -79,7 +79,11 @@ router.post('/import', (req, res) => {
 
     return res.send(successmsg);
   }).
-  catch((err) => res.sendStatus(400));
+  catch((err) => {
+    res.status(400);
+    res.send(err);
+    throw err;
+  });
 });
 
 module.exports = router;
