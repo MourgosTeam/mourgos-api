@@ -10,8 +10,11 @@ then((data) => res.send(data));
 });
 
 router.get('/product/:productid', (req, res) => {
-  knex.table('attributes').select('*').
-where({ product_id: req.params.productid }).
+  knex.table('productattributes').select('*').
+where({ ProductID: req.params.productid }).
+then((data) => knex.table('attributes').
+                    select('*').
+                    whereIn('id', data.map((item) => item.AttributeID))).
 then((data) => res.send(data));
 });
 
