@@ -36,10 +36,6 @@ function isMyCatalogue(catid, req) {
               where({ user_id: req.sessionUser.id }).
               then((catalogues) => {
                   if (catalogues.length) {
-                    console.log(catalogues[0].id === catid);
-                    console.log(catalogues[0].id);
-                    console.log(catid);
-
                     return catalogues[0].id === catid
                     ? true
                     : Promise.reject(Error('not your stuff'));
