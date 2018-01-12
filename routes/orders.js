@@ -153,14 +153,15 @@ router.post('/:id', (req, res) => {
              }).
              then((order) => Layer.notifyOrder(order.id)).
              then(() =>
-              Logger.logIfNotExists(
+              Logger.log(
                 req,
                 'Orders',
                 'StatusChange : ' + Constants.statusTexts[req.body.statusCode],
                 req.params.id
               )).
-             catch(() => {
-              res.sendStatus(403);
+             catch((err) => {
+              res.status(403);
+              res.send({ error: JSON.stringify(err) });
 
               return true;
              });

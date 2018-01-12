@@ -3,6 +3,8 @@ var base32 = require('base32');
 var Constants = require('../constants/constants');
 var Functions = require('./orderFunctions');
 
+var auth = require('../helpers/auth');
+
 var io = require('../sockets/mobile')();
 
 
@@ -176,28 +178,40 @@ function updateOrderStatus (req, res, ...data) {
  let order = {};
 
  return knex.table('orders').select('*').
-         where({ id: req.params.id }).
-         then((orders) => {
-            [order] = orders;
+    where({ id: req.params.id }).
+    then((orders) => {
+      [order] = orders;
 
 /*
  *if (parseInt(req.body.statusCode, 10) < order.Status) {
  *  throw new Error({ msg: 'No backtracing status' });
  *}
  */
-            return Functions.isMyCatalogue(orders[0].catalogue_id, req).
-                   catch((err) => {
-                      if (order.delivery_id === req.sessionUser.id) {
-                        return true;
-                      }
+      return Functions.isMyCatalogue(orders[0].catalogue_id, req).
+        catch((err) => {
+          if (order.delivery_id === req.sessionUser.id) {
+            return true;
+          }
 
-                      throw err;
-                   });
+          throw err;
         }).
-        then(() => knex.table('orders').
-                      where({ id }).
-                      update({ Status: statusCode })).
-        then(() => order);
+        then(() => {
+          if (parseInt(order.Status, 10) === 10 && !auth.isAdmin(req)) {
+            return Promise.
+            reject(Error({ msg: 'You cannot change a completed order' }));
+          }
+          if (parseInt(order.Status, 10) === parseInt(statusCode, 10)) {
+            return Promise.
+            reject(Error({ msg: 'Same status...' }));
+          }
+
+          return true;
+       });
+    }).
+    then(() => knex.table('orders').
+                  where({ id }).
+                  update({ Status: statusCode })).
+    then(() => order);
 }
 
 module.exports = {
