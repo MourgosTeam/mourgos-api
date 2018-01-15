@@ -108,8 +108,8 @@ function verifyItem(item) {
         then((attrs) => calculateMoney(product, attrs, item)).
         then((money) => {
   if (parseFloat(money).toFixed(2) !== parseFloat(item.TotalPrice).toFixed(2)) {
-    const err = Error({ 'msg': 'The total is wrong : ' + item.TotalPrice + " - " + money });
-    console.log('The total is wrong : ' + item.TotalPrice + " - " + money);
+    const err = Error({ 'msg': 'The total is wrong' });
+
     return Promise.reject(err);
   }
 
