@@ -52,6 +52,7 @@ function normalizeAttributes(attrs) {
 
   return nattrs;
 }
+
 function getAttributePrice(nattr, attribute) {
 if (!nattr) {
   return Promise.reject(Error('Attribute not in the list'));
@@ -61,8 +62,12 @@ var opt = parseInt(attribute, 10);
 if (nattr.Options.length <= opt || opt < -1) {
   return Promise.reject(Error('Attribute not in the list2'));
 }
- money += parseFloat(nattr.Price);
 
+const aprice = isNaN(nattr.Price)
+            ? JSON.parse(nattr.Price)[opt]
+            : parseFloat(nattr.Price);
+
+money += aprice;
 
 return money;
 }
@@ -70,6 +75,7 @@ function calculateMoney(product, attrs, item) {
 var nattrs = normalizeAttributes(attrs);
 var money = parseFloat(product.Price);
 
+console.log(item);
 for (var id in item.attributes) {
  if (!isNaN(id)) {
   money += getAttributePrice(nattrs[id], item.attributes[id]);
@@ -102,7 +108,9 @@ function verifyItem(item) {
         then((attrs) => calculateMoney(product, attrs, item)).
         then((money) => {
   if (parseFloat(money).toFixed(2) !== parseFloat(item.TotalPrice).toFixed(2)) {
-    return Promise.reject(Error({ 'msg': 'The total is wrong' }));
+    const err = Error({ 'msg': 'The total is wrong' });
+
+    return Promise.reject(err);
   }
 
           return money;
@@ -114,41 +122,43 @@ function verify(order) {
   if (!order.Name || !order.Address ||
       !order.Orofos || !order.Phone ||
       !order.Items || !order.Total) {
-return Promise.reject(Error('No required values'));
-}
-var proms = [];
-for (let ic = 0; ic < order.Items.length; ic += 1) {
-  proms.push(verifyItem(order.Items[ic]));
-}
-let prom = Promise.all(proms).
-then((moneyarr) => {
- let sum = 0;
- for (var ic = 0; ic < moneyarr.length; ic += 1) {
-  sum += moneyarr[ic];
- }
+    return Promise.reject(Error('No required values'));
+  }
+  var proms = [];
+  for (let ic = 0; ic < order.Items.length; ic += 1) {
+    proms.push(verifyItem(order.Items[ic]));
+  }
+  let prom = Promise.all(proms).
+  then((moneyarr) => {
+   let sum = 0;
+   for (var ic = 0; ic < moneyarr.length; ic += 1) {
+    sum += moneyarr[ic];
+   }
 
-return sum;
-});
-prom = prom.then((money) => {
+  return sum;
+  });
+  prom = prom.then((money) => {
 
     /*
      * I have total money and all verified
      * make finale verifications
      */
     if (parseFloat(money).toFixed(2) !== parseFloat(order.Total).toFixed(2)) {
- return Promise.reject(Error({ 'msg': 'total different than calculated' }));
-}
-// extra charge
+      return Promise.
+            reject(Error({ 'msg': 'total different than calculated' }));
+    }
+    // extra charge
 
-return knex.table('globals').select('*').
-    where({ Name: 'MinimumOrder' }).
-    then((data) => {
-      var minimumOrder = data[0].Value;
-      if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
- return Promise.reject(Error({ 'msg': 'The order is under the minimumOrder' }));
-}
+    return knex.table('globals').select('*').
+      where({ Name: 'MinimumOrder' }).
+      then((data) => {
+        var minimumOrder = data[0].Value;
+        if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
+          return Promise.
+          reject(Error({ 'msg': 'The order is under the minimumOrder' }));
+        }
 
-return money;
+        return money;
     });
   });
 
