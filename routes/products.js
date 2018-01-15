@@ -23,14 +23,26 @@ return newArr;
 /* GET users listing. */
 router.get('/', (req, res) => {
   knex.table('products').select('*').
-      then(filterDate).
+      then((data) => {
+        if (req.query.dev === 'devmode') {
+          return data;
+        }
+
+        return filterDate(data);
+      }).
       then((data) => res.send(data));
 });
 
 router.get('/category/:catid', (req, res) => {
   knex.table('products').select('*').
     where({ category_id: req.params.catid }).
-    then(filterDate).
+    then((data) => {
+      if (req.query.dev === 'devmode') {
+        return data;
+      }
+
+      return filterDate(data);
+    }).
     then((data) => res.send(data));
 });
 
