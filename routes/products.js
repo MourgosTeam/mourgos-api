@@ -20,29 +20,17 @@ function filterDate(data) {
 return newArr;
 }
 
-/* GET users listing. */
+/* GET products listing. */
 router.get('/', (req, res) => {
   knex.table('products').select('*').
-      then((data) => {
-        if (req.query.dev === 'devmode') {
-          return data;
-        }
-
-        return filterDate(data);
-      }).
+      then(filterDate).
       then((data) => res.send(data));
 });
 
 router.get('/category/:catid', (req, res) => {
   knex.table('products').select('*').
     where({ category_id: req.params.catid }).
-    then((data) => {
-      if (req.query.dev === 'devmode') {
-        return data;
-      }
-
-      return filterDate(data);
-    }).
+    then(filterDate).
     then((data) => res.send(data));
 });
 
