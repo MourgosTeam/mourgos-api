@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
     const today = new Date().getDay();
     for (let ic = 0; ic < data.length; ic += 1) {
         const wd = JSON.parse(data[ic].WorkingDates);
-        if (wd[today] === 1) {
+        if (wd[today] === 1 || req.query.dev === 'devmode') {
             newdata.push(data[ic]);
         }
     }
