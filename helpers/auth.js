@@ -5,7 +5,7 @@ function checkUser(req, res) {
     res.status(403);
     res.send('You shall not pass');
 
-return false;
+    return false;
   }
 
 return true;
