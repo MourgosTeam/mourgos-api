@@ -138,6 +138,59 @@ router.get('/:id', (req, res) => {
   then((data) => res.send(data[0] || {}));
 });
 
+
+router.post('/multi', (req, res) => {
+  const orders = req.body;
+  if (orders.length === 0) {
+    return res.sendStatus(400);
+  }
+
+  return auth.isSiteOpen().
+  then((flag) => {
+    if (flag === false) {
+      const err = new Error('Site is closed!');
+      err.errorObject = {
+       code: 8888,
+       msg: 'Site is closed!'
+      };
+      throw err;
+    }
+
+    return flag;
+  }).
+  then(() => orders.map((item) => {
+      const order = Layer.castToOrder(item);
+
+      return () => Functions.verify(order).
+        then(() => HashtagLayer.updateHashtag(order.Hashtag, true)).
+        then(() => Layer.insertOrder(order)).
+        then((order) => {
+          io.sendToCatalogue(order.catalogue_id, 'new-order');
+
+          return order;
+        }).
+        then((order) => order);
+    }).
+    reduce(
+    (initial, newitem) => initial.then((result) =>
+      newitem().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  )).
+  then((values) => {
+    res.status(200);
+    res.send(values);
+  }).
+  catch((err) => {
+    console.log(err);
+    if (err.errorObject && err.errorObject.code === 8888) {
+      res.status(503);
+    } else {
+      res.status(500);
+    }
+    res.send(err.errorObject);
+  });
+});
+
 router.post('/:id', (req, res) => {
   if (!auth.checkUser(req, res)) {
       return false;

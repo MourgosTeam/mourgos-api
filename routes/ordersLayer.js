@@ -105,7 +105,8 @@ function insertOrder (order) {
     order.id = hash.toString().substr(pos, 5);
     order.Items = JSON.stringify(order.Items);
 
-    return knex.table('orders').insert(order);
+    return knex.table('orders').insert(order).
+    then(() => order);
 }
 
 function notifyOrder (id) {

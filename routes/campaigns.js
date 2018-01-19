@@ -17,7 +17,7 @@ router.get('/id/:id', (req, res) => {
   then((data) => res.send(data[0]));
 });
 
-router.get('/:hash', (req, res) => {
+router.get('/:hash/', (req, res) => {
   console.log('Hashtag ' + req.params.hash);
 
 return HashtagLayer.checkHashtag(req.params.hash).
@@ -28,6 +28,15 @@ return HashtagLayer.checkHashtag(req.params.hash).
     res.send(err);
   });
 });
+
+router.get('/:hash/:num', (req, res) => HashtagLayer.
+checkMultiHashtag(req.params.hash, req.params.num).
+then((item) => res.send(item)).
+catch((err) => {
+  res.status(409);
+  res.send(err);
+}));
+
 
 router.post('/', (req, res) => {
   res.sendStatus(500);

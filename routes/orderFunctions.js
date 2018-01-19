@@ -75,7 +75,6 @@ function calculateMoney(product, attrs, item) {
 var nattrs = normalizeAttributes(attrs);
 var money = parseFloat(product.Price);
 
-console.log(item);
 for (var id in item.attributes) {
  if (!isNaN(id)) {
   money += getAttributePrice(nattrs[id], item.attributes[id]);

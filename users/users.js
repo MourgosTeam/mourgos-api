@@ -41,11 +41,12 @@ if (user === null) {
 function middleware(req, res, next) {
 var token = req.get('Token');
 if (!token || token.length < 5) {
-next();
+    next();
 
-return true;
+    return true;
 }
-getUser(token).then((user) => {
+
+return getUser(token).then((user) => {
  req.sessionUser = user;
  next();
 }).
@@ -54,8 +55,6 @@ catch(() => {
  next();
 });
 
-
-return true;
 }
 // /////////////////////////////////////////////////////////////////////
 app.post('/role', (req, res) => {
