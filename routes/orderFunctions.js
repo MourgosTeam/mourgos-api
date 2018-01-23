@@ -148,20 +148,47 @@ function verify(order) {
     }
     // extra charge
 
-    return knex.table('globals').select('*').
-      where({ Name: 'MinimumOrder' }).
-      then((data) => {
-        var minimumOrder = data[0].Value;
-        if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
-          return Promise.
-          reject(Error({ 'msg': 'The order is under the minimumOrder' }));
-        }
+    return money;
+    // return knex.table('globals').select('*').
+    //   where({ Name: 'MinimumOrder' }).
+    //   then((data) => {
+    //     var minimumOrder = data[0].Value;
+    //     if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
+    //       return Promise.
+    //       reject(Error({ 'msg': 'The order is under the minimumOrder' }));
+    //     }
 
-        return money;
-    });
-  });
+    //     return money;
+    // });
+  }).
+  then((money) => applyCatalogueFilters(order, money));
 
 return prom;
+}
+
+function applyCatalogueFilters(order, money) {
+  knex.table('catalogues').select('*').
+    where({ id: order.catalogue_id }).
+    then((data) => data[0].Ruleset).
+    then((ruleset) => {
+      switch (ruleset) {
+        case 0:
+          return true;
+        case 1:
+        default:
+          return knex.table('globals').select('*').
+          where({ Name: 'MinimumOrder' }).
+          then((data) => {
+            var minimumOrder = data[0].Value;
+            if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
+              return Promise.
+              reject(Error({ 'msg': 'The order is under the minimumOrder' }));
+            }
+
+            return money;
+          });
+      }
+    });
 }
 
 function formDescription(theproduct, attrs, item) {
