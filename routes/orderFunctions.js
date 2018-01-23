@@ -149,17 +149,6 @@ function verify(order) {
     // extra charge
 
     return money;
-    // return knex.table('globals').select('*').
-    //   where({ Name: 'MinimumOrder' }).
-    //   then((data) => {
-    //     var minimumOrder = data[0].Value;
-    //     if (parseFloat(money) < parseFloat(minimumOrder) && !order.Extra) {
-    //       return Promise.
-    //       reject(Error({ 'msg': 'The order is under the minimumOrder' }));
-    //     }
-
-    //     return money;
-    // });
   }).
   then((money) => applyCatalogueFilters(order, money));
 
