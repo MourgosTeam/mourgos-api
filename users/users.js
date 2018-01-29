@@ -172,8 +172,10 @@ app.post('/login', (req, res) => {
                then((token) => {
                     theuser.token = token;
 
-                    return res.send(present(theuser));
-        });
+                    return knex.table('users').where({ id: theuser.id }).
+                    update('deviceToken', req.body.deviceToken);
+                }).
+                then(() => res.send(present(theuser)));
     }).
     catch(() => {
         res.status(403);
