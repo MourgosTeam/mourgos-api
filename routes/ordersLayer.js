@@ -121,6 +121,7 @@ function notifyOrder (id) {
 
 function sendNotification () {
   return knex.table('users').where({ role: 2 }).
+          whereNotNull('deviceToken').
           select('deviceToken').
           then((data) => {
             Notifications.sendNotifications(
