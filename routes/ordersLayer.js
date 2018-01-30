@@ -3,6 +3,8 @@ var base32 = require('base32');
 var Constants = require('../constants/constants');
 var Functions = require('./orderFunctions');
 
+var Notifications = require('./notifications.js');
+
 var auth = require('../helpers/auth');
 
 var io = require('../sockets/mobile')();
@@ -117,6 +119,18 @@ function notifyOrder (id) {
       then((data) => io.sendToCatalogue(data[0].catalogue_id, 'update-order'));
 }
 
+function sendNotification () {
+  return knex.table('users').where({ role: 2 }).
+          select('deviceToken').
+          then((data) => {
+            Notifications.sendNotifications(
+              'Νέα παραγγελία',
+              {},
+              data.map((item) => item.deviceToken)
+            );
+          });
+}
+
 function sendAllOrders() {
   return knex.table('orders').
   select(Constants.ADMINORDERFIELDS).
@@ -226,6 +240,7 @@ module.exports = {
  sendAllOrders,
  sendDeliveryOrders,
  sendFreeOrders,
+ sendNotification,
  sendOrderLogs,
  sendShopOrders,
  updateOrderStatus

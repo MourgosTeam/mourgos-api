@@ -6,6 +6,7 @@ var auth = require('../helpers/auth');
 
 var Functions = require('./orderFunctions');
 var Layer = require('./ordersLayer');
+var Scheduler = require('../schedulers/scheduler');
 var io = require('../sockets/mobile')();
 
 var HashtagLayer = require('./hashtagLayer');
@@ -165,6 +166,11 @@ router.post('/multi', (req, res) => {
         then(() => HashtagLayer.updateHashtag(order.Hashtag, true)).
         then(() => Layer.insertOrder(order)).
         then((order) => {
+          Scheduler.add(Layer.sendNotification);
+
+          return order;
+        }).
+        then((order) => {
           io.sendToCatalogue(order.catalogue_id, 'new-order');
 
           return order;
@@ -239,6 +245,7 @@ router.post('/', (req, res) => {
   then(() => Functions.verify(order)).
   then(() => HashtagLayer.updateHashtag(order.Hashtag)).
   then(() => Layer.insertOrder(order)).
+  then(() => Scheduler.add(Layer.sendNotification).
   then(() => {
     io.sendToCatalogue(order.catalogue_id, 'new-order');
     res.status(200);
@@ -252,7 +259,7 @@ router.post('/', (req, res) => {
       res.status(500);
     }
     res.send(err.errorObject);
-  });
+  }));
 });
 
 module.exports = router;
