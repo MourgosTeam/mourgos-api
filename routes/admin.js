@@ -19,6 +19,19 @@ router.get('/site/open', (req, res) => {
   catch((err) => res.send(err));
 });
 
+router.post('/site/problem', (req, res) => {
+  if (!auth.isAdmin(req)) {
+
+    return res.sendStatus(403);
+  }
+
+  return knex.table('globals').where({ Name: 'MourgosHasProblem' }).
+  update({ Value: req.body.value }).
+  then(() => res.send(true)).
+  catch((err) => res.send(err));
+
+});
+
 /* GET CLOSE SITE REQUEST. */
 router.get('/site/close', (req, res) => {
   if (!auth.isAdmin(req)) {
