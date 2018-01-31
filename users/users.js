@@ -176,10 +176,6 @@ app.post('/login', (req, res) => {
                     where({ id: theuser.id }).
                     update('deviceToken', req.body.deviceToken || '');
                 }).
-                catch((err) => {
-                    console.log(err);
-                    throw err;
-                }).
                 then(() => res.send(present(theuser)));
     }).
     catch(() => {

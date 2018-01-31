@@ -19,7 +19,7 @@
     "cors": "^2.8.4",
     "crypto-js": "^3.1.9-1",
     "debug": "~2.6.9",
-    "expo-server-sdk": "git+https://github.com/expo/exponent-server-sdk-node.git",
+    "expo-server-sdk": "^2.3.3",
     "express": "^4.16.2",
     "knex": "^0.13.0",
     "mariasql": "^0.2.6",
