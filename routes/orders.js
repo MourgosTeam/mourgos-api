@@ -139,6 +139,20 @@ router.get('/:id', (req, res) => {
   then((data) => res.send(data[0] || {}));
 });
 
+router.delete('/:id', (req, res) => {
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
+
+  Layer.notifyOrder(req.params.id);
+
+  // Constants.ORDERFIELDS).
+  return knex.table('orders').
+  where({ 'id': req.params.id }).
+  del().
+  then(() => res.sendStatus(200));
+});
+
 
 router.post('/multi', (req, res) => {
   const orders = req.body;
