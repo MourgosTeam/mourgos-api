@@ -173,11 +173,13 @@ router.post('/multi', (req, res) => {
 
     return flag;
   }).
+  // verify all orders first!
+  then(() => Promise.all(orders.map((item) =>
+        Functions.verify(Layer.castToOrder(item))))).
   then(() => orders.map((item) => {
       const order = Layer.castToOrder(item);
 
-      return () => Functions.verify(order).
-        then(() => HashtagLayer.updateHashtag(order.Hashtag, true)).
+      return () => HashtagLayer.updateHashtag(order.Hashtag, true).
         then(() => Layer.insertOrder(order)).
         then((order) => {
           Scheduler.add(Layer.sendNotification);

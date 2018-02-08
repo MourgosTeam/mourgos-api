@@ -117,42 +117,64 @@ function verifyItem(item) {
       });
 }
 
+function isShopAvailable(order) {
+  return knex.table('catalogues').select('*').
+      where('id', order.catalogue_id).
+  then((data) => data[0]).
+  then((catalogue) => {
+    const whours = catalogue.WorkingHours;
+    if (whours === null) {
+      return true;
+    }
+
+    const hours = whours.split(',');
+    const today = new Date();
+    const rightnow = today.getHours() + ':' +
+          (today.getMinutes() < 10
+          ? '0'
+          : '') + today.getMinutes();
+
+    if (rightnow < hours[0] || rightnow > hours[1]) {
+      console.log(rightnow);
+      console.log(hours);
+      throw Error('Shop not available');
+    }
+
+    return true;
+  });
+}
 function verify(order) {
   if (!order.Name || !order.Address ||
       !order.Orofos || !order.Phone ||
       !order.Items || !order.Total) {
     return Promise.reject(Error('No required values'));
   }
+
   var proms = [];
   for (let ic = 0; ic < order.Items.length; ic += 1) {
     proms.push(verifyItem(order.Items[ic]));
   }
-  let prom = Promise.all(proms).
+  const prom = isShopAvailable(order).
+  then(() => Promise.all(proms)).
   then((moneyarr) => {
-   let sum = 0;
-   for (var ic = 0; ic < moneyarr.length; ic += 1) {
-    sum += moneyarr[ic];
-   }
+    let sum = 0;
+    for (var ic = 0; ic < moneyarr.length; ic += 1) {
+      sum += moneyarr[ic];
+    }
 
-  return sum;
-  });
-  prom = prom.then((money) => {
-
-    /*
-     * I have total money and all verified
-     * make finale verifications
-     */
+    return sum;
+  }).
+  then((money) => {
     if (parseFloat(money).toFixed(2) !== parseFloat(order.Total).toFixed(2)) {
       return Promise.
             reject(Error({ 'msg': 'total different than calculated' }));
     }
-    // extra charge
 
     return money;
   }).
   then((money) => applyCatalogueFilters(order, money));
 
-return prom;
+  return prom;
 }
 
 function applyCatalogueFilters(order, money) {
