@@ -45,6 +45,17 @@ router.post('/', (req, res) => {
   // knex.table('campaigns').insert(req.body).then((data) => res.send(data));
 });
 
+router.delete('/:id', (req, res) => {
+  if (!auth.isAdmin(req)) {
+    return res.sendStatus(403);
+  }
+
+  return knex.table('campaigns').
+    where({ id: req.params.id }).
+    delete().
+    then(() => res.sendStatus(200));
+});
+
 
 router.post('/new', (req, res) => {
   if (!auth.isAdmin(req)) {
