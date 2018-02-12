@@ -14,6 +14,8 @@ function getSiteStatus() {
     }, {});
     const hours = globals.MourgosWorkingHours.split('-');
     const today = new Date();
+    const twohours = 2 * 60 * 60 * 1000;
+    today.setTime(today.getTime() + twohours);
     const now = (today.getHours() < 10
       ? '0'
       : '') + today.getHours() + ':' +
