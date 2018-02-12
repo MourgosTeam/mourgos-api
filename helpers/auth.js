@@ -1,5 +1,3 @@
-var knex = require('../db/db.js');
-
 var SiteLayer = require('./SiteLayer.js');
 
 function checkUser(req, res) {
