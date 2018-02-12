@@ -1,5 +1,7 @@
 var knex = require('../db/db.js');
 
+var SiteLayer = require('./SiteLayer.js');
+
 function checkUser(req, res) {
   if (!req.sessionUser) {
     res.status(403);
@@ -41,9 +43,7 @@ function isShop(req) {
 }
 
 function isSiteOpen() {
- return knex.table('globals').select('Value').
-where({ Name: 'MourgosIsLive' }).
- then((data) => data[0].Value === '1');
+ return SiteLayer.getSiteStatus().then((data) => data === 1);
 }
 
 module.exports = {

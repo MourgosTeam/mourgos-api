@@ -2,6 +2,8 @@ var express = require('express');
 var router = new express.Router();
 var knex = require('../db/db.js');
 
+var SiteLayer = require('../helpers/SiteLayer.js');
+
 /* GET users listing. */
 router.get('/', (req, res) => {
   knex.table('globals').select('*').
@@ -31,34 +33,11 @@ then((data) => res.send(data));
 });
 
 router.get('/mourgos/status', (req, res) => {
-  knex.table('globals').select('*').
-  where({ Name: 'MourgosIsLive' }).
-  orWhere({ Name: 'MourgosHasProblem' }).
-  orWhere({ Name: 'MourgosWorkingHours' }).
-  then((data) => {
-    const globals = data.
-    reduce((initial, item) => {
-      initial[item.Name] = item.Value;
-
-      return initial;
-    }, {});
-    const hours = globals.MourgosWorkingHours.split('-');
-    const today = new Date();
-    const now = (today.getHours() < 10
-      ? '0'
-      : '') + today.getHours() + ':' +
-    (today.getMinutes() < 10
-      ? '0'
-      : '') + today.getMinutes();
-
-    const isWorking = hours[0] <= now && now <= hours[1]
-                    ? 1
-                    : 0;
-
-    return isWorking ||
-    Math.max(globals.MourgosIsLive, 2 * globals.MourgosHasProblem);
-  }).
-  then((status) => res.send({ Status: status }));
+  SiteLayer.getSiteStatus().
+  then((status) => {
+    console.log(status);
+    res.send({ Status: status });
+  });
 });
 
 router.post('/change/workingHours', (req, res) => {
