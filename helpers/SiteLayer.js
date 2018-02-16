@@ -23,7 +23,8 @@ function getSiteStatus() {
       ? '0'
       : '') + today.getMinutes();
 
-    const isWorking = hours[0] <= now && now <= hours[1]
+    const isWeekday = today.getDay() === 0 || today.getDay() === 6;
+    const isWorking = isWeekday && hours[0] <= now && now <= hours[1]
                     ? 1
                     : 0;
 
