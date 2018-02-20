@@ -127,15 +127,15 @@ function isShopAvailable(order) {
       return true;
     }
 
-    const today = new Date();
+    const thisday = new Date();
     const twohours = 2 * 60 * 60 * 1000;
-    today.setTime(today.getTime() + twohours);
+    thisday.setTime(thisday.getTime() + twohours);
 
     const hours = whours.split(','),
-    rightnow = today.getHours() + ':' +
-          (today.getMinutes() < 10
+    rightnow = thisday.getHours() + ':' +
+          (thisday.getMinutes() < 10
           ? '0'
-          : '') + today.getMinutes();
+          : '') + thisday.getMinutes();
 
     if (rightnow < hours[0] || rightnow > hours[1]) {
       throw Error('Shop not available');
